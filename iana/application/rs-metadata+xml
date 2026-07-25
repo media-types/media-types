@@ -1,0 +1,39 @@
+Type name: application
+
+Subtype name: rs-metadata+xml
+
+Required parameters: N/A
+
+Optional parameters: N/A
+
+Encoding considerations: Same as encoding considerations of "application/xml" as specified in [RFC7303].
+
+Security considerations: N/A
+
+Interoperability considerations: Please note that [RFC7866] specifies the use of "application/rs-metadata", which has been replaced by "application/rs-metadata+xml" in [RFC9806].
+
+Published specification: [RFC7865] [RFC9806]
+
+Applications that use this media type: Session Recording Clients (SRCs) and Session Recording Servers (SRSs).
+
+Fragment identifier considerations: N/A
+
+Additional information:
+
+Deprecated alias names for this type: N/A
+
+Magic number(s): N/A
+
+File extension(s): N/A
+
+Macintosh file type code(s): N/A
+
+Person & email address to contact for further information: IETF SIPCORE Working Group (sipcore&ietf.org)
+
+Intended usage: COMMON
+
+Restrictions on usage: There are no restrictions on where this media type can be used.
+
+Author: IETF SIPCORE Working Group (sipcore&ietf.org)
+
+Change controller: IETF

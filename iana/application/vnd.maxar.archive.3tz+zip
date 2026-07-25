@@ -1,0 +1,63 @@
+(registered 2022-02-01, last updated 2026-06-05)
+
+Media type name: application
+
+Media subtype name: vnd.maxar.archive.3tz+zip
+
+Required parameters: N/A
+
+Optional parameters: N/A
+
+Encoding considerations: binary
+
+3tz container files are binary ZIP-based container files encoded using the application/zip media type.
+
+Security considerations: This media type employs a specific profile of the application/zip format, so the security considerations that apply to application/zip and the +zip structured syntax suffix also apply to 3tz container files. All processors that read 3tz container files should rigorously check the size and validity of data retrieved, including ZIP structures, entry sizes, checksums, and offsets.
+
+The 3tz container format does not itself define active or executable content. However, 3tz container files may embed content that has its own security implications when parsed, rendered, or otherwise processed.
+
+Processors should guard against decompression bombs and other resource-exhaustion attacks arising from malformed or highly compressed ZIP entries, including entries compressed with DEFLATE or Zstandard. Processors that extract files from the container should validate file paths and reject absolute paths, parent-directory traversal sequences, and other filenames that would escape the intended extraction root.
+
+The archive must contain at the root level a file named tileset.json. The security considerations for JSON described in RFC 8259, Section 12, and for 3D Tiles content apply to this file. The format of this file is specified in:
+
+https://docs.ogc.org/cs/22-025r4/22-025r4.html
+
+The format recommends relative references inside the archive, but referenced resources may in some cases be external to the archive. Implementations should treat dereferencing external resources with appropriate caution.
+
+In addition, because of the various content types that can be embedded in 3tz container files, application/vnd.maxar.archive.3tz+zip may describe content that poses security implications beyond those noted here. However, only in cases where the processor recognizes and processes the additional content, or where further processing of that content is dispatched to other processors, would security issues potentially arise. In such cases, matters of security would fall outside the domain of this registration document.
+
+This media type does not itself provide confidentiality or strong integrity protection. If such protection is desired, it needs to be provided by external mechanisms such as HTTPS or digital signatures.
+
+Interoperability considerations: N/A
+
+Published specification: The 3D Tiles Archive Format v1.4 specification is published at:
+
+https://github.com/Maxar-Public/3tz-specification/blob/v1.4/Specification.md
+
+Applications which use this media: This media type is used for the distribution of large 3D Tiles datasets. The following list of applications is not exhaustive.
+
+* Vantor 3D Explorer
+* Vantor Construct
+
+Fragment identifier considerations: No fragment identifier syntax is defined for this media type. As this media type uses the +zip structured syntax suffix, fragment identifier considerations are as specified for +zip in RFC 6839.
+
+Restrictions on usage: N/A
+
+Additional information:
+
+1. Deprecated alias names for this type: N/A
+2. Magic number(s): 0: PK 0x03 0x04
+3. File extension(s): .3tz, .3dtiles.zip
+4. Macintosh file type code: ZIP
+5. Object Identifiers: N/A
+
+General Comments: The 3D Tiles Archive Format (3tz) is a container format based on the ZIP file format. It is used to encapsulate large 3D Tiles datasets and their associated files.
+
+Person to contact for further information:
+
+1. Name: Björn Blissing
+2. Email: bjorn.blissing&vantor.com
+
+Intended usage: COMMON
+
+Author/Change controller: The published specification is a work product of Vantor Inc. Vantor Inc. has change control over this specification.

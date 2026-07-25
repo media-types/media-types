@@ -1,0 +1,42 @@
+Type name: application
+
+Subtype name: vnd.apple.mpegurl
+
+Required parameters: N/A
+
+Optional parameters: N/A
+
+Encoding considerations: binary (UTF-8)
+
+Security considerations: RFC-pantos-hls-rfc8216bis-22, Section 12.
+
+Interoperability considerations: There are no byte-ordering issues
+since files are 8-bit text.  Applications could encounter
+unrecognized tags, which SHOULD be ignored.
+
+Published specification: RFC-pantos-hls-rfc8216bis-22, Section 4.
+
+Applications that use this media type: Multimedia applications such
+as the iPhone media player in iOS 3.0 and later and QuickTime Player
+in Mac OS X version 10.6 and later.
+
+Fragment identifier considerations: no Fragment Identifiers are
+defined for this media type.
+
+Additional information:
+
+   Deprecated alias names for this type: none
+   Magic number(s): #EXTM3U
+   File extension(s): .m3u8, .m3u (see Section 4)
+   Macintosh file type code(s): none
+
+Person & email address to contact for further information: Dimitri
+Podborski, dpodborski AT apple.com.
+
+Intended usage: LIMITED USE
+
+Restrictions on usage: none
+
+Author: Roger Pantos
+
+Change Controller: Apple Inc.

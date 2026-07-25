@@ -1,0 +1,65 @@
+(registered 2014-11-06, last updated 2025-06-26)
+
+MIME media type name: application
+
+MIME subtype name: epub+zip
+
+Required parameters: None.
+
+Optional parameters: None.
+
+Encoding considerations: OCF ZIP container files are binary files
+   encoded in the application/zip media type.
+
+Security considerations: All processors that read OCF ZIP container
+   files should rigorously check the size and validity of data
+   retrieved.
+
+   In addition, because of the various content types that can be
+   embedded in OCF ZIP container files, application/epub+zip may
+   describe content that poses security implications beyond those
+   noted here. However, only in cases where the processor recognizes
+   and processes the additional content, or where further processing
+   of that content is dispatched to other processors, would security
+   issues potentially arise. In such cases, matters of security would
+   fall outside the domain of this registration document.
+
+Security considerations that apply to application/zip also apply to
+   OCF ZIP container files.
+
+Interoperability considerations: None.
+
+Published specification: This media type registration is for the EPUB
+   Open Container Format (OCF), as described by the EPUB 3
+   specification located at https://www.w3.org/TR/epub-33/.
+
+   The EPUB 3 specification supersedes both RFC 4839 and the Open
+   Container Format 2.0.1 specification, which is located at
+   http://idpf.org/epub/20/spec/OCF_2.0.1_draft.doc, and which also
+   uses the application/epub+zip media type.
+
+Applications that use this media type: This media type is in wide use
+   for the distribution of ebooks in the EPUB format.
+
+Additional information:
+
+   Magic number(s):
+      0: PK 0x03 0x04, 30: mimetype, 38: application/epub+zip
+
+   File extension(s): OCF ZIP container files are most often
+      identified with the extension .epub.
+
+   Macintosh file type code(s): ZIP
+
+Fragment identifiers: EPUB Canonical Fragment Identifiers are custom
+   fragment identifiers defined for EPUB Publications. They may be
+   used to refer to an arbitrary content within any publication
+   resource defined for the publication. These identifiers are
+   defined at https://idpf.org/epub/linking/cfi/.
+
+Person & email address to contact for further information:
+   EPUB 3 Working Group (epub-maintenance&w3.org)
+
+Intended usage: COMMON
+
+Author/change controller: World Wide Web Consortium (W3C)

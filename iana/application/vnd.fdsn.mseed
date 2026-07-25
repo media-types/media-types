@@ -1,0 +1,54 @@
+(registered 2009-02-19, last updated 2025-03-31)
+
+Media type name: application
+
+Media subtype name: vnd.fdsn.mseed
+
+Required parameters: N/A
+
+Optional parameters: N/A
+
+Encoding considerations: binary
+
+Security considerations: miniSEED records do not contain executable or active content. miniSEED records do contain content, including optionally compressed data payloads, that are typically parsed and decoded by 3rd party libraries. It is assumed that decoders, when improperly written or intentionally or otherwise corrupted, will have vulnerabilities similar to other software that are not memory safe or allow making stack-based procedural calls.
+
+miniSEED records are informational only. No viewer or analysis program is expected to modify a system beyond saving a file containing one or more records when the content-disposition is an attachment.
+
+Version 3 miniSEED records contain CRC checks to ensure the integrity of the record. Version 2 miniSEED records can contain, depending on the data payload encoding, integration constants that can be used to check integrity of the payload when decompressing, but otherwise there is no checksum or CRC in version 2.
+
+Interoperability considerations: The miniSEED format is the most widely used format for exchanging and archiving seismological time series, and related, data globally. Parsing and decoding libraries are openly available in many languages.
+
+Version 2 of the format was specified in 1992 as a subset of the Standard for the Exchange of Earthquake Data (SEED 2.4), specifically by allowing the “data record” to be self contained and describing. This version of the format has, and continues to be, broadly used to exchange and archive seismological data.
+
+Version 3 of the format was specified in 2023 in order to address some of the shortcomings of the previous major version (e.g. expanded data identifiers, CRCs, variable length records, flexible headers, etc.).
+
+Published specification: The International Federation of Digital Seismograph Networks (FDSN) publications: https://fdsn.org/publications/
+
+For version 2 miniSEED, the SEED Manual: https://fdsn.org/pdf/SEEDManual_V2.4.pdf
+
+For version 3 miniSEED: https://docs.fdsn.org/projects/miniseed3
+
+Applications which use this media: Many applications use these formats in seismological software ecosystems.
+
+Fragment identifier considerations: None
+
+Restrictions on usage: No restrictions
+
+Additional information:
+
+1. Deprecated alias names for this type: none
+2. Magic number(s): none
+3. File extension(s): .mseed, .mseed3
+4. Macintosh file type code: none
+5. Object Identifiers: none
+
+Person to contact for further information:
+
+1. Name: International FDSN
+2. Email: fdsn-wg2-data&fdsn.org
+
+Intended usage: COMMON
+
+The miniSEED formats are used extensively in communities that use seismological data, particularly by repositories as an exchange format. The formats are also used in numerous analysis tools ranging from sophisticated, large-scale processing to simple in-browser data visualization.
+
+Author/Change controller: The International Federation of Digital Seismograph Stations (FDSN), Working Group 2: https://fdsn.org/wg/wgII/

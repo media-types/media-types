@@ -1,0 +1,59 @@
+(last updated 2024-04-16)
+
+Media type name: application
+
+Media subtype name: sep+xml
+
+Required parameters: None
+
+Optional parameters: None
+
+Encoding considerations: binary
+
+Security considerations: This media type is used for energy
+   management (specifically for conveying information such as demand
+   response signals, pricing information, and energy usage
+   information) which may, depending on the circumstances, require
+   privacy and integrity protections. The specification provides for
+   this through the use of TLS.
+
+   This media type does not contain active or executable content.
+   However, the information provided may result in actions being
+   taken to adjust energy consumption or generation.
+
+   For a more in-depth analysis of security considerations, as well as
+   additional detail regarding the security mechanisms employed,
+   please see the specification.
+
+Interoperability considerations:
+
+Published specification: IEEE 2030.5
+
+Applications which use this media: This media type is intended to be
+   used by any server which implements SEP 2.0. This media type is
+   also intended to be used by any client which implements SEP 2.0
+   using XML (as opposed to EXI, a binary encoding of XML).
+
+Additional information:
+
+   1. Magic number(s): None
+   2. File extension(s): None
+   3. Macintosh file type code: None
+   4. Object Identifiers: None
+
+Person to contact for further information:
+
+   1. Name: Robby Simpson, PhD
+   2. Email: robby.simpson&ieee.org
+
+Intended usage: Common
+
+   This standard is intended for usage by any application that may
+   use the following information for Smart Grid home area networks
+   for information or control purposes: energy usage information,
+   pricing information, demand response and load control signals,
+   distributed energy resource information, etc.
+
+Author/Change controller: IEEE
+
+(file created 2012-10-04)

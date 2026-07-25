@@ -1,0 +1,48 @@
+Type name:  video
+
+Subtype name:  scip
+
+Required parameters:  N/A
+
+Optional parameters:  N/A
+
+Encoding considerations:  Binary.  This media subtype is only defined
+   for transfer via RTP.  There SHALL be no transcoding of the video
+   stream as it traverses the network.
+
+Security considerations:  See Section 6.
+
+Interoperability considerations:  N/A
+
+Published specification:  [SCIP210]
+
+Applications that use this media type:  N/A
+
+Fragment identifier considerations:  none
+
+Additional information:
+
+   Deprecated alias names for this type:  N/A
+   Magic number(s):  N/A
+   File extension(s):  N/A
+   Macintosh file type code(s):  N/A
+
+Person & email address to contact for further information:  Michael
+   Faller (michael.faller&gd-ms.com or MichaelFFaller&gmail.com) and
+   Daniel Hanson (dan.hanson&gd-ms.com)
+
+Intended usage:  COMMON
+
+Restrictions on usage:  N/A
+
+Authors:  Michael Faller (michael.faller&gd-ms.com or
+   MichaelFFaller&gmail.com) and Daniel Hanson (dan.hanson&gd-ms.com)
+
+Change controller:  SCIP Working Group (ncia.cis3&ncia.nato.int)
+
+Informative References:
+
+[SCIP210]
+         SCIP Working Group, "SCIP Signaling Plan, SCIP-210".
+         Available by request via email to
+         <ncia.cis3&ncia.nato.int>.

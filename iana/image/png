@@ -1,0 +1,81 @@
+(last modified 2021-12-07)
+
+Media type name: image
+
+Media subtype name: png
+
+Required parameters: None
+
+Optional parameters: None
+
+Encoding considerations: binary
+
+Security considerations: A PNG document is composed of a collection
+   of explicitly typed "chunks".
+
+   For each of the chunk types defined in the PNG specification
+   (except for "gIFx"), the only effect associated with those chunks
+   is to cause an image to be rendered on the recipient's display or
+   printer.
+
+   The gIFx chunk type is used to encapsulate Application Extension
+   data, and some use of that data might present security risks,
+   though no risks are known. Likewise, the security risks associated
+   with future chunk types cannot be evaluated, particularly
+   unregistered chunks. However, it is the intention of the PNG group
+   to disallow chunks containing "executable" data to become
+   registered chunks.
+
+   The text chunks, tEXt and zTXt, contain data that can be displayed
+   in the form of comments, etc. Some operating systems or terminals
+   might allow the display of textual data with embedded control
+   characters to perform operations such as re-mapping of keys,
+   creation of files, etc. For this reason, the specification
+   recommends that the text chunks be filtered for control characters
+   before direct display.
+
+   The PNG format is specifically designed to facilitate early
+   detection of file transmission errors, and makes use of cyclical
+   redundancy checks to ensure the integrity of the data contained in
+   its chunks.
+
+Interoperability considerations: Network byte order used throughout.
+
+Published specification:
+
+   Portable Network Graphics (PNG) Specification
+   https://www.w3.org/TR/PNG/
+
+Applications which use this media: PNG is widely implemented in all
+   Web browsers, image viewers, and image creation tools
+
+Fragment identifier considerations: N/A
+
+Restrictions on usage: N/A
+
+Additional information:
+
+   1. Deprecated alias names for this type: N/A
+   2. Magic number(s): 89 50 4E 47 0D 0A 1A 0A
+   3. File extension(s): .png
+   4. Macintosh file type code: N/A
+   5. Object Identifiers: N/A
+
+General Comments: This registration updates the earlier one as follows
+
+   1) The old one points to an expired Internet Draft. This updated
+   registration points to a W3C Recommendation.
+
+   2) The old contact person is sadly deceased. The new contact email
+   is a publicly archived W3C mailing list for the PNG Working Group.
+
+   3) Change controller is W3C
+
+Person to contact for further information:
+
+   1. Name: PNG Working Group
+   2. Email:public-png&w3.org
+
+Intended usage: Common
+
+Author/Change controller: W3C
