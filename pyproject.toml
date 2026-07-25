@@ -1,0 +1,14 @@
+[tool.black]
+line-length = 88
+
+[tool.isort]
+line_length = 88
+profile = "black"
+
+[tool.pylint.format]
+# Maximum number of characters on a single line.
+max-line-length = 88
+
+[tool.pylint.reports]
+# Tells whether to display a full report or only the messages.
+reports = false
