@@ -27,12 +27,12 @@ import urllib.error
 import urllib.request
 from collections.abc import Iterable, Iterator, Sequence
 
+from media_types import TOP_LEVEL_TYPES_CSV, get_top_level_media_type_names
+
 BASE_URL = "https://www.iana.org/assignments"
 MEDIA_TYPES_URL = f"{BASE_URL}/media-types"
 EXPECT_MISSING = (f"{MEDIA_TYPES_URL}/image/x-emf", f"{MEDIA_TYPES_URL}/image/x-wmf")
 LOG_FORMAT = "%(asctime)s %(name)s %(levelname)s: %(message)s"
-TOP_LEVEL_TYPES_CSV = "top-level-media-type-names.csv"
-SKIP_TOP_LEVEL_TYPES = ("example",)
 __script_name__ = os.path.basename(sys.argv[0]) if __name__ == "__main__" else __name__
 
 
@@ -133,17 +133,6 @@ def download_top_level_media_type_names(directory: pathlib.Path) -> int:
     url = f"{BASE_URL}/top-level-media-types/{TOP_LEVEL_TYPES_CSV}"
     path = directory / TOP_LEVEL_TYPES_CSV
     return download_file(url, path)
-
-
-def get_top_level_media_type_names(directory: pathlib.Path) -> Iterator[str]:
-    """Yield top-level media type names from the local CSV file."""
-    with open(directory / TOP_LEVEL_TYPES_CSV, encoding="utf-8") as csv_file:
-        reader = csv.DictReader(csv_file)
-        for row in reader:
-            name = row["Name"]
-            if name in SKIP_TOP_LEVEL_TYPES:
-                continue
-            yield name
 
 
 def read_templates(path: pathlib.Path) -> Iterator[str]:
