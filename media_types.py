@@ -18,6 +18,7 @@ import csv
 import pathlib
 from collections.abc import Iterator
 
+ALLOWED_MISSING_TEMPLATES = {"image/x-emf", "image/x-wmf"}
 TOP_LEVEL_TYPES_CSV = "top-level-media-type-names.csv"
 SKIP_TOP_LEVEL_TYPES = ("example",)
 

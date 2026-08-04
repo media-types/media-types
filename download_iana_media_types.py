@@ -27,11 +27,15 @@ import urllib.error
 import urllib.request
 from collections.abc import Iterable, Iterator, Sequence
 
-from media_types import TOP_LEVEL_TYPES_CSV, get_top_level_media_type_names
+from media_types import (
+    ALLOWED_MISSING_TEMPLATES,
+    TOP_LEVEL_TYPES_CSV,
+    get_top_level_media_type_names,
+)
 
 BASE_URL = "https://www.iana.org/assignments"
 MEDIA_TYPES_URL = f"{BASE_URL}/media-types"
-EXPECT_MISSING = (f"{MEDIA_TYPES_URL}/image/x-emf", f"{MEDIA_TYPES_URL}/image/x-wmf")
+EXPECT_MISSING = {f"{MEDIA_TYPES_URL}/{t}" for t in ALLOWED_MISSING_TEMPLATES}
 LOG_FORMAT = "%(asctime)s %(name)s %(levelname)s: %(message)s"
 __script_name__ = os.path.basename(sys.argv[0]) if __name__ == "__main__" else __name__
 
