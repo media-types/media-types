@@ -1,0 +1,36 @@
+BLAKE2b Checksum,Media Type,File Extensions
+e4a617c18b09e0aaf16a3df7894ae553,application/ccxml+xml,ccxml
+c6e27fb6805b055a3b998a4153b9214d,application/font-sfnt,ttf otf
+d03e3aedf30adcb64cf46e70af70212d,application/hyperstudio,stk
+0eb62e88f0bf93bfb8d4ed9a0a13d516,application/pkcs7-mime,p7m p7c p7z
+02536ed67af5ec0b495e0e94a4bb0f52,application/pkcs7-signature,p7s
+e4a617c18b09e0aaf16a3df7894ae553,application/pls+xml,pls
+e4a617c18b09e0aaf16a3df7894ae553,application/srgs+xml,grxml
+e4a617c18b09e0aaf16a3df7894ae553,application/ssml+xml,ssml
+710bb803ab58fd9a59e6439303d7ffb1,application/timestamp-query,TSQ
+710bb803ab58fd9a59e6439303d7ffb1,application/timestamp-reply,TSR
+df0da2ec60cade7937ccd84c5a3a6abd,application/vnd.kde.kpresenter,KPR KPT
+46666d2ad9a7b46587262602f9640f83,application/vnd.kde.kspread,KSP
+fc0e3c5579a957113d8e2c32f4641678,application/vnd.koan,skp skd skm skt
+8dd0f255ecfc923256eeb477aa23b62c,application/vnd.ms-artgalry,cil
+13be1af1140af6fb11591b541a70a6d8,application/vnd.ms-lrm,lrm
+7030fa7ed25ce5e6a5d95dca5de67139,application/vnd.musician,mus
+2cd7df57c8a3af7d6c456e83df3987d5,application/vnd.seemail,see
+9c5eb0b5436c5375ef61aed2464662ee,application/vnd.shana.informed.formdata,IFM
+d769d3a930d78b8a68e12ae169851b29,application/vnd.shana.informed.formtemplate,ITP
+83893eafd88a1f4a1c66bb4097253bfa,application/vnd.shana.informed.interchange,IIF
+68519727737c4291b30270ac1b8000da,application/vnd.shana.informed.package,IPK
+b6a135c41ed6bd61b16fd54b6944a049,application/vnd.webturbo,WTB
+17cd829edc10c729bf1f63bb0bc98736,application/vnd.wfa.dpp,
+e4a617c18b09e0aaf16a3df7894ae553,application/voicexml+xml,vxml
+4f37a782766e5b595d0c25cc8b7611cc,application/zip,ZIP
+b3453a706a87348d3326b31e21667301,audio/vnd.qcelp,QCP
+f1919ba32d32464c633556a8cbbe9534,font/otf,otf ttf
+76bb2b0cfbd506d074738e8e33585515,font/sfnt,ttf otf
+f7cd90d5d7222455f730daf320d3761f,font/ttf,ttf otf
+03e6c54dcf3d706283b591f0af12f065,image/heic,heic hif
+fae9c7e33fd14c4e1174aa69c9c1d6d2,image/heic-sequence,heics hif
+03e6c54dcf3d706283b591f0af12f065,image/heif,heif hif
+fae9c7e33fd14c4e1174aa69c9c1d6d2,image/heif-sequence,heifs hif
+b365ddd9ae2206d6e58eb8bc94a332b3,image/vnd.dwg,dwg
+2cce903733573c528973493bb5bbe20f,image/vnd.dxf,dxf

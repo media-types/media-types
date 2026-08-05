@@ -15,12 +15,91 @@
 """Common functions for media types scripts."""
 
 import csv
+import dataclasses
+import logging
 import pathlib
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
+from typing import Self
 
 ALLOWED_MISSING_TEMPLATES = {"image/x-emf", "image/x-wmf"}
 TOP_LEVEL_TYPES_CSV = "top-level-media-type-names.csv"
 SKIP_TOP_LEVEL_TYPES = ("example",)
+
+
+class ParserFailure(RuntimeError):
+    """Base exception raised for errors during file extensions parsing."""
+
+
+def parse_space_separated_list(string: str) -> list[str]:
+    """Splits a space-separated string into a list of strings."""
+    if not string:
+        return []
+    return string.split(" ")
+
+
+@dataclasses.dataclass
+class MediaType:
+    """Media type data (including file extensions).
+
+    This class represents the media type data provided by IANA.
+    """
+
+    name: str
+    template: str
+    file_extensions: list[str]
+    reference: str
+
+    @classmethod
+    def from_csv_dict(cls, items: dict[str, str]) -> Self:
+        """Creates an instance from a CSV row dictionary."""
+        return cls(
+            items["Name"],
+            items["Template"],
+            parse_space_separated_list(items["File Extensions"]),
+            items["Reference"],
+        )
+
+    @staticmethod
+    def get_csv_dict_keys() -> list[str]:
+        """Gets the list of CSV header keys used for CSV serialization."""
+        return ["Name", "Template", "File Extensions", "Reference"]
+
+    def as_csv_dict(self) -> dict[str, str]:
+        """Converts the instance into a CSV row dictionary."""
+        return {
+            "Name": self.name,
+            "Template": self.template,
+            "File Extensions": " ".join(self.file_extensions),
+            "Reference": self.reference,
+        }
+
+    def add_additional_information(
+        self,
+        file_extension_parser: Callable[[str, str], list[str]],
+        directory: pathlib.Path,
+    ) -> int:
+        """Populates file extensions by reading and parsing the entry's template file.
+
+        Returns number of failures.
+        """
+        path = directory / self.template
+        try:
+            content = path.read_text("utf-8")
+        except FileNotFoundError as error:
+            if self.template in ALLOWED_MISSING_TEMPLATES:
+                return 0
+            logger = logging.getLogger(__name__)
+            logger.error("%s not found", error.filename)
+            return 1
+
+        failures = 0
+        try:
+            self.file_extensions = file_extension_parser(self.template, content)
+        except ParserFailure as error:
+            logger = logging.getLogger(__name__)
+            logger.error("%s", error)
+            failures += 1
+        return 0
 
 
 def get_top_level_media_type_names(directory: pathlib.Path) -> Iterator[str]:

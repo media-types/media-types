@@ -1,0 +1,104 @@
+# Tab separated mapping of text to file extensions.
+# To avoid trailing tabs, the columns are inversed.
+#
+# File extensions	Matching Text
+	ASN.1 SOAP messages are not required or expected to be stored as files.
+	Files do not require any specific "extension". Many are in use as a convenience for mechanized processing of files, some associated with specific macro packages or preprocessors; others are ad hoc.  File names are orthogonal to the nature of the content.  In particular, while a file name or a component of a name may be useful in some types of automated processing of files, the name or component might not be capable of indicating subtleties such as proportion of textual (as opposed to image or formatting directive) content.  This media type SHOULD NOT be assigned a relationship with any file "extension" where content may be untrusted unless there is provision for human judgment that may be used to override that relationship for individual files.  Where appropriate, a file name MAY be suggested by a suitable mechanism such as the one specified in [I17.RFC2183] as amended by [N5.RFC2231] and [N6.Errata].
+	No extension, but the file is usually named 'copyright'.
+	No specific file extensions are recommended for this type.
+	None - no file storage type is defined for syslog
+	None.  A file format with the extension .mp4 has been defined for MPEG-4 content but is not directly correlated with this MIME type for which the sole purpose is RTP transport.
+	None. This MIME-type primary purpoes is to identify PDUs that are in transport.
+	RFC 8427 uses the media type to refer to protocol messages and thus does not require a file extension.
+	RFC 9569 uses the media type to refer to protocol messages; thus, it does not require a file extension.
+	SOAP messages are not required or expected to be stored as files.
+	This media type does not propose a specific extension.
+	W3C SOAP message infosets serialized as fast infoset documents are not required or expected to be stored as files.
+	[RFC7285] uses the mime type to refer to protocol messages and thus does not require a file extension.
+	[RFC8895] uses the mime type to refer to protocol messages and thus does not require a file extension.
+	none but the file is commonly named "Manifest"
+	not expected to be stored in files
+123 wk4 wk3 wk1	123 wk4 (older form) wk3 (older form) wk1 (older form)
+3g2 3gpp2	3g2 and 3gpp2 are both declared at <http://www.nist.gov/nics/>; 3g2 is preferred.
+3gp 3gpp	'3gp' and '3gpp' are declared at http://www.nist.gov/nics/
+3gp 3gpp	3gp and 3gpp are both declared at http://www.nist.gov/nics/; 3gp is preferred
+X_B xmt_bin	.X_B (recommended), .xmt_bin (deprecated)
+X_T xmt_txt	.X_T (recommended), .xmt_txt (deprecated)
+abc	".abc" It is recommended that abc file names should use this extension.  (Many HTTP servers use the file extension as an indicator of MIME type.)  The ABC language uses the '<' and '>' characters. Raw ABC must not be embedded into HTML files, and the file extension ".html" must be avoided.
+adts aac loas ass	.adts or .aac (ADTS), .loas or .ass (LATM/LOAS)
+apexlang apex axdl	- .apexlang - .apex - .axdl
+cellml xml cml	The RECOMMENDED file extension for CellML Umbrella documents is .cellml  Some older software uses the file extension .xml. Software vendors have also used the non-standard extension .cml. In contexts where the MIME type is available, or where the type has already been determined as CellML, implementations SHOULD allow files to be opened regardless of the extension. Implementations transferring models to an environment that uses file extensions SHOULD use the .cellml extension.
+dcm	".dcm" is recommended for files saved to disk (other than DICOMDIR)
+dls	.dls is declared at http://www.nist.gov/nics
+eln	ELN files are identified with .eln extension.
+emf	.emf (for both EMF and EMF+ content)
+emm	emm (Electronic Media Management)
+emma	EMMA documents are most often identified with the extensions ".emma".
+epub	OCF ZIP container files are most often identified with the extension .epub.
+fdt	".fdt" (e.g., if there is a need to store an FDT Instance as a file)
+fits fit fts	fits  This file extension SHOULD NOT be interpreted as a prescription.  The FITS standard originated in the era when files were stored and exchanged via magnetic tape; it does not prescribe any nomenclature for files on disk. Various sites within the FITS community have long-established practices where files are presumed to be FITS by context. File extensions used at such sites commonly indicate content of the file instead of the data format.  In the absence of other information it is reasonably safe to presume that a file name ending in ".fits" is intended to be a FITS file. Nevertheless, there are other commonly used extensions; e.g., ".fit", ".fts", and many others not suitable for listing in a media type registration.
+flx	Generally "flx", but documents describing certain symbol table may allocate their own set of extensions.
+fpx	often used with .fpx files.
+g3fc	.g3fc, .g3fc<n>
+h5 hdf5	.h5 (common), .hdf5 (also common)
+hbci hbc kom upa pkd bpd	.hbci and .hbc; .kom, .upa, .pkd an .bpd for special purpose
+hdf h4 hdf4	.hdf (common), .h4, .hdf4 (also seen)
+hjif	Haptic file extensions used for HJIF files: .hjif
+hmpg	Haptic file extensions used for HMPG files: .hmpg
+html htm	"html" and "htm" are commonly used.
+ica icf icd icc ic0 ic1 ic2 ic3 ic4 ic5 ic6 ic7 ic8	ica,icf,icd,icc,ic# where # is an integer such that -1<#<9.
+ics ifb	The file extension of "ics" is to be used to designate a file containing (an arbitrary set of) calendaring and scheduling information consistent with this MIME content type.  The file extension of "ifb" is to be used to designate a file containing free or busy time information consistent with this MIME content type.
+ink inkml	InkML documents are most often identified with the extensions ".ink" or ".inkml".
+irm	irm (IBM Rights Management)
+istc isws	istc, isws: istc is the configuration file for isclient.exe and isws is the configuration file for isupdater.exe. Both are ASCII files like java property that contains configuration settings useful to execute isclient.exe and isupdater.exe respectively.
+ivs	Haptic file extensions used for IVS files: .ivs
+jp2 jpg2	jp2 and jpg2 are both declared at http://www.nist.gov/nics/; jp2 is preferred
+jpf jpx	jpf is declared at http://www.nist.gov/nics/. jpx is also an acceptable file extension, although it is not recommended for files on a desktop computer that are not directly associated with a MIME media type
+jpm jpgm	jpm and jpgm are both declared at http://www.nist.gov/nics/; jpm is preferred
+json	.json (see Section 4)
+json	JSON documents often use ".json" as the file extension, and this media type does not propose a specific extension other than this generic one.
+loas xhe	.loas (preferred), .xhe
+lpf	LPF files are most often identified with the extension .lpf.
+lwp sam	lwp (Word Pro) sam (older form for Ami Pro)
+m21 mp21	m21 and mp21 are both declared at http://www.fileinfo.net and http://filext.com/.
+m3u8 m3u	.m3u8, .m3u (see Section 4)
+mbox	mbox database files sometimes have an ".mbox" extension, but this is not required nor expected. As with magic numbers, implementers should avoid reflexive assumptions about the contents of such files.
+mj2 mjp2	mj2 and mjp2 are both declared at http://www.nist.gov/nics/;  mj2 is preferred
+mp4 mov mkv	various media file types, such as .mp4, .mov, .mkv, etc.
+mp4 mpg4	mp4 and mpg4 are both declared at <http://pitch.nist.gov/nics/>.
+mp4 mpg4	none mp4 and mpg4 are both declared at <http://pitch.nist.gov/nics/>.
+mrc	.mrc OID: 1.2.840.10003.5.10
+nsf ntf ndl ns4 ns3 ns2 nsh nsg	nsf (database) ntf (template) ndl (link) ns4 (database older form) ns3 (database older form) ns2 (database older form) nsh (database older form) nsg (database older form)
+ogx	.ogx  RFC 3534 defined the file extension .ogg for application/ogg, which RFC 5334 obsoletes in favor of .ogx due to concerns where, historically, some implementations expect .ogg files to be solely Vorbis-encoded audio.
+or3 or2 org	or3 or2 (older form) org (older form)
+prz pre	prz pre (older form)
+quox quiz	.quox and .quiz (.quiz=compressed collection of multiple .quox files + one xml information file containing the order in which questions should be displayed)
+sc	sc (Secure Container)
+sdp	The extension ".sdp" is commonly used.
+smil smi sml	.smil, .smi, .sml  NOTE: On the Windows operating system and the Macintosh platform, the ".smi" extension is used by other formats.  To avoid conflicts, it is thus recommended to use the extension ".smil" for storing SMIL files on these platforms.
+smil smi sml	See registration of application/smil.
+soa zone	'soa' and 'zone' are known to be used.
+sqlite sqlite3 db	.db, .sqlite, .sqlite3 (".db" does not uniquely identify SQLite database files. Other extensions are commonly used.)
+super	File extension(s): .super
+svg svgz	svg Note that the extension 'svgz' is used as an alias for 'svg.gz' [rfc1952], i.e. octet streams of type image/svg+xml, subsequently compressed with gzip.
+tag dsc	Suggest .tag for general purpose tag files, .dsc is used for tag descriptor files
+tei teiCorpus odd	Common extensions are '.tei', '.teiCorpus' and '.odd'.  See Recognizing TEI files (Section 2) in this specification.
+tm.jsonld tm.json jsontm	.jsontm, .tm.json, .tm.jsonld (preferred file extension)
+ttc	Font file extensions used for OFF / TrueType and OpenType fonts: .ttc
+u8dsn	The extension ".u8dsn" is suggested.
+u8hdr	In the event this is saved to a file, the extension ".u8hdr" is suggested.
+u8mdn	The extension ".u8mdn" is suggested.
+u8msg	The extension ".u8msg" is suggested.
+urim urimap	.urim, .urimap recommended
+uris uri	.uris or .uri recommended
+xdcf	.xdcf The file extension .xml is considered deprecated for XMLDataContainer files.
+xhtml xht	"xhtml" and "xht" are sometimes used.
+xmi	XMI documents are most often identified with the extensions
+xml	.xml (see RFC 3023)
+xml	.xml (the file is always named "metadata.xml")
+xml	XML data should use ".xml" as the file extension.
+xml	XML documents often use ".xml" as the file extension, and this media type does not propose a specific extension other than this generic one.
+xml rfcxml	.xml or .rfcxml when disambiguation from other XML files is needed
+xsl xslt	XSLT documents are most often identified with the extensions ".xsl" or ".xslt".
+yaml yml	"yaml" (preferred) and "yml". See Section 3.3 of RFC 9512.
+zip	None or .zip

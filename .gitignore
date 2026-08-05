@@ -1,4 +1,5 @@
 .mypy_cache/
 .~lock.*
 /.coverage*
+/iana.csv
 __pycache__/
