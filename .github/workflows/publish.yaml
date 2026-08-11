@@ -1,0 +1,26 @@
+---
+name: publish
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  publish-trigger:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Send Repository Dispatch Event
+        uses: actions/github-script@v9
+        with:
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: 'media-types',
+              repo: 'media-types.github.io',
+              event_type: 'publish',
+              client_payload: {}
+            });
+          github-token: ${{ secrets.GH_TOKEN }}
