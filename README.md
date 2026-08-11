@@ -5,6 +5,8 @@ This project contains the media type information provided by the Internet
 Assigned Numbers Authority (IANA) on the
 [IANA Media Types Registry](https://www.iana.org/assignments/media-types/).
 
+The latest generated data can be found on https://media-types.github.io.
+
 Data Pipeline
 =============
 
