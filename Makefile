@@ -13,7 +13,7 @@ check:
 
 clean:
 	rm -f iana.csv
-	rm -rf .mypy_cache __pycache__
+	rm -rf .mypy_cache __pycache__ _site
 
 lint: black isort mypy pylint
 
@@ -29,4 +29,17 @@ mypy:
 pylint:
 	pylint $(PYTHON_FILES)
 
-.PHONY: black check clean isort lint mypy pylint
+_site/index.html: website/index.html.jinja2 iana.csv
+	./generate_index.py
+
+_site/%.csv: %.csv
+	@mkdir -p _site
+	cp $< $@
+
+_site/%/: iana/%/
+	mkdir -p $@
+	for f in $<*; do cp "$$f" "_site/$${f#iana/}.txt"; done
+
+site: _site/index.html _site/iana.csv $(patsubst iana/%,_site/%,$(wildcard iana/*/))
+
+.PHONY: black check clean isort lint mypy pylint site

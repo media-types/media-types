@@ -111,3 +111,11 @@ def get_top_level_media_type_names(directory: pathlib.Path) -> Iterator[str]:
             if name in SKIP_TOP_LEVEL_TYPES:
                 continue
             yield name
+
+
+def read_media_type_csv(path: pathlib.Path) -> Iterator[MediaType]:
+    """Read CSV file containing media types."""
+    with open(path, encoding="utf-8") as csv_file:
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+            yield MediaType.from_csv_dict(row)

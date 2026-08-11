@@ -3,3 +3,4 @@
 /.coverage*
 /iana.csv
 __pycache__/
+_site/

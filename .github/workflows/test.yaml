@@ -53,7 +53,9 @@ jobs:
       - name: Update APT cache
         run: sudo apt-get update
       - name: Install dependencies
-        run: sudo apt-get install --no-install-recommends --yes pylint
+        run: >
+          sudo apt-get install --no-install-recommends --yes
+          pylint python3-jinja2
       - uses: actions/checkout@v6
       - name: Run pylint check
         run: make pylint
@@ -69,6 +71,10 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - name: Update APT cache
+        run: sudo apt-get update
+      - name: Install dependencies
+        run: sudo apt-get install --no-install-recommends --yes python3-jinja2
       - uses: actions/checkout@v6
       - name: Run unittest
         run: make check

@@ -27,3 +27,5 @@ Building
 
 1. Ensure `make` and Python 3 are installed.
 2. Run `make`.
+
+To build a website with this generated data in a directory named `_site`, run `make site`.
