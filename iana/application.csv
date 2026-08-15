@@ -638,6 +638,7 @@ vnd.3gpp.seal-mbms-usage-info+xml,application/vnd.3gpp.seal-mbms-usage-info+xml,
 vnd.3gpp.seal-mbs-usage-info+xml,application/vnd.3gpp.seal-mbs-usage-info+xml,[_3GPP]
 vnd.3gpp.seal-network-QoS-management-info+xml,application/vnd.3gpp.seal-network-QoS-management-info+xml,[_3GPP][Christian_Herrero-Veron]
 vnd.3gpp.seal-network-resource-info+cbor,application/vnd.3gpp.seal-network-resource-info+cbor,[_3GPP]
+vnd.3gpp.seal-store-forward-events-info+xml,application/vnd.3gpp.seal-store-forward-events-info+xml,[_3GPP]
 vnd.3gpp.seal-ue-config-info+xml,application/vnd.3gpp.seal-ue-config-info+xml,[Sapan_Shah]
 vnd.3gpp.seal-unicast-info+xml,application/vnd.3gpp.seal-unicast-info+xml,[_3GPP][Christian_Herrero-Veron]
 vnd.3gpp.seal-user-profile-info+xml,application/vnd.3gpp.seal-user-profile-info+xml,[Sapan_Shah]
