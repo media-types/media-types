@@ -61,6 +61,7 @@ NOT_SPECIFIED_RE = re.compile(
     r"^(-|any|n/a|undefined|unknown|not (applicable|available|designed yet)"
     r"|do not apply|\(none\)|-none-|<none defined>|none ?(disclosed|yet)?)[.,]?$"
 )
+SPLIT_RE = re.compile(r"\s*(?:,? and |,? or |[,;\s])\s*")
 __script_name__ = os.path.basename(sys.argv[0]) if __name__ == "__main__" else __name__
 
 
@@ -149,15 +150,7 @@ def load_file_extensions_missing(path: pathlib.Path) -> dict[str, str]:
     return mapping
 
 
-def _split(text: str) -> list[str]:
-    for separator in (", or ", ",", " or ", " and ", ";", " "):
-        if separator in text:
-            return [x.strip() for x in text.split(separator) if x.strip()]
-    return [text]
-
-
 def _strip(text: str) -> str:
-    text = text.removeprefix("and ")
     if text.startswith("'") and text.endswith("'"):
         text = text[1:-1]
     if text.startswith('"') and text.endswith('"'):
@@ -240,7 +233,7 @@ class FileExtensionsParser:
         if unwrapped in self.mapping:
             self.used_mapping.add(unwrapped)
             return self.mapping[unwrapped]
-        extensions = [_strip(x) for x in _split(unwrapped)]
+        extensions = [_strip(x) for x in SPLIT_RE.split(unwrapped.strip(",;"))]
         return extensions
 
     def check_unused(self) -> int:
@@ -463,6 +456,11 @@ class TestFileExtensionsParser(unittest.TestCase):
     def test_multiple_comma_separated(self) -> None:
         self.assertEqual(self.parse_file("image/jpeg"), ["jpg", "jpeg"])
 
+    def test_multiple_or_without_comma(self) -> None:
+        self.assertEqual(
+            self.parse_file("image/avif"), ["avif", "heif", "heifs", "hif"]
+        )
+
     def test_multiple_semicolon_separated(self) -> None:
         self.assertEqual(self.parse_file("application/vnd.erofs"), ["erofs", "0fs"])
 
@@ -513,6 +511,9 @@ class TestFileExtensionsParser(unittest.TestCase):
 
     def test_single_without_dot(self) -> None:
         self.assertEqual(self.parse_file("image/webp"), ["webp"])
+
+    def test_trailing_comma(self) -> None:
+        self.assertEqual(self.parse_file("application/clue+xml"), ["xml"])
 
     def test_undefined(self) -> None:
         self.assertEqual(self.parse_file("video/vnd.directv.mpeg"), [])
