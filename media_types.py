@@ -19,7 +19,7 @@ import dataclasses
 import logging
 import os
 import pathlib
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterable, Iterator
 from typing import Self
 
 ALLOWED_MISSING_TEMPLATES = {"image/x-emf", "image/x-wmf"}
@@ -106,6 +106,17 @@ class MediaType:
 class MediaTypeList(list[MediaType]):
     """A typed list container for MediaType instances."""
 
+    @classmethod
+    def from_files(cls, files: Iterable[pathlib.Path]) -> Self:
+        """Creates an instance populated from the given CSV files."""
+        result: Self = cls()
+        for path in files:
+            with open(path, encoding="utf-8") as csv_file:
+                reader = csv.DictReader(csv_file)
+                for row in reader:
+                    result.append(MediaType.from_csv_dict(row))
+        return result
+
     def add_additional_information(
         self,
         file_extension_parser: Callable[[str, str], list[str]],
@@ -143,11 +154,3 @@ def get_top_level_media_type_names(directory: pathlib.Path) -> Iterator[str]:
             if name in SKIP_TOP_LEVEL_TYPES:
                 continue
             yield name
-
-
-def read_media_type_csv(path: pathlib.Path) -> Iterator[MediaType]:
-    """Read CSV file containing media types."""
-    with open(path, encoding="utf-8") as csv_file:
-        reader = csv.DictReader(csv_file)
-        for row in reader:
-            yield MediaType.from_csv_dict(row)

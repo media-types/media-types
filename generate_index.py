@@ -22,7 +22,7 @@ from typing import Any
 
 import jinja2
 
-from media_types import read_media_type_csv
+from media_types import MediaTypeList
 
 TEMPLATE_DIRECTORY = "website"
 TEMPLATE = "index.html.jinja2"
@@ -48,7 +48,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    iana = list(read_media_type_csv(args.iana_csv))
+    iana = MediaTypeList.from_files([args.iana_csv])
     context = {"iana": iana}
     _render_index_html(context, args.output)
 
