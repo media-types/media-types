@@ -17,6 +17,7 @@
 import csv
 import dataclasses
 import logging
+import os
 import pathlib
 from collections.abc import Callable, Iterator
 from typing import Self
@@ -100,6 +101,37 @@ class MediaType:
             logger.error("%s", error)
             failures += 1
         return 0
+
+
+class MediaTypeList(list[MediaType]):
+    """A typed list container for MediaType instances."""
+
+    def add_additional_information(
+        self,
+        file_extension_parser: Callable[[str, str], list[str]],
+        directory: pathlib.Path,
+    ) -> int:
+        """Populates file extensions by reading and parsing the entry's template file.
+
+        Returns number of failures.
+        """
+        failures = 0
+        for media_type in self:
+            failures += media_type.add_additional_information(
+                file_extension_parser, directory
+            )
+        return failures
+
+    def write_to_csv(self, path: pathlib.Path) -> None:
+        """Writes a list of MediaType instances to a CSV file."""
+        fieldnames = self[0].get_csv_dict_keys()
+        with open(path, "w", encoding="utf-8") as file:
+            writer = csv.DictWriter(
+                file, fieldnames=fieldnames, lineterminator=os.linesep
+            )
+            writer.writeheader()
+            for item in self:
+                writer.writerow(item.as_csv_dict())
 
 
 def get_top_level_media_type_names(directory: pathlib.Path) -> Iterator[str]:

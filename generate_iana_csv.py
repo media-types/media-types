@@ -26,11 +26,12 @@ import pathlib
 import re
 import sys
 import unittest
-from collections.abc import Callable, Iterator
+from collections.abc import Iterator
 from typing import Self
 
 from media_types import (
     MediaType,
+    MediaTypeList,
     ParserFailure,
     get_top_level_media_type_names,
     parse_space_separated_list,
@@ -263,37 +264,6 @@ def iter_media_types(directory: pathlib.Path) -> Iterator[MediaType]:
         path = directory / f"{top_level_media_type}.csv"
         for row in iter_csv_rows(path):
             yield MediaType(row["Name"], row["Template"], [], row["Reference"])
-
-
-class MediaTypeList(list[MediaType]):
-    """A typed list container for MediaType instances."""
-
-    def add_additional_information(
-        self,
-        file_extension_parser: Callable[[str, str], list[str]],
-        directory: pathlib.Path,
-    ) -> int:
-        """Populates file extensions by reading and parsing the entry's template file.
-
-        Returns number of failures.
-        """
-        failures = 0
-        for media_type in self:
-            failures += media_type.add_additional_information(
-                file_extension_parser, directory
-            )
-        return failures
-
-    def write_to_csv(self, path: pathlib.Path) -> None:
-        """Writes a list of MediaType instances to a CSV file."""
-        fieldnames = self[0].get_csv_dict_keys()
-        with open(path, "w", encoding="utf-8") as file:
-            writer = csv.DictWriter(
-                file, fieldnames=fieldnames, lineterminator=os.linesep
-            )
-            writer.writeheader()
-            for item in self:
-                writer.writerow(item.as_csv_dict())
 
 
 def parse_args() -> argparse.Namespace:
