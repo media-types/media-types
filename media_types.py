@@ -38,6 +38,16 @@ def iter_csv_rows(path: pathlib.Path) -> Iterator[dict[str, str]]:
         yield from reader
 
 
+def iter_non_comment_lines(path: pathlib.Path) -> Iterator[str]:
+    """Yields non-empty, non-comment lines from a file line-by-line."""
+    with path.open("r", encoding="utf-8") as file:
+        for line in file:
+            line = line.rstrip()
+            if not line or line.startswith("#"):
+                continue
+            yield line
+
+
 def parse_space_separated_list(string: str) -> list[str]:
     """Splits a space-separated string into a list of strings."""
     if not string:

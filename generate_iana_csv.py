@@ -34,6 +34,7 @@ from media_types import (
     ParserFailure,
     get_top_level_media_type_names,
     iter_csv_rows,
+    iter_non_comment_lines,
     parse_space_separated_list,
 )
 
@@ -106,16 +107,6 @@ class ManualFileExtensions:
 def blake2b_128bit(text: str) -> str:
     """Calculates the 128-bit (32-hex-character) BLAKE2b hash of a string."""
     return hashlib.blake2b(text.encode("utf-8"), digest_size=16).hexdigest()
-
-
-def iter_non_comment_lines(path: pathlib.Path) -> Iterator[str]:
-    """Yields non-empty, non-comment lines from a file line-by-line."""
-    with path.open("r", encoding="utf-8") as file:
-        for line in file:
-            line = line.rstrip()
-            if not line or line.startswith("#"):
-                continue
-            yield line
 
 
 def load_file_extensions_manual(path: pathlib.Path) -> dict[str, ManualFileExtensions]:
