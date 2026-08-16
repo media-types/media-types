@@ -22,7 +22,7 @@ from typing import Any
 
 import jinja2
 
-from media_types import MediaTypeList
+from media_types import EnhancedMediaTypeList, MediaType, MediaTypeList
 
 TEMPLATE_DIRECTORY = "website"
 TEMPLATE = "index.html.jinja2"
@@ -41,6 +41,9 @@ def main() -> None:
     """Render index.html from Jinja 2 template and CSV files."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "-e", "--enhanced-csv", default=pathlib.Path("enhanced.csv"), type=pathlib.Path
+    )
+    parser.add_argument(
         "-i", "--iana-csv", default=pathlib.Path("iana.csv"), type=pathlib.Path
     )
     parser.add_argument(
@@ -48,8 +51,9 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    iana = MediaTypeList.from_files([args.iana_csv])
-    context = {"iana": iana}
+    enhanced = EnhancedMediaTypeList.from_files([args.enhanced_csv])
+    iana: MediaTypeList[MediaType] = MediaTypeList.from_files([args.iana_csv])
+    context = {"enhanced": enhanced, "iana": iana}
     _render_index_html(context, args.output)
 
 

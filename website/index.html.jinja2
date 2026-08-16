@@ -17,6 +17,24 @@
     This page contains the generated artifacts from
     <a href="https://github.com/media-types/media-types">https://github.com/media-types/media-types</a>.
   </p>
+  <h2>enhanced.csv</h2>
+  <p>Download the source CSV: <a href="enhanced.csv">enhanced.csv</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Template</th>
+        <th>Unique File Extensions</th>
+        <th>File Extensions</th>
+        <th>Reference</th>
+      </tr>
+    </thead>
+    <tbody>
+{%- for row in enhanced %}
+<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.unique_file_extensions | join(" ") }}</td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.reference }}</td></tr>
+{%- endfor %}
+    </tbody>
+  </table>
   <h2>iana.csv</h2>
   <p>Download the source CSV: <a href="iana.csv">iana.csv</a></p>
   <table>

@@ -1,0 +1,104 @@
+File Extension,Media Type,Reason
+Text,,too generic extension for application/vnd.cncf.helm.chart.provenance.v1.prov
+aa3,audio/ATRAC3,oldest codec mentioned in RFC5584
+ac,application/pkix-attr-cert,standards tree takes precedence over vendor tree
+afp,application/vnd.afpc.modca,alternative application/vnd.ibm.modcap is obsolete
+aml,application/AML,first registered - first served
+apng,image/apng,standards tree takes precedence over vendor tree
+atx,audio/ATRAC-X,RFC5584 takes precedence over vendor tree
+bin,,too generic extension
+bpd,application/vnd.fints,FinTS is successor of HBCI
+cab,application/vnd.ms-cab-compressed,first registered - first served
+cbor,application/cbor,obvious and RFC8949
+cjs,,also used by CommonJS
+cl,application/simple-filter+xml,first RFC - first served
+class,,also used by Java
+curl,text/vnd.curl,text takes precedence over application
+db,,too generic extension
+dvb,video/vnd.dvb.file,video takes precedence over audio
+entity,,too generic extension
+fit,application/fits,image/fits supports only a subset of FITS
+fits,application/fits,image/fits supports only a subset of FITS
+fpx,image/vnd.fpx,first registered - first served
+fts,application/fits,image/fits supports only a subset of FITS
+gbr,application/rpki-ghostbusters,standards tree takes precedence over vendor tree
+geojson,application/geo+json,alternative application/vnd.geo+json is obsolete
+gml,application/gml+xml,first registered - first served
+gz,application/gzip,obvious and structured syntax suffix
+hbc,application/vnd.fints,FinTS is successor of HBCI
+hbci,application/vnd.fints,FinTS is successor of HBCI
+heif,image/heif,specified in image/heif and first registered - first served
+heifs,image/heif-sequence,first registered - first served
+hif,image/heif,mentioned first in image/heif and first registered - first served
+html,text/html,obvious and standards tree takes precedence over vendor tree
+img,,too generic extension
+imscc,application/vnd.ims.imsccv1p3,latest version
+iso,,also used for optical disc images (ISO 9660)
+jar,application/java-archive,standards tree takes precedence over vendor tree
+js,text/javascript,alternative application/javascript is obsolete and application/node is subset
+json,application/json,RFC6839
+jsonld,application/ld+json,standards tree takes precedence over vendor tree
+key,,also used by PGP
+kom,application/vnd.fints,FinTS is successor of HBCI
+list3820,application/vnd.afpc.modca,alternative application/vnd.ibm.modcap is obsolete
+listafp,application/vnd.afpc.modca,alternative application/vnd.ibm.modcap is obsolete
+mjs,text/javascript,alternative text/ecmascript is obsolete
+mkv,video/matroska,RFC9559 takes precedence over vendor tree
+mmd,application/vnd.chipnuts.karaoke-mmd,first registered - first served
+mov,,too generic extension
+mp4,video/mp4,most common case from RFC4337 §2 and RFC takes precedence over vendor tree
+mpg4,video/mp4,most common case from RFC4337 §2
+mpp,,also used by Microsoft Project
+mxmf,audio/mobile-xmf,RFC4723 takes precedence over vendor tree
+nb,application/vnd.wolfram.mathematica,latest version
+ntf,application/vnd.lotus-notes,first registered - first served
+odb,application/vnd.oasis.opendocument.base,alternative application/vnd.oasis.opendocument.database is obsolete
+omg,audio/ATRAC3,oldest codec mentioned in RFC5584
+org,text/org,standards tree takes precedence over vendor tree
+otf,font/otf,typical usage and RFC8081 takes precedence over vendor tree
+ots,application/vnd.oasis.opendocument.spreadsheet-template,first registered - first served
+pbd,application/vnd.powerbuilder75,use latest PowerBuilder version (non-secure mode)
+pfr,application/font-tdpfr,RFC3073 takes precedence over vendor tree
+pic,,too generic extension
+pkd,application/vnd.fints,FinTS is successor of HBCI
+png,image/png,standards tree takes precedence over vendor tree
+prc,model/prc,standards tree takes precedence over vendor tree
+pseg3820,application/vnd.afpc.modca,alternative application/vnd.ibm.modcap is obsolete
+pyo,,also used by Python programming environment
+rdf,application/rdf+xml,RFC3870 takes precedence over vendor tree
+rep,application/vnd.businessobjects,first registered - first served
+req,,too generic extension
+request,,too generic extension
+scm,application/vnd.lotus-screencam,first registered - first served
+scs,application/scvp-cv-response,first registered - first served
+sid,application/yang-sid+json,standards tree takes precedence over personal tree
+sig,application/pgp-signature,first RFC - first served
+smi,application/smil+xml,alternative application/smil is obsolete
+smil,application/smil+xml,alternative application/smil is obsolete
+sml,application/smil+xml,alternative application/smil is obsolete
+sms,application/vnd.3gpp2.sms,latest version
+spp,application/scvp-vp-response,RFC5055 takes precedence over vendor tree
+swi,application/vnd.aristanetworks.swi,alternative application/vnd.arastra.swi is obsolete
+tbz2,,also used as short form for tar.bz2
+texi,application/texinfo,standards tree takes precedence over personal tree
+tsq,application/timestamp-query,first RFC - first served
+tsr,application/timestamp-reply,first RFC - first served
+ttf,font/ttf,typical usage according to RFC8081
+upa,application/vnd.fints,FinTS is successor of HBCI
+vcf,text/vcard,standards tree takes precedence over vendor tree
+vis,application/vnd.visionary,alternative application/vnd.informix-visionary is obsolete
+wbxml,application/vnd.wap.wbxml,RFC6839
+woff,font/woff,alternative application/font-woff is deprecated
+x3d,model/x3d+xml,standards tree takes precedence over vendor tree
+xbd,application/vnd.fujifilm.fb.docuworks.binder,Fuji Xerox was renamed to Fujifilm Business Innovation in 2021
+xct,application/vnd.fujifilm.fb.docuworks.container,Fuji Xerox was renamed to Fujifilm Business Innovation in 2021
+xdf,application/xcap-diff+xml,first RFC - first served
+xdw,application/vnd.fujifilm.fb.docuworks,Fuji Xerox was renamed to Fujifilm Business Innovation in 2021
+xer,application/xcap-error+xml,first RFC - first served
+xhtm,,also used for application/xhtml+xml
+xhtml,application/xhtml+xml,standards tree takes precedence over vendor tree
+xml,application/xml,RFC6839 and alternative text/xml is an alias
+yaml,application/yaml,obvious and structured syntax suffix
+yml,application/yaml,obvious and structured syntax suffix
+yt,video/vnd.youtube.yt,alternative application/vnd.youtube.yt is obsolete
+zip,application/zip,RFC6839
