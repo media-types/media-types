@@ -17,7 +17,6 @@
 """Generate IANA CSV file with additional file extensions column."""
 
 import argparse
-import csv
 import dataclasses
 import hashlib
 import logging
@@ -34,6 +33,7 @@ from media_types import (
     MediaTypeList,
     ParserFailure,
     get_top_level_media_type_names,
+    iter_csv_rows,
     parse_space_separated_list,
 )
 
@@ -106,13 +106,6 @@ class ManualFileExtensions:
 def blake2b_128bit(text: str) -> str:
     """Calculates the 128-bit (32-hex-character) BLAKE2b hash of a string."""
     return hashlib.blake2b(text.encode("utf-8"), digest_size=16).hexdigest()
-
-
-def iter_csv_rows(path: pathlib.Path) -> Iterator[dict[str, str]]:
-    """Yields rows from a CSV file."""
-    with open(path, encoding="utf-8") as csv_file:
-        reader = csv.DictReader(csv_file)
-        yield from reader
 
 
 def iter_non_comment_lines(path: pathlib.Path) -> Iterator[str]:

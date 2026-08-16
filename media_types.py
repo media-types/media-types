@@ -31,6 +31,13 @@ class ParserFailure(RuntimeError):
     """Base exception raised for errors during file extensions parsing."""
 
 
+def iter_csv_rows(path: pathlib.Path) -> Iterator[dict[str, str]]:
+    """Yields rows from a CSV file."""
+    with open(path, encoding="utf-8") as csv_file:
+        reader = csv.DictReader(csv_file)
+        yield from reader
+
+
 def parse_space_separated_list(string: str) -> list[str]:
     """Splits a space-separated string into a list of strings."""
     if not string:
