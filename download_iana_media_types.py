@@ -17,7 +17,6 @@
 """Download and update IANA media type CSV assignments and templates."""
 
 import argparse
-import csv
 import logging
 import os
 import pathlib
@@ -31,6 +30,7 @@ from media_types import (
     ALLOWED_MISSING_TEMPLATES,
     TOP_LEVEL_TYPES_CSV,
     get_top_level_media_type_names,
+    iter_csv_rows,
 )
 
 BASE_URL = "https://www.iana.org/assignments"
@@ -141,10 +141,8 @@ def download_top_level_media_type_names(directory: pathlib.Path) -> int:
 
 def read_templates(path: pathlib.Path) -> Iterator[str]:
     """Read a media type CSV file and yield template file relative paths."""
-    with open(path, encoding="utf-8") as csv_file:
-        reader = csv.DictReader(csv_file)
-        for row in reader:
-            yield row["Template"]
+    for row in iter_csv_rows(path):
+        yield row["Template"]
 
 
 def main() -> int:

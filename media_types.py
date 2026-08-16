@@ -118,10 +118,8 @@ class MediaTypeList(list[MediaType]):
         """Creates an instance populated from the given CSV files."""
         result: Self = cls()
         for path in files:
-            with open(path, encoding="utf-8") as csv_file:
-                reader = csv.DictReader(csv_file)
-                for row in reader:
-                    result.append(MediaType.from_csv_dict(row))
+            for row in iter_csv_rows(path):
+                result.append(MediaType.from_csv_dict(row))
         return result
 
     def add_additional_information(
@@ -154,10 +152,8 @@ class MediaTypeList(list[MediaType]):
 
 def get_top_level_media_type_names(directory: pathlib.Path) -> Iterator[str]:
     """Yield top-level media type names from the local CSV file."""
-    with open(directory / TOP_LEVEL_TYPES_CSV, encoding="utf-8") as csv_file:
-        reader = csv.DictReader(csv_file)
-        for row in reader:
-            name = row["Name"]
-            if name in SKIP_TOP_LEVEL_TYPES:
-                continue
-            yield name
+    for row in iter_csv_rows(directory / TOP_LEVEL_TYPES_CSV):
+        name = row["Name"]
+        if name in SKIP_TOP_LEVEL_TYPES:
+            continue
+        yield name
