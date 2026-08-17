@@ -41,7 +41,10 @@ def main() -> None:
     """Render index.html from Jinja 2 template and CSV files."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "-e", "--enhanced-csv", default=pathlib.Path("enhanced.csv"), type=pathlib.Path
+        "-m",
+        "--media-types-csv",
+        default=pathlib.Path("media-types.csv"),
+        type=pathlib.Path,
     )
     parser.add_argument(
         "-i", "--iana-csv", default=pathlib.Path("iana.csv"), type=pathlib.Path
@@ -51,9 +54,9 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    enhanced = EnhancedMediaTypeList.from_files([args.enhanced_csv])
+    media_types = EnhancedMediaTypeList.from_files([args.media_types_csv])
     iana: MediaTypeList[MediaType] = MediaTypeList.from_files([args.iana_csv])
-    context = {"enhanced": enhanced, "iana": iana}
+    context = {"media_types": media_types, "iana": iana}
     _render_index_html(context, args.output)
 
 

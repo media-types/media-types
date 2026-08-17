@@ -1,7 +1,7 @@
 .mypy_cache/
 .~lock.*
 /.coverage*
-/enhanced.csv
 /iana.csv
+/media-types.csv
 __pycache__/
 _site/

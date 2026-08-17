@@ -259,7 +259,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "-o",
         "--output",
-        default=pathlib.Path("enhanced.csv"),
+        default=pathlib.Path("media-types.csv"),
         type=pathlib.Path,
         help="Output CSV file (default: %(default)s)",
     )
