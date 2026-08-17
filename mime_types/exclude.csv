@@ -1,0 +1,29 @@
+Media Type,Reason
+application/ecmascript,obsoleted in favor of text/javascript
+application/font-sfnt,deprecated in favor of font/sfnt
+application/font-woff,deprecated in favor of font/woff
+application/javascript,obsoleted in favor of text/javascript
+application/remote-printing,obsolete
+application/smil,obsoleted in favor of application/smil+xml
+application/vnd.3gpp.mcvideo-affiliation-info+xml,obsoleted in favor of application/vnd.3gpp.mcvideo-info+xml
+application/vnd.arastra.swi,obsoleted in favor of application/vnd.aristanetworks.swi
+application/vnd.frogans.fnc,obsolete
+application/vnd.frogans.ltf,obsolete
+application/vnd.geo+json,obsoleted by RFC7946 in favor of application/geo+json
+application/vnd.gmx,deprecated
+application/vnd.gov.sk.e-form+xml,obsoleted by request
+application/vnd.ibm.afplinedata,obsoleted in favor of vnd.afpc.afplinedata
+application/vnd.ibm.modcap,obsoleted in favor of application/vnd.afpc.modca
+application/vnd.informix-visionary,obsoleted in favor of application/vnd.visionary
+application/vnd.nokia.n-gage.symbian.install,obsolete
+application/vnd.oasis.opendocument.database,obsoleted in favor of application/vnd.oasis.opendocument.base
+application/vnd.youtube.yt,obsoleted in favor of video/vnd.youtube.yt
+audio/vnd.qcelp,deprecated in favor of audio/qcelp
+image/x-emf,deprecated in favor of image/emf
+image/x-wmf,deprecated in favor of image/wmf
+message/news,obsoleted by RFC5537
+message/s-http,obsolete
+message/vnd.si.simp,obsoleted by request
+text/directory,deprecated by RFC6350
+text/ecmascript,obsoleted in favor of text/javascript
+text/vnd.si.uricatalogue,uric,obsoleted by request

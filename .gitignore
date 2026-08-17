@@ -3,5 +3,6 @@
 /.coverage*
 /iana.csv
 /media-types.csv
+/mime.types
 __pycache__/
 _site/

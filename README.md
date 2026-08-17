@@ -40,6 +40,13 @@ This step can be heavily modified by users:
 * Additional (non IANA) media types can be added
 * Additional file extensions can be specified for media types
 
+## 3. Generate mime.types
+
+As last step, generate `mime.types` from the enhanced IANA CSV file.
+Media types can be excluded from the output file
+to support removing deprecated or obsoleted media types.
+A (different) header and a footer can be added to `mime.types`.
+
 Building
 ========
 
@@ -51,7 +58,8 @@ To build a website with this generated data in a directory named `_site`, run `m
 Installing
 ==========
 
-Run `make install` to install the enhanced IANA CSV file to `/usr/share/media-types`.
+Run `make install` to install `mime.types` to `/etc/mime.types`
+and the enhanced IANA CSV file to `/usr/share/media-types`.
 
 Modification
 ============
@@ -102,3 +110,18 @@ key,application/pgp-keys
 ```
 
 **Note**: To removed a file extension from all media types, set the media type to an empty string.
+
+To exclude additional media types from `mime.types`,
+create a CSV file with at least the column `Media Type`.
+Set the environment/make variable `EXTRA_EXCLUDE` to its path.
+Example content:
+
+```csv
+Media Type,Reason
+image/hsj2,Because I said so
+```
+
+To add a different header to `mime.types`
+set the environment/make variable `HEADER` to a file containing it.
+To add a footer to `mime.types`
+set the environment/make variable `FOOTER` to a file containing it.

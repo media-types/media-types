@@ -203,6 +203,19 @@ class MediaTypeList(list[T]):
             used.update(file_extensions)
         return duplicates
 
+    def remove_templates(self, templates: set[str]) -> list[str]:
+        """Remove all media types with matching template names. Return removed names."""
+        kept = []
+        removed = []
+        for media_type in self:
+            if media_type.template in templates:
+                removed.append(media_type.template)
+            else:
+                kept.append(media_type)
+
+        self[:] = kept
+        return removed
+
     def write_to_csv(self, path: pathlib.Path) -> None:
         """Writes a list of MediaType instances to a CSV file."""
         fieldnames = self[0].get_csv_dict_keys()
