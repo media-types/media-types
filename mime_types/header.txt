@@ -1,5 +1,5 @@
 # This file maps Internet media (MIME) types to unique file extension(s).
-# Placed in the public domain for unlimited redistribution.
+# Placed in the public domain (CC0 1.0) for unlimited redistribution.
 # Upstream repository: <https://github.com/media-types/media-types>
 #
 # The format of this file is a media type on the left and zero or more
