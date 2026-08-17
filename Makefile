@@ -11,6 +11,8 @@ ifdef EXTRA_UNIQUE_FILE_EXTENSIONS
 ENHANCE_IANA_CSV_ARGS += --unique-file-extensions=enhancement/unique-file-extensions.csv --unique-file-extensions=$(EXTRA_UNIQUE_FILE_EXTENSIONS)
 endif
 
+PREFIX = /usr
+DATADIR = $(PREFIX)/share/media-types
 PYTHON_FILES = $(wildcard scripts/*.py)
 
 all: iana/top-level-media-type-names.csv media-types.csv
@@ -23,6 +25,10 @@ iana.csv: iana/top-level-media-type-names.csv $(wildcard iana/*.csv) $(wildcard 
 
 media-types.csv: iana.csv $(wildcard enhancement/*)
 	scripts/enhance_iana_csv.py $(ENHANCE_IANA_CSV_ARGS)
+
+install: media-types.csv
+	install -m 755 -d $(DESTDIR)$(DATADIR)
+	install -m 644 media-types.csv $(DESTDIR)$(DATADIR)/media-types.csv
 
 check:
 	python3 -m unittest discover -p '*.py' -s scripts -v
@@ -58,4 +64,4 @@ _site/%/: iana/%/
 
 site: _site/index.html _site/iana.csv _site/media-types.csv $(patsubst iana/%,_site/%,$(wildcard iana/*/))
 
-.PHONY: black check clean isort lint mypy pylint site
+.PHONY: black check clean install isort lint mypy pylint site

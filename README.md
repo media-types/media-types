@@ -48,6 +48,11 @@ Building
 
 To build a website with this generated data in a directory named `_site`, run `make site`.
 
+Installing
+==========
+
+Run `make install` to install the enhanced IANA CSV file to `/usr/share/media-types`.
+
 Modification
 ============
 
