@@ -56,6 +56,6 @@ _site/%/: iana/%/
 	mkdir -p $@
 	for f in $<*; do cp "$$f" "_site/$${f#iana/}.txt"; done
 
-site: _site/index.html _site/iana.csv $(patsubst iana/%,_site/%,$(wildcard iana/*/))
+site: _site/index.html _site/iana.csv _site/enhanced.csv $(patsubst iana/%,_site/%,$(wildcard iana/*/))
 
 .PHONY: black check clean isort lint mypy pylint site
