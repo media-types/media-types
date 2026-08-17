@@ -36,21 +36,9 @@
     </tbody>
   </table>
   <h2>iana.csv</h2>
-  <p>Download the CSV: <a href="iana.csv">iana.csv</a></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Template</th>
-        <th>File Extensions</th>
-        <th>Reference</th>
-      </tr>
-    </thead>
-    <tbody>
-{%- for row in iana %}
-<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.reference }}</td></tr>
-{%- endfor %}
-    </tbody>
-  </table>
+  <p>
+    Download the CSV: <a href="iana.csv">iana.csv</a><br/>
+    Show the table: <a href="iana.html">iana</a>
+  </p>
 </body>
 </html>

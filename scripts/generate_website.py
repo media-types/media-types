@@ -14,7 +14,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-"""Render index.html from Jinja 2 template and CSV files."""
+"""Render website html pages from Jinja 2 template and CSV files."""
 
 import argparse
 import pathlib
@@ -25,16 +25,19 @@ import jinja2
 from media_types import EnhancedMediaTypeList, MediaType, MediaTypeList
 
 TEMPLATE_DIRECTORY = "website"
-TEMPLATE = "index.html.jinja2"
 
 
-def _render_index_html(context: dict[str, Any], output: pathlib.Path) -> None:
+def _render_html_pages(context: dict[str, Any], output_dir: pathlib.Path) -> None:
+    output_dir.mkdir(exist_ok=True)
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(TEMPLATE_DIRECTORY))
-    template = env.get_template(TEMPLATE)
-    rendered = template.render(context)
+    for template_name in env.list_templates(
+        filter_func=lambda name: name.endswith(".jinja2")
+    ):
+        template = env.get_template(template_name)
+        rendered = template.render(context)
 
-    output.parent.mkdir(exist_ok=True)
-    output.write_text(rendered)
+        output_path = output_dir / template_name.removesuffix(".jinja2")
+        output_path.write_text(rendered)
 
 
 def main() -> None:
@@ -50,14 +53,14 @@ def main() -> None:
         "-i", "--iana-csv", default=pathlib.Path("iana.csv"), type=pathlib.Path
     )
     parser.add_argument(
-        "-o", "--output", default=pathlib.Path("_site/index.html"), type=pathlib.Path
+        "-o", "--output", default=pathlib.Path("_site"), type=pathlib.Path
     )
     args = parser.parse_args()
 
     media_types = EnhancedMediaTypeList.from_files([args.media_types_csv])
     iana: MediaTypeList[MediaType] = MediaTypeList.from_files([args.iana_csv])
     context = {"media_types": media_types, "iana": iana}
-    _render_index_html(context, args.output)
+    _render_html_pages(context, args.output)
 
 
 if __name__ == "__main__":

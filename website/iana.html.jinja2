@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>iana.csv - Media Types with File Extensions</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    table { border-collapse: collapse; font-size: 10pt; }
+    th, td { border: 1px solid #ccc; padding-left: 0.5em; padding-right: 0.5em; text-align: left; vertical-align: top; }
+    th { background: #f5f5f5; }
+    a { color: #0b57d0; }
+  </style>
+</head>
+<body>
+  <h1>Media Types with File Extensions</h1>
+  <p>
+    This page contains one generated artifact from
+    <a href="https://github.com/media-types/media-types">https://github.com/media-types/media-types</a>:
+  </p>
+  <h2>iana.csv</h2>
+  <p>Download the CSV: <a href="iana.csv">iana.csv</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Template</th>
+        <th>File Extensions</th>
+        <th>Reference</th>
+      </tr>
+    </thead>
+    <tbody>
+{%- for row in iana %}
+<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.reference }}</td></tr>
+{%- endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

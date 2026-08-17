@@ -45,8 +45,8 @@ mypy:
 pylint:
 	pylint $(PYTHON_FILES)
 
-_site/index.html: website/index.html.jinja2 iana.csv media-types.csv
-	scripts/generate_index.py
+_site/index.html: $(wildcard website/*.jinja2) iana.csv media-types.csv
+	scripts/generate_website.py
 
 _site/%.csv: %.csv
 	@mkdir -p _site
