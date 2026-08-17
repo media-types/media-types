@@ -11,21 +11,21 @@ ifdef EXTRA_UNIQUE_FILE_EXTENSIONS
 ENHANCE_IANA_CSV_ARGS += --unique-file-extensions=enhancement/unique-file-extensions.csv --unique-file-extensions=$(EXTRA_UNIQUE_FILE_EXTENSIONS)
 endif
 
-PYTHON_FILES = $(wildcard *.py)
+PYTHON_FILES = $(wildcard scripts/*.py)
 
 all: iana/top-level-media-type-names.csv enhanced.csv
 
 iana/top-level-media-type-names.csv:
-	./download_iana_media_types.py
+	scripts/download_iana_media_types.py
 
 iana.csv: iana/top-level-media-type-names.csv $(wildcard iana/*.csv) $(wildcard parser/file_extensions/*)
-	./generate_iana_csv.py
+	scripts/generate_iana_csv.py
 
 enhanced.csv: iana.csv $(wildcard enhancement/*)
-	./enhance_iana_csv.py $(ENHANCE_IANA_CSV_ARGS)
+	scripts/enhance_iana_csv.py $(ENHANCE_IANA_CSV_ARGS)
 
 check:
-	python3 -m unittest -v $(PYTHON_FILES)
+	python3 -m unittest discover -p '*.py' -s scripts -v
 
 clean:
 	rm -f enhanced.csv iana.csv
@@ -46,7 +46,7 @@ pylint:
 	pylint $(PYTHON_FILES)
 
 _site/index.html: website/index.html.jinja2 iana.csv enhanced.csv
-	./generate_index.py
+	scripts/generate_index.py
 
 _site/%.csv: %.csv
 	@mkdir -p _site

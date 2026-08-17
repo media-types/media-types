@@ -16,3 +16,6 @@ max-line-length = 88
 [tool.pylint.reports]
 # Tells whether to display a full report or only the messages.
 reports = false
+
+[tool.ruff]
+src = ["."]
