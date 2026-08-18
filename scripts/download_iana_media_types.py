@@ -17,11 +17,13 @@
 """Download and update IANA media type CSV assignments and templates."""
 
 import argparse
+import concurrent.futures
 import json
 import logging
 import os
 import pathlib
 import sys
+import threading
 import time
 import types
 import urllib.error
@@ -38,6 +40,7 @@ from media_types import (
 
 BASE_URL = "https://www.iana.org/assignments"
 CACHE_FILENAME = "last-modified.json"
+DEFAULT_WORKERS = 16
 MEDIA_TYPES_URL = f"{BASE_URL}/media-types"
 EXPECT_MISSING = {f"{MEDIA_TYPES_URL}/{t}" for t in ALLOWED_MISSING_TEMPLATES}
 LOG_FORMAT = "%(asctime)s %(name)s %(levelname)s: %(message)s"
@@ -45,10 +48,11 @@ __script_name__ = os.path.basename(sys.argv[0]) if __name__ == "__main__" else _
 
 
 class LastModifiedCache:
-    """Caches HTTP Last-Modified headers for downloaded files."""
+    """Thread-safe manager for persistent HTTP Last-Modified headers."""
 
     def __init__(self, cache_directory: pathlib.Path) -> None:
         self.cache_path = cache_directory / CACHE_FILENAME
+        self._lock = threading.Lock()
         self._cache: dict[str, str] = self.load()
 
     def load(self) -> dict[str, str]:
@@ -70,25 +74,28 @@ class LastModifiedCache:
 
     def save(self) -> None:
         """Save the cache contents to disk."""
-        try:
-            self.cache_path.parent.mkdir(exist_ok=True)
-            with self.cache_path.open("w", encoding="utf-8") as f:
-                json.dump(self._cache, f, indent=2, sort_keys=True)
-                f.write(os.linesep)
-        except OSError as error:
-            logger = logging.getLogger(__script_name__)
-            logger.error("Failed to save cache to '%s': %s", self.cache_path, error)
+        with self._lock:
+            try:
+                self.cache_path.parent.mkdir(exist_ok=True)
+                with self.cache_path.open("w", encoding="utf-8") as f:
+                    json.dump(self._cache, f, indent=2, sort_keys=True)
+                    f.write(os.linesep)
+            except OSError as error:
+                logger = logging.getLogger(__script_name__)
+                logger.error("Failed to save cache to '%s': %s", self.cache_path, error)
 
     def get_last_modified(self, url: str) -> str | None:
         """Return the cached Last-Modified header string for a URL if present."""
-        return self._cache.get(url)
+        with self._lock:
+            return self._cache.get(url)
 
     def set_last_modified(self, url: str, last_modified: str | None) -> None:
         """Update or set the Last-Modified header for a URL."""
-        if last_modified is None:
-            del self._cache[url]
-        else:
-            self._cache[url] = last_modified
+        with self._lock:
+            if last_modified is None:
+                self._cache.pop(url, None)
+            else:
+                self._cache[url] = last_modified
 
     def __enter__(self) -> Self:
         return self
@@ -151,26 +158,43 @@ def download_file(url: str, path: pathlib.Path, cache: LastModifiedCache) -> int
     return 0
 
 
+def download_files_in_parallel(
+    tasks: list[tuple[str, pathlib.Path]], cache: LastModifiedCache, max_workers: int
+) -> int:
+    """Execute a list of (url, path) download tasks concurrently using threads."""
+    failures = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = [
+            executor.submit(download_file, url, path, cache) for url, path in tasks
+        ]
+        for future in concurrent.futures.as_completed(futures):
+            failures += future.result()
+    return failures
+
+
 def download_media_types(
     top_level_media_type_names: Sequence[str],
     directory: pathlib.Path,
     cache: LastModifiedCache,
+    max_workers: int,
 ) -> int:
     """Download media type CSV files for each specified top-level media type."""
     logger = logging.getLogger(__script_name__)
     logger.info(
         "Downloading %i media type CSV files...", len(top_level_media_type_names)
     )
-    failures = 0
-    for media_type in top_level_media_type_names:
-        url = f"{MEDIA_TYPES_URL}/{media_type}.csv"
-        path = directory / f"{media_type}.csv"
-        failures += download_file(url, path, cache)
-    return failures
+    tasks = [
+        (f"{MEDIA_TYPES_URL}/{media_type}.csv", directory / f"{media_type}.csv")
+        for media_type in top_level_media_type_names
+    ]
+    return download_files_in_parallel(tasks, cache, max_workers)
 
 
 def download_templates_from_file(
-    media_type_file: pathlib.Path, directory: pathlib.Path, cache: LastModifiedCache
+    media_type_file: pathlib.Path,
+    directory: pathlib.Path,
+    cache: LastModifiedCache,
+    max_workers: int,
 ) -> int:
     """Download all media type template files listed inside a given media type CSV."""
     logger = logging.getLogger(__script_name__)
@@ -180,24 +204,24 @@ def download_templates_from_file(
         len(templates),
         media_type_file,
     )
-    failures = 0
-    for template in templates:
-        url = f"{MEDIA_TYPES_URL}/{template}"
-        path = directory / template
-        failures += download_file(url, path, cache)
-    return failures
+    tasks = [
+        (f"{MEDIA_TYPES_URL}/{template}", directory / template)
+        for template in templates
+    ]
+    return download_files_in_parallel(tasks, cache, max_workers)
 
 
 def download_templates(
     top_level_media_type_names: Iterable[str],
     directory: pathlib.Path,
     cache: LastModifiedCache,
+    max_workers: int,
 ) -> int:
     """Download template files for all provided top-level media types."""
     failures = 0
     for media_type in top_level_media_type_names:
         failures += download_templates_from_file(
-            directory / f"{media_type}.csv", directory, cache
+            directory / f"{media_type}.csv", directory, cache, max_workers
         )
     return failures
 
@@ -231,6 +255,13 @@ def main() -> int:
         help="directory to store downloaded IANA files (default: %(default)s)",
     )
     parser.add_argument(
+        "-w",
+        "--workers",
+        default=DEFAULT_WORKERS,
+        type=int,
+        help="number of worker threads for parallel downloads (default: %(default)s)",
+    )
+    parser.add_argument(
         "-q",
         "--quiet",
         dest="log_level",
@@ -250,10 +281,10 @@ def main() -> int:
             get_top_level_media_type_names(args.directory)
         )
         failures += download_media_types(
-            top_level_media_type_names, args.directory, cache
+            top_level_media_type_names, args.directory, cache, args.workers
         )
         failures += download_templates(
-            top_level_media_type_names, args.directory, cache
+            top_level_media_type_names, args.directory, cache, args.workers
         )
 
     elapsed_time = time.perf_counter() - start_time
