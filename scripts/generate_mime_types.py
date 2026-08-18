@@ -82,11 +82,11 @@ def write_mime_types(
                     math.ceil((MIME_TYPE_WIDTH - len(mime_type.template)) / TAB_WIDTH),
                 )
                 mime_types_file.write(
-                    f"{mime_type.template}{'\t' * num_tabs}"
+                    f"{mime_type.template.lower()}{'\t' * num_tabs}"
                     f"{' '.join(mime_type.unique_file_extensions)}\n"
                 )
             else:
-                mime_types_file.write(f"{mime_type.template}\n")
+                mime_types_file.write(f"{mime_type.template.lower()}\n")
         mime_types_file.write(footer)
 
 
