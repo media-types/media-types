@@ -40,6 +40,14 @@
 {%- endfor %}
     </tbody>
   </table>
+  <p>
+    Statistics:
+    <ul>
+      <li>Total media types: {{ media_types | length }}</li>
+      <li>Media types with file extension(s): {{ media_types | selectattr('file_extensions') | list | length }}</li>
+      <li>Media types with unique file extension(s): {{ media_types | selectattr('unique_file_extensions') | list | length }}</li>
+    </ul>
+  </p>
   <h2>iana.csv</h2>
   <p>
     Download the CSV: <a href="iana.csv">iana.csv</a><br/>

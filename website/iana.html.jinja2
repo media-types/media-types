@@ -34,5 +34,12 @@
 {%- endfor %}
     </tbody>
   </table>
+  <p>
+    Statistics:
+    <ul>
+      <li>Total media types: {{ iana | length }}</li>
+      <li>Media types with file extension(s): {{ iana | selectattr('file_extensions') | list | length }}</li>
+    </ul>
+  </p>
 </body>
 </html>
