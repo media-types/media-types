@@ -17,14 +17,17 @@
 """Download and update IANA media type CSV assignments and templates."""
 
 import argparse
+import json
 import logging
 import os
 import pathlib
 import sys
 import time
+import types
 import urllib.error
 import urllib.request
 from collections.abc import Iterable, Iterator, Sequence
+from typing import Self
 
 from media_types import (
     ALLOWED_MISSING_TEMPLATES,
@@ -34,10 +37,69 @@ from media_types import (
 )
 
 BASE_URL = "https://www.iana.org/assignments"
+CACHE_FILENAME = "last-modified.json"
 MEDIA_TYPES_URL = f"{BASE_URL}/media-types"
 EXPECT_MISSING = {f"{MEDIA_TYPES_URL}/{t}" for t in ALLOWED_MISSING_TEMPLATES}
 LOG_FORMAT = "%(asctime)s %(name)s %(levelname)s: %(message)s"
 __script_name__ = os.path.basename(sys.argv[0]) if __name__ == "__main__" else __name__
+
+
+class LastModifiedCache:
+    """Caches HTTP Last-Modified headers for downloaded files."""
+
+    def __init__(self, cache_directory: pathlib.Path) -> None:
+        self.cache_path = cache_directory / CACHE_FILENAME
+        self._cache: dict[str, str] = self.load()
+
+    def load(self) -> dict[str, str]:
+        """Load the cache content from disk."""
+        if not self.cache_path.exists():
+            return {}
+        try:
+            with self.cache_path.open("r", encoding="utf-8") as f:
+                data = json.load(f)
+            assert isinstance(data, dict), "Cache content is not a dict"
+            assert all(
+                isinstance(k, str) and isinstance(v, str) for k, v in data.items()
+            ), "Cache entries must be string key-value pairs"
+            return data
+        except (AssertionError, json.JSONDecodeError, OSError) as error:
+            logger = logging.getLogger(__script_name__)
+            logger.warning("Failed to load cache '%s': %s", self.cache_path, error)
+            return {}
+
+    def save(self) -> None:
+        """Save the cache contents to disk."""
+        try:
+            self.cache_path.parent.mkdir(exist_ok=True)
+            with self.cache_path.open("w", encoding="utf-8") as f:
+                json.dump(self._cache, f, indent=2, sort_keys=True)
+                f.write(os.linesep)
+        except OSError as error:
+            logger = logging.getLogger(__script_name__)
+            logger.error("Failed to save cache to '%s': %s", self.cache_path, error)
+
+    def get_last_modified(self, url: str) -> str | None:
+        """Return the cached Last-Modified header string for a URL if present."""
+        return self._cache.get(url)
+
+    def set_last_modified(self, url: str, last_modified: str | None) -> None:
+        """Update or set the Last-Modified header for a URL."""
+        if last_modified is None:
+            del self._cache[url]
+        else:
+            self._cache[url] = last_modified
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_val: BaseException | None,
+        exc_tb: types.TracebackType | None,
+    ) -> None:
+        self.save()
 
 
 def _strip_trailing_whitespace(text: str) -> str:
@@ -45,13 +107,16 @@ def _strip_trailing_whitespace(text: str) -> str:
     return stripped.rstrip() + os.linesep
 
 
-def download_file(url: str, path: pathlib.Path) -> int:
+def download_file(url: str, path: pathlib.Path, cache: LastModifiedCache) -> int:
     """Download a file from a URL and save it if the content has changed.
 
     Return failure count."""
     request = urllib.request.Request(url)
     try:
         previous_content = path.read_text("utf-8")
+        last_modified = cache.get_last_modified(url)
+        if last_modified:
+            request.add_header("If-Modified-Since", last_modified)
     except FileNotFoundError:
         previous_content = ""
     try:
@@ -63,7 +128,10 @@ def download_file(url: str, path: pathlib.Path) -> int:
             path.write_text(content, "utf-8")
             logger = logging.getLogger(__script_name__)
             logger.info("Updated content for '%s' (%d bytes).", path, len(content))
+        cache.set_last_modified(url, response.headers.get("Last-Modified"))
     except urllib.error.HTTPError as error:
+        if error.code == 304:
+            return 0
         logger = logging.getLogger(__script_name__)
         if url in EXPECT_MISSING and error.code == 404:
             logger.info("As expected '%s' was not found.", url)
@@ -84,7 +152,9 @@ def download_file(url: str, path: pathlib.Path) -> int:
 
 
 def download_media_types(
-    top_level_media_type_names: Sequence[str], directory: pathlib.Path
+    top_level_media_type_names: Sequence[str],
+    directory: pathlib.Path,
+    cache: LastModifiedCache,
 ) -> int:
     """Download media type CSV files for each specified top-level media type."""
     logger = logging.getLogger(__script_name__)
@@ -95,12 +165,12 @@ def download_media_types(
     for media_type in top_level_media_type_names:
         url = f"{MEDIA_TYPES_URL}/{media_type}.csv"
         path = directory / f"{media_type}.csv"
-        failures += download_file(url, path)
+        failures += download_file(url, path, cache)
     return failures
 
 
 def download_templates_from_file(
-    media_type_file: pathlib.Path, directory: pathlib.Path
+    media_type_file: pathlib.Path, directory: pathlib.Path, cache: LastModifiedCache
 ) -> int:
     """Download all media type template files listed inside a given media type CSV."""
     logger = logging.getLogger(__script_name__)
@@ -114,29 +184,33 @@ def download_templates_from_file(
     for template in templates:
         url = f"{MEDIA_TYPES_URL}/{template}"
         path = directory / template
-        failures += download_file(url, path)
+        failures += download_file(url, path, cache)
     return failures
 
 
 def download_templates(
-    top_level_media_type_names: Iterable[str], directory: pathlib.Path
+    top_level_media_type_names: Iterable[str],
+    directory: pathlib.Path,
+    cache: LastModifiedCache,
 ) -> int:
     """Download template files for all provided top-level media types."""
     failures = 0
     for media_type in top_level_media_type_names:
         failures += download_templates_from_file(
-            directory / f"{media_type}.csv", directory
+            directory / f"{media_type}.csv", directory, cache
         )
     return failures
 
 
-def download_top_level_media_type_names(directory: pathlib.Path) -> int:
+def download_top_level_media_type_names(
+    directory: pathlib.Path, cache: LastModifiedCache
+) -> int:
     """Download the main top-level media types CSV file from IANA."""
     logger = logging.getLogger(__script_name__)
     logger.info("Downloading top-level media types CSV...")
     url = f"{BASE_URL}/top-level-media-types/{TOP_LEVEL_TYPES_CSV}"
     path = directory / TOP_LEVEL_TYPES_CSV
-    return download_file(url, path)
+    return download_file(url, path, cache)
 
 
 def read_templates(path: pathlib.Path) -> Iterator[str]:
@@ -170,10 +244,17 @@ def main() -> int:
     logger = logging.getLogger(__script_name__)
 
     failures = 0
-    failures += download_top_level_media_type_names(args.directory)
-    top_level_media_type_names = list(get_top_level_media_type_names(args.directory))
-    failures += download_media_types(top_level_media_type_names, args.directory)
-    failures += download_templates(top_level_media_type_names, args.directory)
+    with LastModifiedCache(args.directory) as cache:
+        failures += download_top_level_media_type_names(args.directory, cache)
+        top_level_media_type_names = list(
+            get_top_level_media_type_names(args.directory)
+        )
+        failures += download_media_types(
+            top_level_media_type_names, args.directory, cache
+        )
+        failures += download_templates(
+            top_level_media_type_names, args.directory, cache
+        )
 
     elapsed_time = time.perf_counter() - start_time
     logger.info("Completed execution in %.2f seconds.", elapsed_time)
