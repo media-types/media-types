@@ -167,8 +167,12 @@ def download_files_in_parallel(
         futures = [
             executor.submit(download_file, url, path, cache) for url, path in tasks
         ]
-        for future in concurrent.futures.as_completed(futures):
-            failures += future.result()
+        try:
+            for future in concurrent.futures.as_completed(futures):
+                failures += future.result()
+        except KeyboardInterrupt:
+            executor.shutdown(wait=False, cancel_futures=True)
+            raise
     return failures
 
 
@@ -293,4 +297,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        logging.getLogger(__script_name__).info("Execution interrupted by user.")
+        sys.exit(130)
