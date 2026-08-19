@@ -1,0 +1,31 @@
+---
+name: update
+
+on:  # yamllint disable-line rule:truthy
+  schedule:
+    # Runs every 6 hours
+    - cron: '0 */6 * * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-media-types:
+    runs-on: ubuntu-latest
+    if: >-
+      github.repository == 'media-types/media-types'
+      || github.event_name != 'schedule'
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Download IANA media types
+        run: scripts/download_iana_media_types.py -w 1
+      - name: Run peter-evans/create-pull-request@v8.1.1
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1
+        with:
+          branch: updates
+          commit-message: "update: sync IANA media types"
+          title: "iana: update IANA media types"
+          body: "Add latest changes to IANA media types."
+          delete-branch: true
