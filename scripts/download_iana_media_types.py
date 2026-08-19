@@ -136,26 +136,24 @@ def download_file(url: str, path: pathlib.Path, cache: LastModifiedCache) -> int
             logger = logging.getLogger(__script_name__)
             logger.info("Updated content for '%s' (%d bytes).", path, len(content))
         cache.set_last_modified(url, response.headers.get("Last-Modified"))
+        return 0
     except urllib.error.HTTPError as error:
         if error.code == 304:
             return 0
         logger = logging.getLogger(__script_name__)
         if url in EXPECT_MISSING and error.code == 404:
             logger.info("As expected '%s' was not found.", url)
-        else:
-            logger.error(
-                "Failed to download '%s': HTTP %s (%s)", url, error.code, error.reason
-            )
-            return 1
+            return 0
+        logger.error(
+            "Failed to download '%s': HTTP %s (%s)", url, error.code, error.reason
+        )
     except urllib.error.URLError as error:
         logger = logging.getLogger(__script_name__)
         logger.error("Network error while downloading '%s': %s", path, error.reason)
-        return 1
     except OSError as error:
         logger = logging.getLogger(__script_name__)
         logger.error("File system error writing to '%s': %s", path, error)
-        return 1
-    return 0
+    return 1
 
 
 def download_files_in_parallel(
