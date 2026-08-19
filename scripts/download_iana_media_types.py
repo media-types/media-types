@@ -22,6 +22,7 @@ import json
 import logging
 import os
 import pathlib
+import random
 import sys
 import threading
 import time
@@ -38,6 +39,9 @@ from media_types import (
     iter_csv_rows,
 )
 
+ATTEMPTS = 3
+BASE_DELAY = 10.0
+MIN_DELAY = 1.0
 BASE_URL = "https://www.iana.org/assignments"
 CACHE_FILENAME = "last-modified.json"
 DEFAULT_WORKERS = 16
@@ -114,7 +118,49 @@ def _strip_trailing_whitespace(text: str) -> str:
     return stripped.rstrip() + os.linesep
 
 
-def download_file(url: str, path: pathlib.Path, cache: LastModifiedCache) -> int:
+def _handle_http_error(
+    error: urllib.error.HTTPError, url: str, attempt: int, attempts: int
+) -> bool:
+    """Process HTTP errors and determine whether to retry."""
+    logger = logging.getLogger(__script_name__)
+
+    retry_after = error.headers.get("Retry-After")
+    if retry_after and retry_after.isdigit():
+        wait_time = float(retry_after)
+    elif error.code in (429, 500, 502, 503, 504):
+        delay = BASE_DELAY * (2**attempt)
+        wait_time = random.uniform(MIN_DELAY, delay)
+    else:
+        wait_time = 0.0
+
+    if wait_time and attempt < attempts:
+        logger.warning(
+            "HTTP %s (%s) for '%s'. Retrying in %.1f seconds (attempt %d/%d)...",
+            error.code,
+            error.reason,
+            url,
+            wait_time,
+            attempt + 1,
+            attempts,
+        )
+        time.sleep(wait_time)
+        return True
+
+    logger.error(
+        "HTTP %s (%s) for '%s'%s",
+        error.code,
+        error.reason,
+        url,
+        ". Waiting %.1f seconds..." if wait_time else "",
+    )
+    if wait_time:
+        time.sleep(wait_time)
+    return False
+
+
+def download_file(
+    url: str, path: pathlib.Path, cache: LastModifiedCache, attempts: int = ATTEMPTS
+) -> int:
     """Download a file from a URL and save it if the content has changed.
 
     Return failure count."""
@@ -126,33 +172,36 @@ def download_file(url: str, path: pathlib.Path, cache: LastModifiedCache) -> int
             request.add_header("If-Modified-Since", last_modified)
     except FileNotFoundError:
         previous_content = ""
-    try:
-        with urllib.request.urlopen(request) as response:
-            encoding = response.headers.get_content_charset() or "utf-8"
-            content = _strip_trailing_whitespace(response.read().decode(encoding))
-        if content != previous_content:
-            path.parent.mkdir(exist_ok=True)
-            path.write_text(content, "utf-8")
+    for attempt in range(attempts):
+        try:
+            with urllib.request.urlopen(request) as response:
+                encoding = response.headers.get_content_charset() or "utf-8"
+                content = _strip_trailing_whitespace(response.read().decode(encoding))
+            if content != previous_content:
+                path.parent.mkdir(exist_ok=True)
+                path.write_text(content, "utf-8")
+                logger = logging.getLogger(__script_name__)
+                logger.info("Updated content for '%s' (%d bytes).", path, len(content))
+            cache.set_last_modified(url, response.headers.get("Last-Modified"))
+            return 0
+        except urllib.error.HTTPError as error:
+            if error.code == 304:
+                return 0
             logger = logging.getLogger(__script_name__)
-            logger.info("Updated content for '%s' (%d bytes).", path, len(content))
-        cache.set_last_modified(url, response.headers.get("Last-Modified"))
-        return 0
-    except urllib.error.HTTPError as error:
-        if error.code == 304:
-            return 0
-        logger = logging.getLogger(__script_name__)
-        if url in EXPECT_MISSING and error.code == 404:
-            logger.info("As expected '%s' was not found.", url)
-            return 0
-        logger.error(
-            "Failed to download '%s': HTTP %s (%s)", url, error.code, error.reason
-        )
-    except urllib.error.URLError as error:
-        logger = logging.getLogger(__script_name__)
-        logger.error("Network error while downloading '%s': %s", path, error.reason)
-    except OSError as error:
-        logger = logging.getLogger(__script_name__)
-        logger.error("File system error writing to '%s': %s", path, error)
+            if url in EXPECT_MISSING and error.code == 404:
+                logger.info("As expected '%s' was not found.", url)
+                return 0
+            if _handle_http_error(error, url, attempt, attempts):
+                continue
+            break
+        except urllib.error.URLError as error:
+            logger = logging.getLogger(__script_name__)
+            logger.error("Network error while downloading '%s': %s", path, error.reason)
+            break
+        except OSError as error:
+            logger = logging.getLogger(__script_name__)
+            logger.error("File system error writing to '%s': %s", path, error)
+            break
     return 1
 
 
