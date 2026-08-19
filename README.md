@@ -125,3 +125,19 @@ To add a different header to `mime.types`
 set the environment/make variable `HEADER` to a file containing it.
 To add a footer to `mime.types`
 set the environment/make variable `FOOTER` to a file containing it.
+
+Creating releases
+=================
+
+This project uses [calendar versioning](https://calver.org/) in the form
+`YYYY.0M.0D`. To create a release, increase the version in [Makefile](Makefile)
+and document the noteworthy changes in [NEWS.md](./NEWS.md).
+Then commit the changes, tag the release, and generate a xz-compressed release
+tarball:
+
+```
+version=$(make version)
+git commit -sm "Release media-types $version" Makefile NEWS.md
+git tag -a "v$version" -m "Release media-types $version"
+make dist
+```

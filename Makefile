@@ -89,4 +89,7 @@ site: _site/index.html _site/iana.csv _site/media-types.csv _site/mime.types $(p
 
 dist: ../$(NAME)-$(VERSION).tar.xz ../$(NAME)-$(VERSION).tar.xz.asc
 
-.PHONY: black check clean install isort lint mypy pylint site
+version:
+	@echo $(VERSION)
+
+.PHONY: black check clean install isort lint mypy pylint site version
