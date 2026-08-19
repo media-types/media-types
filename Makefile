@@ -21,6 +21,9 @@ ifdef FOOTER
 GENERATE_MIME_TYPES_ARGS += --footer=$(FOOTER)
 endif
 
+NAME = media-types
+# Use YYYY.0M.0D defined in https://calver.org/
+VERSION = 2026.08.19
 PREFIX = /usr
 DATADIR = $(PREFIX)/share/media-types
 PYTHON_FILES = $(wildcard scripts/*.py)
@@ -77,5 +80,13 @@ _site/%/: iana/%/
 	for f in $<*; do cp "$$f" "_site/$${f#iana/}.txt"; done
 
 site: _site/index.html _site/iana.csv _site/media-types.csv _site/mime.types $(patsubst iana/%,_site/%,$(wildcard iana/*/))
+
+%.asc: %
+	gpg --armor --batch --detach-sign --yes --output $@ $^
+
+%.tar.xz: .git
+	git archive --prefix=$(NAME)-$(VERSION)/ HEAD | xz -c -9 -T1 > $@
+
+dist: ../$(NAME)-$(VERSION).tar.xz ../$(NAME)-$(VERSION).tar.xz.asc
 
 .PHONY: black check clean install isort lint mypy pylint site
