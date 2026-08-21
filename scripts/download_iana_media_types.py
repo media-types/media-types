@@ -127,7 +127,7 @@ def _handle_http_error(
     retry_after = error.headers.get("Retry-After")
     if retry_after and retry_after.isdigit():
         wait_time = float(retry_after)
-    elif error.code in (429, 500, 502, 503, 504):
+    elif error.code in (429, 500, 502, 503, 504, 520):
         delay = BASE_DELAY * (2**attempt)
         wait_time = random.uniform(MIN_DELAY, delay)
     else:
