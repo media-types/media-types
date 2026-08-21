@@ -173,6 +173,24 @@ These projects provide their own registry:
   [Lib/mimetypes.py](https://github.com/python/cpython/blob/main/Lib/mimetypes.py)
   includes a minimal default set, but primarily parses local system `mime.types` files.
 
+Linux distributions
+===================
+
+`/etc/mime.types` is provided by these packages on various Linux distributions:
+
+* **Alpine Linux**: [`mailcap`](https://gitlab.alpinelinux.org/alpine/aports/-/tree/master/main/mailcap)
+* **Arch Linux**: [`mailcap`](https://archlinux.org/packages/extra/any/mailcap/)
+* **Debian / Ubuntu**: [`media-types`](https://salsa.debian.org/debian/media-types) (native package)
+* **Fedora / RHEL / CentOS**: [`mailcap`](https://packages.fedoraproject.org/pkgs/mailcap/)
+* **Gentoo**: [`app-misc/mime-types`](https://packages.gentoo.org/packages/app-misc/mime-types)
+  (pulls from [mailcap](https://github.com/InfrastructureServices/mailcap))
+* **NixOS**: [`mailcap`](https://github.com/NixOS/nixpkgs/tree/master/pkgs/by-name/ma/mailcap)
+* **openSUSE**: [`aaa_base`](https://github.com/openSUSE/aaa_base)
+  (can fetch updates from Apache httpd release tarballs;
+  see [`Makefile`](https://github.com/openSUSE/aaa_base/blob/master/Makefile))
+* **Void Linux**: [`mime-types`](https://github.com/void-linux/void-packages/tree/master/srcpkgs/mime-types)
+  (pulls from [mailcap](https://github.com/InfrastructureServices/mailcap))
+
 Creating releases
 =================
 
