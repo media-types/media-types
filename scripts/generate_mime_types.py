@@ -76,14 +76,14 @@ def write_mime_types(
     with path.open("w", encoding="utf-8") as mime_types_file:
         mime_types_file.write(header)
         for mime_type in mime_types:
-            if mime_type.unique_file_extensions:
+            if mime_type.primary_file_extensions:
                 num_tabs = max(
                     1,
                     math.ceil((MIME_TYPE_WIDTH - len(mime_type.template)) / TAB_WIDTH),
                 )
                 mime_types_file.write(
                     f"{mime_type.template.lower()}{'\t' * num_tabs}"
-                    f"{' '.join(mime_type.unique_file_extensions)}\n"
+                    f"{' '.join(mime_type.primary_file_extensions)}\n"
                 )
             else:
                 mime_types_file.write(f"{mime_type.template.lower()}\n")
@@ -98,7 +98,7 @@ def parse_args() -> argparse.Namespace:
         "--input",
         default=pathlib.Path("media-types.csv"),
         type=pathlib.Path,
-        help="Input enhanced IANA CSV file including unique file extensions column"
+        help="Input enhanced IANA CSV file including primary file extensions column"
         " (default: %(default)s)",
     )
     parser.add_argument(

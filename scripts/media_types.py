@@ -230,9 +230,9 @@ class MediaTypeList(list[T]):
 
 @dataclasses.dataclass
 class EnhancedMediaType(MediaType):
-    """Media type data enhanced with unique file extensions."""
+    """Media type data enhanced with primary file extensions."""
 
-    unique_file_extensions: list[str]
+    primary_file_extensions: list[str]
 
     @classmethod
     def from_csv_dict(cls, items: dict[str, str]) -> Self:
@@ -242,29 +242,29 @@ class EnhancedMediaType(MediaType):
             items["Template"],
             parse_space_separated_list(items["File Extensions"]),
             items["Reference"],
-            parse_space_separated_list(items["Unique File Extensions"]),
+            parse_space_separated_list(items["Primary File Extensions"]),
         )
 
     @classmethod
     def from_media_type(
-        cls, base: MediaType, unique_file_extensions: list[str]
+        cls, base: MediaType, primary_file_extensions: list[str]
     ) -> Self:
         """Constructs an instance from a base MediaType instance."""
         return cls(
-            **dataclasses.asdict(base), unique_file_extensions=unique_file_extensions
+            **dataclasses.asdict(base), primary_file_extensions=primary_file_extensions
         )
 
     @staticmethod
     def get_csv_dict_keys() -> list[str]:
         """Gets the list of CSV header keys used for CSV serialization."""
         dict_keys = MediaType.get_csv_dict_keys()
-        dict_keys.insert(2, "Unique File Extensions")
+        dict_keys.insert(2, "Primary File Extensions")
         return dict_keys
 
     def as_csv_dict(self) -> dict[str, str]:
         """Converts the instance into a CSV row dictionary."""
         data = super().as_csv_dict()
-        data["Unique File Extensions"] = " ".join(self.unique_file_extensions)
+        data["Primary File Extensions"] = " ".join(self.primary_file_extensions)
         return data
 
 

@@ -14,7 +14,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-"""Enhance IANA CSV with unique file extensions."""
+"""Enhance IANA CSV with primary file extensions."""
 
 import argparse
 import collections
@@ -37,7 +37,9 @@ from media_types import (
 
 DEFAULT_INPUT = pathlib.Path("iana.csv")
 DEFAULT_KNOWN_DUPLICATES = pathlib.Path("enhancement/duplicates.txt")
-DEFAULT_UNIQUE_FILE_EXTENSIONS = pathlib.Path("enhancement/unique-file-extensions.csv")
+DEFAULT_PRIMARY_FILE_EXTENSIONS = pathlib.Path(
+    "enhancement/primary-file-extensions.csv"
+)
 LOG_FORMAT = "%(name)s %(levelname)s: %(message)s"
 __script_name__ = os.path.basename(sys.argv[0]) if __name__ == "__main__" else __name__
 
@@ -85,7 +87,7 @@ def enhance_media_types(
     media_types: Iterable[MediaType],
     duplicates: Collection[str],
     lowercase: Collection[str],
-    unique_file_extension_mapping: Mapping[str, str],
+    primary_file_extension_mapping: Mapping[str, str],
 ) -> tuple[EnhancedMediaTypeList, int]:
     """Enhance media types by filtering and resolving file extensions."""
     enhanced = EnhancedMediaTypeList()
@@ -93,29 +95,29 @@ def enhance_media_types(
     used_extensions = set()
     checked_extensions = set()
     for media_type in media_types:
-        unique_file_extensions = []
+        primary_file_extensions = []
         for extension in media_type.get_lowercased_file_extensions(lowercase):
-            unique_type = unique_file_extension_mapping.get(extension)
-            if unique_type is not None:
+            primary_type = primary_file_extension_mapping.get(extension)
+            if primary_type is not None:
                 checked_extensions.add(extension)
-                if unique_type == media_type.template:
-                    unique_file_extensions.append(extension)
+                if primary_type == media_type.template:
+                    primary_file_extensions.append(extension)
                     used_extensions.add(extension)
             elif extension not in duplicates:
-                unique_file_extensions.append(extension)
+                primary_file_extensions.append(extension)
         enhanced.append(
-            EnhancedMediaType.from_media_type(media_type, unique_file_extensions)
+            EnhancedMediaType.from_media_type(media_type, primary_file_extensions)
         )
 
     unchecked = {
         k: v
-        for k, v in unique_file_extension_mapping.items()
+        for k, v in primary_file_extension_mapping.items()
         if k not in checked_extensions
     }
     if unchecked:
         logger = logging.getLogger(__script_name__)
         logger.warning(
-            "%i completely unused unique file extension mappings: %s",
+            "%i completely unused primary file extension mappings: %s",
             len(unchecked),
             unchecked,
         )
@@ -123,13 +125,13 @@ def enhance_media_types(
 
     unused = {
         k: v
-        for k, v in unique_file_extension_mapping.items()
+        for k, v in primary_file_extension_mapping.items()
         if k not in used_extensions and v and k not in unchecked
     }
     if unused:
         logger = logging.getLogger(__script_name__)
         logger.warning(
-            "%i unused unique file extension mappings: %s", len(unused), unused
+            "%i unused primary file extension mappings: %s", len(unused), unused
         )
         failures += 1
 
@@ -156,20 +158,22 @@ def str_sorted_set(s: set[Any]) -> str:
     return f"{{{items_repr}}}"
 
 
-def check_duplicate_unique_file_extensions(
+def check_duplicate_primary_file_extensions(
     media_types: Iterable[EnhancedMediaType],
 ) -> int:
-    """Check that there are no duplicate unique file extensions."""
+    """Check that there are no duplicate primary file extensions."""
     file_extensions = collections.defaultdict(set)
     for media_type in media_types:
-        for file_extension in media_type.unique_file_extensions:
+        for file_extension in media_type.primary_file_extensions:
             file_extensions[file_extension].add(media_type.template)
 
     duplicates = {k: v for k, v in file_extensions.items() if len(v) > 1}
     if duplicates:
         logger = logging.getLogger(__script_name__)
         logger.warning(
-            "%i duplicate unique file extensions found: %s", len(duplicates), duplicates
+            "%i duplicate primary file extensions found: %s",
+            len(duplicates),
+            duplicates,
         )
         return 1
     return 0
@@ -278,12 +282,12 @@ def parse_args() -> argparse.Namespace:
         " that should be converted to lowercase. (default: %(default)s)",
     )
     parser.add_argument(
-        "--unique-file-extensions",
+        "--primary-file-extensions",
         action="append",
         type=pathlib.Path,
         help=f"CSV file listing file extensions and their corresponding media type."
         f" Can be specified multiple times."
-        f" (default: {DEFAULT_UNIQUE_FILE_EXTENSIONS})",
+        f" (default: {DEFAULT_PRIMARY_FILE_EXTENSIONS})",
     )
     parser.add_argument(
         "--extra-file-extensions",
@@ -299,13 +303,13 @@ def parse_args() -> argparse.Namespace:
         args.input = [DEFAULT_INPUT]
     if args.known_duplicates is None:
         args.known_duplicates = [DEFAULT_KNOWN_DUPLICATES]
-    if args.unique_file_extensions is None:
-        args.unique_file_extensions = [DEFAULT_UNIQUE_FILE_EXTENSIONS]
+    if args.primary_file_extensions is None:
+        args.primary_file_extensions = [DEFAULT_PRIMARY_FILE_EXTENSIONS]
     return args
 
 
 def main() -> int:
-    """Enhance IANA CSV with unique file extensions."""
+    """Enhance IANA CSV with primary file extensions."""
     args = parse_args()
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 
@@ -322,15 +326,15 @@ def main() -> int:
     known_duplicates = set(read_list_from_files(args.known_duplicates))
     total_failures += check_duplicates(duplicates, known_duplicates)
 
-    unique_file_extensions, failures = read_mapping_from_csv(
-        args.unique_file_extensions, "File Extension", "Media Type"
+    primary_file_extensions, failures = read_mapping_from_csv(
+        args.primary_file_extensions, "File Extension", "Media Type"
     )
     total_failures += failures
     enhanced_media_types, failures = enhance_media_types(
-        media_types, duplicates, lowercase, unique_file_extensions
+        media_types, duplicates, lowercase, primary_file_extensions
     )
     total_failures += failures
-    total_failures += check_duplicate_unique_file_extensions(enhanced_media_types)
+    total_failures += check_duplicate_primary_file_extensions(enhanced_media_types)
     enhanced_media_types.sort()
     enhanced_media_types.write_to_csv(args.output)
     return total_failures

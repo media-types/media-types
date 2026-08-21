@@ -29,14 +29,14 @@
       <tr>
         <th>Name</th>
         <th>Template</th>
-        <th>Unique File Extensions</th>
+        <th>Primary File Extensions</th>
         <th>File Extensions</th>
         <th>Reference</th>
       </tr>
     </thead>
     <tbody>
 {%- for row in media_types %}
-<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.unique_file_extensions | join(" ") }}</td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.reference }}</td></tr>
+<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.primary_file_extensions | join(" ") }}</td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.reference }}</td></tr>
 {%- endfor %}
     </tbody>
   </table>
@@ -45,7 +45,7 @@
     <ul>
       <li>Total media types: {{ media_types | length }}</li>
       <li>Media types with file extension(s): {{ media_types | selectattr('file_extensions') | list | length }}</li>
-      <li>Media types with unique file extension(s): {{ media_types | selectattr('unique_file_extensions') | list | length }}</li>
+      <li>Media types with primary file extension(s): {{ media_types | selectattr('primary_file_extensions') | list | length }}</li>
     </ul>
   </p>
   <h2>iana.csv</h2>

@@ -24,10 +24,10 @@ A new CSV table is then generated featuring the added "File Extensions" column.
 
 Ideally, the IANA Media Types Registry would provide this information directly.
 
-## 2. Enhance IANA data with "Unique File Extensions" column
+## 2. Enhance IANA data with "Primary File Extensions" column
 
 As a second step,
-the IANA CSV table is enhanced with a new "Unique File Extensions" column.
+the IANA CSV table is enhanced with a new "Primary File Extensions" column.
 Following rules are applied:
 
 * Uppercase file extensions (mentioned in a config file) are converted to lowercase.
@@ -100,7 +100,7 @@ key
 
 To resolve duplicate file extensions, pick a preferred media type for them.
 Create a CSV file with at least the columns `File Extension` and `Media Type`.
-Set the environment/make variable `EXTRA_UNIQUE_FILE_EXTENSIONS` to its path.
+Set the environment/make variable `EXTRA_PRIMARY_FILE_EXTENSIONS` to its path.
 Example content:
 
 ```csv

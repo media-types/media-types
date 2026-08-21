@@ -7,8 +7,8 @@ endif
 ifdef EXTRA_KNOWN_DUPLICATES
 ENHANCE_IANA_CSV_ARGS += --known-duplicates=enhancement/duplicates.txt --known-duplicates=$(EXTRA_KNOWN_DUPLICATES)
 endif
-ifdef EXTRA_UNIQUE_FILE_EXTENSIONS
-ENHANCE_IANA_CSV_ARGS += --unique-file-extensions=enhancement/unique-file-extensions.csv --unique-file-extensions=$(EXTRA_UNIQUE_FILE_EXTENSIONS)
+ifdef EXTRA_PRIMARY_FILE_EXTENSIONS
+ENHANCE_IANA_CSV_ARGS += --primary-file-extensions=enhancement/primary-file-extensions.csv --primary-file-extensions=$(EXTRA_PRIMARY_FILE_EXTENSIONS)
 endif
 
 ifdef EXTRA_EXCLUDE
