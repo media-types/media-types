@@ -1,6 +1,12 @@
 This file summarizes the major and interesting changes for each release. For a
 detailed list of changes, please see the git history.
 
+2026.08.21
+----------
+
+* Rename `unique` to `primary`. The CSV column is called
+  `Primary File Extensions` now.
+
 2026.08.19
 ----------
 
