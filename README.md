@@ -126,6 +126,53 @@ set the environment/make variable `HEADER` to a file containing it.
 To add a footer to `mime.types`
 set the environment/make variable `FOOTER` to a file containing it.
 
+Related projects
+================
+
+These projects serve a similar purpose:
+
+* **[FreeDesktop.org Shared MIME Info Specification](https://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec/)**
+  defines an extensible XML-based database. The core database is provided by
+  **[shared-mime-info](https://www.freedesktop.org/wiki/Software/shared-mime-info/)**.
+  Other projects can register additional mime types.
+  Desktop environments like GNOME, KDE, ROX, and Xfce use this database.
+
+* **[mime-types/mime-types-data](https://github.com/mime-types/mime-types-data)**
+  is a MIME media type definition registry
+  used to map file extensions to their corresponding MIME types and vice versa.
+  The data is sourced from various registries and user contributions.
+  It is provided in different formats (YAML, JSON, etc.) and used primarily in Ruby.
+  The project is active and releases multiple times per year.
+
+* **[jshttp/mime-db](https://github.com/jshttp/mime-db)**
+  is a large database of mime types and information about them.
+  It consists of a single, public JSON file and does not include any logic.
+  It aggregates data from IANA, Apache httpd, and NGINX.
+  There was only one release in 2025 and one in 2024.
+
+* The **[file(1)](https://github.com/file/file)** command and the `libmagic(3)` library
+  identify thousands of file types and their corresponding MIME types by looking
+  for 'magic numbers'.
+
+These projects provide their own registry:
+
+* **Apache httpd**: [docs/conf/mime.types](https://github.com/apache/httpd/blob/trunk/docs/conf/mime.types)
+  ([SVN repo](https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types))
+
+* **Apache Tika**:
+  [tika-core/src/main/resources/org/apache/tika/mime/tika-mimetypes.xml](https://github.com/apache/tika/blob/main/tika-core/src/main/resources/org/apache/tika/mime/tika-mimetypes.xml)
+
+* **[Mailcap](https://github.com/InfrastructureServices/mailcap)**:
+  [mime.types](https://github.com/InfrastructureServices/mailcap/blob/master/mime.types)
+  is synced with IANA from time to time (but no update between May 2023 and August 2026).
+
+* **NGINX**: [conf/mime.types](https://github.com/nginx/nginx/blob/master/conf/mime.types)
+  contains a quite short list and the config format is specific for NGINX.
+
+* **Python Standard Library**:
+  [Lib/mimetypes.py](https://github.com/python/cpython/blob/main/Lib/mimetypes.py)
+  includes a minimal default set, but primarily parses local system `mime.types` files.
+
 Creating releases
 =================
 
