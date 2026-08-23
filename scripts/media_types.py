@@ -96,7 +96,7 @@ class MediaType:
 
     def add_additional_information(
         self,
-        file_extension_parser: Callable[[str, str], list[str]],
+        file_extensions_parser: Callable[[str, str], list[str]],
         directory: pathlib.Path,
     ) -> int:
         """Populates file extensions by reading and parsing the entry's template file.
@@ -115,7 +115,7 @@ class MediaType:
 
         failures = 0
         try:
-            self.file_extensions = file_extension_parser(self.template, content)
+            self.file_extensions = file_extensions_parser(self.template, content)
         except ParserFailure as error:
             logger = logging.getLogger(__name__)
             logger.error("%s", error)
@@ -152,7 +152,7 @@ class MediaTypeList(list[T]):
 
     def add_additional_information(
         self,
-        file_extension_parser: Callable[[str, str], list[str]],
+        file_extensions_parser: Callable[[str, str], list[str]],
         directory: pathlib.Path,
     ) -> int:
         """Populates file extensions by reading and parsing the entry's template file.
@@ -162,7 +162,7 @@ class MediaTypeList(list[T]):
         failures = 0
         for media_type in self:
             failures += media_type.add_additional_information(
-                file_extension_parser, directory
+                file_extensions_parser, directory
             )
         return failures
 

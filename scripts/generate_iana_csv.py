@@ -299,14 +299,16 @@ def main() -> int:
     args = parse_args()
     logging.basicConfig(level=logging.WARNING, format=LOG_FORMAT)
 
-    parser = FileExtensionsParser.from_files(
+    file_extensions_parser = FileExtensionsParser.from_files(
         args.file_extensions_manual,
         args.file_extensions_mapping,
         args.file_extensions_missing,
     )
     media_types = MediaTypeList(iter_media_types(args.directory))
-    failures = media_types.add_additional_information(parser.parse, args.directory)
-    parser.check_unused()
+    failures = media_types.add_additional_information(
+        file_extensions_parser.parse, args.directory
+    )
+    file_extensions_parser.check_unused()
     media_types.write_to_csv(args.output)
     return failures
 
