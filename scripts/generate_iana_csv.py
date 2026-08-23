@@ -491,6 +491,15 @@ class TestFileExtensionsParser(unittest.TestCase):
             " but got 85b7c6860119555c208d7718663581f2",
         )
 
+    def test_check_unused(self) -> None:
+        missing = {"audio/ac3": "cae66941d9efbd404e4d88758ea67670"}
+        parser = FileExtensionsParser({}, {}, missing)
+        with self.assertLogs(__script_name__, level=logging.WARNING) as context_manager:
+            unused_count = parser.check_unused()
+        self.assertRegex(context_manager.output[0], "audio/ac3")
+        self.assertEqual(len(context_manager.output), 1)
+        self.assertEqual(unused_count, 1)
+
     def test_parse_full(self) -> None:
         parser = FileExtensionsParser.from_files(
             DEFAULT_FILE_EXTENSIONS_MANUAL,
