@@ -1,5 +1,4 @@
 File Extension,Media Type,Reason
-Text,,too generic extension for application/vnd.cncf.helm.chart.provenance.v1.prov
 aa3,audio/ATRAC3,oldest codec mentioned in RFC5584
 ac,application/pkix-attr-cert,standards tree takes precedence over vendor tree
 aep,application/vnd.audiograph,first registered - first served
@@ -82,6 +81,7 @@ spp,application/scvp-vp-response,RFC5055 takes precedence over vendor tree
 swi,application/vnd.aristanetworks.swi,alternative application/vnd.arastra.swi is obsolete
 tbz2,,also used as short form for tar.bz2
 texi,application/texinfo,standards tree takes precedence over personal tree
+Text,,too generic extension for application/vnd.cncf.helm.chart.provenance.v1.prov
 tsq,application/timestamp-query,first RFC - first served
 tsr,application/timestamp-reply,first RFC - first served
 ttf,font/ttf,typical usage according to RFC8081

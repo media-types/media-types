@@ -7,8 +7,10 @@
 	No extension, but the file is usually named 'copyright'.
 	No specific file extensions are recommended for this type.
 	None - no file storage type is defined for syslog
+	none but the file is commonly named "Manifest"
 	None.  A file format with the extension .mp4 has been defined for MPEG-4 content but is not directly correlated with this MIME type for which the sole purpose is RTP transport.
 	None. This MIME-type primary purpoes is to identify PDUs that are in transport.
+	not expected to be stored in files
 	RFC 8427 uses the media type to refer to protocol messages and thus does not require a file extension.
 	RFC 9569 uses the media type to refer to protocol messages; thus, it does not require a file extension.
 	SOAP messages are not required or expected to be stored as files.
@@ -16,14 +18,10 @@
 	W3C SOAP message infosets serialized as fast infoset documents are not required or expected to be stored as files.
 	[RFC7285] uses the mime type to refer to protocol messages and thus does not require a file extension.
 	[RFC8895] uses the mime type to refer to protocol messages and thus does not require a file extension.
-	none but the file is commonly named "Manifest"
-	not expected to be stored in files
 123 wk4 wk3 wk1	123 wk4 (older form) wk3 (older form) wk1 (older form)
 3g2 3gpp2	3g2 and 3gpp2 are both declared at <http://www.nist.gov/nics/>; 3g2 is preferred.
 3gp 3gpp	'3gp' and '3gpp' are declared at http://www.nist.gov/nics/
 3gp 3gpp	3gp and 3gpp are both declared at http://www.nist.gov/nics/; 3gp is preferred
-X_B xmt_bin	.X_B (recommended), .xmt_bin (deprecated)
-X_T xmt_txt	.X_T (recommended), .xmt_txt (deprecated)
 abc	".abc" It is recommended that abc file names should use this extension.  (Many HTTP servers use the file extension as an indicator of MIME type.)  The ABC language uses the '<' and '>' characters. Raw ABC must not be embedded into HTML files, and the file extension ".html" must be avoided.
 adts aac loas ass	.adts or .aac (ADTS), .loas or .ass (LATM/LOAS)
 apexlang apex axdl	- .apexlang - .apex - .axdl
@@ -100,5 +98,7 @@ xml	XML data should use ".xml" as the file extension.
 xml	XML documents often use ".xml" as the file extension, and this media type does not propose a specific extension other than this generic one.
 xml rfcxml	.xml or .rfcxml when disambiguation from other XML files is needed
 xsl xslt	XSLT documents are most often identified with the extensions ".xsl" or ".xslt".
+X_B xmt_bin	.X_B (recommended), .xmt_bin (deprecated)
+X_T xmt_txt	.X_T (recommended), .xmt_txt (deprecated)
 yaml yml	"yaml" (preferred) and "yml". See Section 3.3 of RFC 9512.
 zip	None or .zip

@@ -18,6 +18,7 @@ DAF
 DIS
 EDM
 EDX
+eFIF
 ENW
 EP
 EVB
@@ -74,6 +75,7 @@ SPP
 SPQ
 SSE
 T38
+teiCorpus
 TFX
 TIF
 TSQ
@@ -101,5 +103,3 @@ X_T
 ZFO
 ZIP
 ZMM
-eFIF
-teiCorpus
