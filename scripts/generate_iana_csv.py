@@ -247,7 +247,7 @@ def iter_media_types(directory: pathlib.Path) -> Iterator[MediaType]:
     for top_level_media_type in get_top_level_media_type_names(directory):
         path = directory / f"{top_level_media_type}.csv"
         for row in iter_csv_rows(path):
-            yield MediaType(row["Name"], row["Template"], [], row["Reference"])
+            yield MediaType.from_upstream_iana_csv_dict(row)
 
 
 def parse_args() -> argparse.Namespace:

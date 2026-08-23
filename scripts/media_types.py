@@ -80,6 +80,11 @@ class MediaType:
             items["Reference"],
         )
 
+    @classmethod
+    def from_upstream_iana_csv_dict(cls, items: dict[str, str]) -> Self:
+        """Creates an instance from a upstream IANA CSV row dictionary."""
+        return cls(items["Name"], items["Template"], [], items["Reference"])
+
     @staticmethod
     def get_csv_dict_keys() -> list[str]:
         """Gets the list of CSV header keys used for CSV serialization."""
