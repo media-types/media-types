@@ -127,8 +127,8 @@ def load_file_extensions_mapping(path: pathlib.Path) -> dict[str, list[str]]:
     return mapping
 
 
-def load_file_extensions_missing(path: pathlib.Path) -> dict[str, str]:
-    """Load file extensions mapping tab-separated value file."""
+def load_missing_csv(path: pathlib.Path) -> dict[str, str]:
+    """Load CSV file that lists media types and their BLAKE2b checksums."""
     mapping = {}
     for row in iter_csv_rows(path):
         mapping[row["Media Type"]] = row["BLAKE2b Checksum"]
@@ -171,7 +171,7 @@ class FileExtensionsParser:
         """Construct an instance by loading rules from file paths."""
         manual = load_file_extensions_manual(manual_file)
         mapping = load_file_extensions_mapping(mapping_file)
-        missing = load_file_extensions_missing(missing_file)
+        missing = load_missing_csv(missing_file)
         return cls(manual, mapping, missing)
 
     # pylint: disable-next=too-many-return-statements
