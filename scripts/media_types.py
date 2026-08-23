@@ -120,7 +120,7 @@ class MediaType:
             logger = logging.getLogger(__name__)
             logger.error("%s", error)
             failures += 1
-        return 0
+        return failures
 
     def get_lowercased_file_extensions(self, lowercase: Container[str]) -> list[str]:
         """Returns deduplicated file extensions, lowercasing specified matches."""
