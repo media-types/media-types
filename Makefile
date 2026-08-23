@@ -47,8 +47,19 @@ install: media-types.csv mime.types
 	install -m 644 mime.types $(DESTDIR)/etc/mime.types
 	install -m 644 media-types.csv $(DESTDIR)$(DATADIR)/media-types.csv
 
-check:
+unittest:
 	python3 -m unittest discover -p '*.py' -s scripts -v
+
+check-sorted:
+	tail -n +2 parser/file_extensions/manual.csv | LANG=C sort -cf -k 2 -t ,
+	grep -v '^#' parser/file_extensions/mapping.tsv | LANG=C sort -cf
+	tail -n +2 parser/file_extensions/missing.csv | LANG=C sort -cf -k 2 -t ,
+	grep -v '^#' enhancement/duplicates.txt | LANG=C sort -cf
+	grep -v '^#' enhancement/lowercase.txt | LANG=C sort -cf
+	tail -n +2 enhancement/primary-file-extensions.csv | LANG=C sort -cf
+	tail -n +2 mime_types/exclude.csv | LANG=C sort -cf
+
+check: check-sorted unittest
 
 clean:
 	rm -f iana.csv media-types.csv mime.types
