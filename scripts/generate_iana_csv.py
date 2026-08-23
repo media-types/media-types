@@ -83,7 +83,7 @@ class ChecksumMismatch(ParserFailure):
 
 
 class NoFileExtensionsFound(ParserFailure):
-    """Raised when no file extensions where found."""
+    """Raised when no file extensions were found."""
 
 
 @dataclasses.dataclass
