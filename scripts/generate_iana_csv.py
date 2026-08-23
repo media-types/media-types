@@ -135,6 +135,13 @@ def load_missing_csv(path: pathlib.Path) -> dict[str, str]:
     return mapping
 
 
+def verify_checksum(template: str, content: str, expected_checksum: str) -> None:
+    """Validate the content against the given expected checksum."""
+    checksum = blake2b_128bit(content)
+    if checksum != expected_checksum:
+        raise ChecksumMismatch(template, expected_checksum, checksum)
+
+
 def _strip(text: str) -> str:
     if text.startswith("'") and text.endswith("'"):
         text = text[1:-1]
@@ -181,11 +188,7 @@ class FileExtensionsParser:
             return []
 
         if template in self.manual:
-            checksum = blake2b_128bit(content)
-            if checksum != self.manual[template].checksum:
-                raise ChecksumMismatch(
-                    template, self.manual[template].checksum, checksum
-                )
+            verify_checksum(template, content, self.manual[template].checksum)
             self.used_manual.add(template)
             return self.manual[template].file_extensions
 
@@ -197,9 +200,7 @@ class FileExtensionsParser:
             if NO_ADDITIONAL_INFORMATION_RE.search(clean_content):
                 return []
             if template in self.missing:
-                checksum = blake2b_128bit(content)
-                if checksum != self.missing[template]:
-                    raise ChecksumMismatch(template, self.missing[template], checksum)
+                verify_checksum(template, content, self.missing[template])
                 self.used_missing.add(template)
                 return []
             raise NoFileExtensionsFound(f"Found no file extensions for '{template}'.")
