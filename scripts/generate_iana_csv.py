@@ -25,7 +25,7 @@ import pathlib
 import re
 import sys
 import unittest
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 from typing import Self
 
 from media_types import (
@@ -251,7 +251,7 @@ def iter_media_types(directory: pathlib.Path) -> Iterator[MediaType]:
             yield MediaType.from_upstream_iana_csv_dict(row)
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     """Parse CLI arguments."""
     parser = argparse.ArgumentParser()
     # pylint: disable-next=duplicate-code
@@ -292,12 +292,12 @@ def parse_args() -> argparse.Namespace:
         help="Path to the CSV file listing media types that do not specify"
         " file extensions (default: %(default)s)",
     )
-    return parser.parse_args()
+    return parser.parse_args(argv[1:])
 
 
-def main() -> int:
+def main(argv: Sequence[str]) -> int:
     """Generate IANA CSV file with additional file extensions column."""
-    args = parse_args()
+    args = parse_args(argv)
     logging.basicConfig(level=logging.WARNING, format=LOG_FORMAT)
 
     file_extensions_parser = FileExtensionsParser.from_files(
@@ -513,5 +513,13 @@ class TestFileExtensionsParser(unittest.TestCase):
         self.assertEqual(parser.check_unused(), 0)
 
 
+class TestMain(unittest.TestCase):
+    """Test cases for main function."""
+
+    def test_no_stack_trace(self) -> None:
+        """Test that the main function does not crash."""
+        main([__script_name__])
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv))  # pragma: no cover
