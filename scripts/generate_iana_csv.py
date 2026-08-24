@@ -40,6 +40,7 @@ from media_types import (
     typecast_intended_usage,
 )
 
+DEFAULT_DIRECTORY = pathlib.Path("iana")
 DEFAULT_FILE_EXTENSIONS_MANUAL = pathlib.Path("parser/file_extensions/manual.csv")
 DEFAULT_FILE_EXTENSIONS_MAPPING = pathlib.Path("parser/file_extensions/mapping.tsv")
 DEFAULT_FILE_EXTENSIONS_MISSING = pathlib.Path("parser/file_extensions/missing.csv")
@@ -360,7 +361,7 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument(
         "-d",
         "--directory",
-        default=pathlib.Path("iana"),
+        default=DEFAULT_DIRECTORY,
         type=pathlib.Path,
         help="directory containing the input IANA media type files"
         " (default: %(default)s)",
@@ -439,10 +440,8 @@ class TestFileExtensionsParser(unittest.TestCase):
     # pylint: disable=missing-function-docstring
     """Test cases for FileExtensionsParser class."""
 
-    IANA_DIR = pathlib.Path("iana")
-
     def parse_file(self, template: str) -> list[str] | None:
-        path = self.IANA_DIR / template
+        path = DEFAULT_DIRECTORY / template
         content = path.read_text("utf-8")
         parser = FileExtensionsParser({}, {}, {})
         return parser.parse(template, content)
@@ -626,10 +625,10 @@ class TestFileExtensionsParser(unittest.TestCase):
             DEFAULT_FILE_EXTENSIONS_MAPPING,
             DEFAULT_FILE_EXTENSIONS_MISSING,
         )
-        media_types = MediaTypeList(iter_media_types(self.IANA_DIR))
+        media_types = MediaTypeList(iter_media_types(DEFAULT_DIRECTORY))
         self.assertEqual(
             media_types.add_additional_information(
-                parser.parse, lambda _a, _b: "", self.IANA_DIR
+                parser.parse, lambda _a, _b: "", DEFAULT_DIRECTORY
             ),
             0,
         )
@@ -640,10 +639,8 @@ class TestIntendedUsageParser(unittest.TestCase):
     # pylint: disable=missing-function-docstring
     """Test cases for IntendedUsageParser class."""
 
-    IANA_DIR = pathlib.Path("iana")
-
     def parse_file(self, template: str) -> IntendedUsageType:
-        path = self.IANA_DIR / template
+        path = DEFAULT_DIRECTORY / template
         content = path.read_text("utf-8")
         parser = IntendedUsageParser({}, {})
         return parser.parse(template, content)
