@@ -1,0 +1,9 @@
+BLAKE2b Checksum,Media Type,Intended Usage,Note
+6bcbd856bb5570858b5242d9bc7879db,application/vnd.ecdis-update,Limited use,Limited to navigation systems
+fd59da3ea15d2a426abda608960517e7,application/vnd.las.las+xml,Limited use,Limited
+3494a5ce8c900ab6eab056e00c9b30fb,application/vnd.mediastation.cdkey,Limited use,Limited
+d6edf3adf91eea23c3a500588d6d79ad,application/vnd.uri-map,Common,Unlimited use
+8f5beacfbb2bc79711bd1ef342086c9d,application/voucher-cms+json,Limited use,LIMITED
+24678a538a15ac3fe3c71b35d4eed0e8,application/voucher-jws+json,Limited use,LIMITED
+081fb6f204b709cbdf6c5318471c748e,audio/vnd.nokia.mobile-xmf,Limited use,Typo in intended usage
+a88cc728458054d5ff21486ea169e3a9,text/vnd.hans,Common,共同 Common

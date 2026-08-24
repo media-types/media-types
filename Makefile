@@ -54,6 +54,8 @@ check-sorted:
 	tail -n +2 parser/file_extensions/manual.csv | LANG=C sort -cf -k 2 -t ,
 	grep -v '^#' parser/file_extensions/mapping.tsv | LANG=C sort -cf
 	tail -n +2 parser/file_extensions/missing.csv | LANG=C sort -cf -k 2 -t ,
+	tail -n +2 parser/intended_usage/manual.csv | LANG=C sort -cf -k 2 -t ,
+	tail -n +2 parser/intended_usage/missing.csv | LANG=C sort -cf -k 2 -t ,
 	grep -v '^#' enhancement/duplicates.txt | LANG=C sort -cf
 	grep -v '^#' enhancement/lowercase.txt | LANG=C sort -cf
 	tail -n +2 enhancement/primary-file-extensions.csv | LANG=C sort -cf

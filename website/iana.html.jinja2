@@ -25,20 +25,28 @@
         <th>Name</th>
         <th>Template</th>
         <th>File Extensions</th>
+        <th>Intended Usage</th>
         <th>Reference</th>
       </tr>
     </thead>
     <tbody>
 {%- for row in iana %}
-<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.reference }}</td></tr>
+<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.intended_usage }}</td><td>{{ row.reference }}</td></tr>
 {%- endfor %}
     </tbody>
   </table>
   <p>
-    Statistics:
+    <b>Statistics</b>:
     <ul>
       <li>Total media types: {{ iana | length }}</li>
       <li>Media types with file extension(s): {{ iana | selectattr('file_extensions') | list | length }}</li>
+      <li>Media types per intended usage:</li>
+      <ul>
+        <li>Common: {{ iana | selectattr('intended_usage', 'equalto', 'Common') | list | length }}</li>
+        <li>Limited use: {{ iana | selectattr('intended_usage', 'equalto', 'Limited use') | list | length }}</li>
+        <li>Obsolete: {{ iana | selectattr('intended_usage', 'equalto', 'Obsolete') | list | length }}</li>
+        <li>Not specified: {{ iana | selectattr('intended_usage', 'equalto', '') | list | length }}</li>
+      </ul>
     </ul>
   </p>
 </body>

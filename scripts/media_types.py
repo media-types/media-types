@@ -20,15 +20,17 @@ import logging
 import os
 import pathlib
 from collections.abc import Callable, Container, Iterable, Iterator, Mapping
-from typing import Self, TypeVar
+from typing import Literal, Self, TypeVar, cast
 
 ALLOWED_MISSING_TEMPLATES = {"image/x-emf", "image/x-wmf"}
 TOP_LEVEL_TYPES_CSV = "top-level-media-type-names.csv"
 SKIP_TOP_LEVEL_TYPES = ("example",)
 
+type IntendedUsageType = Literal["Common", "Limited use", "Obsolete", ""]
+
 
 class ParserFailure(RuntimeError):
-    """Base exception raised for errors during file extensions parsing."""
+    """Base exception raised for errors during parsing."""
 
 
 def iter_csv_rows(path: pathlib.Path) -> Iterator[dict[str, str]]:
@@ -55,6 +57,12 @@ def parse_space_separated_list(string: str) -> list[str]:
     return string.split(" ")
 
 
+def typecast_intended_usage(intended_usage: str) -> IntendedUsageType:
+    """Narrow type from str to IntendedUsageType."""
+    assert intended_usage in ("Common", "Limited use", "Obsolete", "")
+    return cast(IntendedUsageType, intended_usage)
+
+
 @dataclasses.dataclass
 class MediaType:
     """Media type data (including file extensions).
@@ -65,6 +73,7 @@ class MediaType:
     name: str
     template: str
     file_extensions: list[str]
+    intended_usage: IntendedUsageType
     reference: str
 
     def __lt__(self, other: Self) -> bool:
@@ -77,18 +86,19 @@ class MediaType:
             items["Name"],
             items["Template"],
             parse_space_separated_list(items["File Extensions"]),
+            typecast_intended_usage(items["Intended Usage"]),
             items["Reference"],
         )
 
     @classmethod
     def from_upstream_iana_csv_dict(cls, items: dict[str, str]) -> Self:
         """Creates an instance from a upstream IANA CSV row dictionary."""
-        return cls(items["Name"], items["Template"], [], items["Reference"])
+        return cls(items["Name"], items["Template"], [], "", items["Reference"])
 
     @staticmethod
     def get_csv_dict_keys() -> list[str]:
         """Gets the list of CSV header keys used for CSV serialization."""
-        return ["Name", "Template", "File Extensions", "Reference"]
+        return ["Name", "Template", "File Extensions", "Intended Usage", "Reference"]
 
     def as_csv_dict(self) -> dict[str, str]:
         """Converts the instance into a CSV row dictionary."""
@@ -96,12 +106,14 @@ class MediaType:
             "Name": self.name,
             "Template": self.template,
             "File Extensions": " ".join(self.file_extensions),
+            "Intended Usage": self.intended_usage,
             "Reference": self.reference,
         }
 
     def add_additional_information(
         self,
         file_extensions_parser: Callable[[str, str], list[str]],
+        intended_usage_parser: Callable[[str, str], IntendedUsageType],
         directory: pathlib.Path,
     ) -> int:
         """Populates file extensions by reading and parsing the entry's template file.
@@ -121,6 +133,12 @@ class MediaType:
         failures = 0
         try:
             self.file_extensions = file_extensions_parser(self.template, content)
+        except ParserFailure as error:
+            logger = logging.getLogger(__name__)
+            logger.error("%s", error)
+            failures += 1
+        try:
+            self.intended_usage = intended_usage_parser(self.template, content)
         except ParserFailure as error:
             logger = logging.getLogger(__name__)
             logger.error("%s", error)
@@ -158,6 +176,7 @@ class MediaTypeList(list[T]):
     def add_additional_information(
         self,
         file_extensions_parser: Callable[[str, str], list[str]],
+        intended_usage_parser: Callable[[str, str], IntendedUsageType],
         directory: pathlib.Path,
     ) -> int:
         """Populates file extensions by reading and parsing the entry's template file.
@@ -167,7 +186,7 @@ class MediaTypeList(list[T]):
         failures = 0
         for media_type in self:
             failures += media_type.add_additional_information(
-                file_extensions_parser, directory
+                file_extensions_parser, intended_usage_parser, directory
             )
         return failures
 
@@ -246,6 +265,7 @@ class EnhancedMediaType(MediaType):
             items["Name"],
             items["Template"],
             parse_space_separated_list(items["File Extensions"]),
+            typecast_intended_usage(items["Intended Usage"]),
             items["Reference"],
             parse_space_separated_list(items["Primary File Extensions"]),
         )

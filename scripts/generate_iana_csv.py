@@ -29,6 +29,7 @@ from collections.abc import Iterator, Sequence
 from typing import Self
 
 from media_types import (
+    IntendedUsageType,
     MediaType,
     MediaTypeList,
     ParserFailure,
@@ -36,11 +37,14 @@ from media_types import (
     iter_csv_rows,
     iter_non_comment_lines,
     parse_space_separated_list,
+    typecast_intended_usage,
 )
 
 DEFAULT_FILE_EXTENSIONS_MANUAL = pathlib.Path("parser/file_extensions/manual.csv")
 DEFAULT_FILE_EXTENSIONS_MAPPING = pathlib.Path("parser/file_extensions/mapping.tsv")
 DEFAULT_FILE_EXTENSIONS_MISSING = pathlib.Path("parser/file_extensions/missing.csv")
+DEFAULT_INTENDED_USAGE_MANUAL = pathlib.Path("parser/intended_usage/manual.csv")
+DEFAULT_INTENDED_USAGE_MISSING = pathlib.Path("parser/intended_usage/missing.csv")
 LOG_FORMAT = "%(name)s %(levelname)s: %(message)s"
 FILE_EXTENSIONS_RE = re.compile(
     r"[Ff]ile\s[Ee]xtensions? ?(?:\(s\))?(?:\s*)[:\n](.*?)(?:\n> ?)*"
@@ -51,6 +55,10 @@ FILE_EXTENSIONS_RE = re.compile(
     r"|Person(?:al)? (?:(?:and|&) e-?mail address )?"
     r"(?:to contact )?for further +information) ?[:\n]",
     re.DOTALL,
+)
+INTENDED_USAGE_RE = re.compile(
+    r"Intended [Uu]sage\s*?[:\n]\s*?"
+    r"(COMMON|LIMITED USE|OBSOLETE|[Cc]ommon|[Ll]imited [Uu]se|Obsolete)"
 )
 NO_ADDITIONAL_INFORMATION_RE = re.compile(
     r"Additional\s[Ii]nformation:\s*(|[Nn][Oo][Nn][Ee]|[Nn]/[Aa]|\(none\))\.?\s*"
@@ -86,6 +94,10 @@ class NoFileExtensionsFound(ParserFailure):
     """Raised when no file extensions were found."""
 
 
+class NoIntendedUsageFound(ParserFailure):
+    """Raised when no intended usage was found."""
+
+
 @dataclasses.dataclass
 class ManualFileExtensions:
     """Row of file-extensions manual CSV file."""
@@ -101,6 +113,24 @@ class ManualFileExtensions:
             items["BLAKE2b Checksum"],
             items["Media Type"],
             parse_space_separated_list(items["File Extensions"] or ""),
+        )
+
+
+@dataclasses.dataclass
+class ManualIntendedUsage:
+    """Row of intended usage manual CSV file."""
+
+    checksum: str
+    media_type: str
+    intended_usage: IntendedUsageType
+
+    @classmethod
+    def from_csv_dict(cls, items: dict[str, str]) -> Self:
+        """Creates an instance from a CSV row dictionary."""
+        return cls(
+            items["BLAKE2b Checksum"],
+            items["Media Type"],
+            typecast_intended_usage(items["Intended Usage"] or ""),
         )
 
 
@@ -124,6 +154,17 @@ def load_file_extensions_mapping(path: pathlib.Path) -> dict[str, list[str]]:
     for line in iter_non_comment_lines(path):
         extensions_str, key = line.split("\t")
         mapping[key] = parse_space_separated_list(extensions_str)
+    return mapping
+
+
+def load_intended_usage_manual_csv(
+    path: pathlib.Path,
+) -> dict[str, ManualIntendedUsage]:
+    """Load intended usage manual CSV file."""
+    mapping = {}
+    for row in iter_csv_rows(path):
+        value = ManualIntendedUsage.from_csv_dict(row)
+        mapping[value.media_type] = value
     return mapping
 
 
@@ -243,6 +284,67 @@ class FileExtensionsParser:
         return unused_count
 
 
+@dataclasses.dataclass
+class IntendedUsageParser:
+    """Parser for intended usage."""
+
+    manual: dict[str, ManualIntendedUsage]
+    missing: dict[str, str]
+
+    used_manual: set[str] = dataclasses.field(
+        default_factory=set, init=False, repr=False
+    )
+    used_missing: set[str] = dataclasses.field(
+        default_factory=set, init=False, repr=False
+    )
+
+    @classmethod
+    def from_files(cls, manual_file: pathlib.Path, missing_file: pathlib.Path) -> Self:
+        """Construct an instance by loading rules from file paths."""
+        manual = load_intended_usage_manual_csv(manual_file)
+        missing = load_missing_csv(missing_file)
+        return cls(manual, missing)
+
+    def parse(self, template: str, content: str) -> IntendedUsageType:
+        """Extract intended usage from template text content."""
+        if content.strip() == "No registration template available.":
+            return ""
+
+        if template in self.manual:
+            verify_checksum(template, content, self.manual[template].checksum)
+            self.used_manual.add(template)
+            return self.manual[template].intended_usage
+
+        found = INTENDED_USAGE_RE.findall(content)
+        if not found:
+            if template in self.missing:
+                verify_checksum(template, content, self.missing[template])
+                self.used_missing.add(template)
+                return ""
+            raise NoIntendedUsageFound(f"Found no intended usage for '{template}'.")
+        assert len(set(found)) == 1
+        return typecast_intended_usage(found[0].capitalize())
+
+    def check_unused(self) -> int:
+        """Check configs that were never matched or used."""
+        logger = logging.getLogger(__script_name__)
+        unused_count = 0
+        for name, data, used in (
+            ("manual", self.manual, self.used_manual),
+            ("missing", self.missing, self.used_missing),
+        ):
+            unused = [key for key in data if key not in used]
+            if unused:
+                logger.warning(
+                    "%i unused entrie(s) in intended usage %s file: %s",
+                    len(unused),
+                    name,
+                    unused,
+                )
+                unused_count += len(unused)
+        return unused_count
+
+
 def iter_media_types(directory: pathlib.Path) -> Iterator[MediaType]:
     """Iterate over media types loaded from CSV files in a directory."""
     for top_level_media_type in get_top_level_media_type_names(directory):
@@ -292,6 +394,20 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
         help="Path to the CSV file listing media types that do not specify"
         " file extensions (default: %(default)s)",
     )
+    parser.add_argument(
+        "--intended-usage-manual",
+        default=DEFAULT_INTENDED_USAGE_MANUAL,
+        type=pathlib.Path,
+        help="Path to the CSV file containing mapping of media types"
+        " to intended usage. This is the last resort. (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--intended-usage-missing",
+        default=DEFAULT_INTENDED_USAGE_MISSING,
+        type=pathlib.Path,
+        help="Path to the CSV file listing media types that do not specify"
+        " intended usage (default: %(default)s)",
+    )
     return parser.parse_args(argv[1:])
 
 
@@ -305,11 +421,15 @@ def main(argv: Sequence[str]) -> int:
         args.file_extensions_mapping,
         args.file_extensions_missing,
     )
+    intended_usage_parser = IntendedUsageParser.from_files(
+        args.intended_usage_manual, args.intended_usage_missing
+    )
     media_types = MediaTypeList(iter_media_types(args.directory))
     failures = media_types.add_additional_information(
-        file_extensions_parser.parse, args.directory
+        file_extensions_parser.parse, intended_usage_parser.parse, args.directory
     )
     file_extensions_parser.check_unused()
+    intended_usage_parser.check_unused()
     media_types.write_to_csv(args.output)
     return failures
 
@@ -508,9 +628,71 @@ class TestFileExtensionsParser(unittest.TestCase):
         )
         media_types = MediaTypeList(iter_media_types(self.IANA_DIR))
         self.assertEqual(
-            media_types.add_additional_information(parser.parse, self.IANA_DIR), 0
+            media_types.add_additional_information(
+                parser.parse, lambda _a, _b: "", self.IANA_DIR
+            ),
+            0,
         )
         self.assertEqual(parser.check_unused(), 0)
+
+
+class TestIntendedUsageParser(unittest.TestCase):
+    # pylint: disable=missing-function-docstring
+    """Test cases for IntendedUsageParser class."""
+
+    IANA_DIR = pathlib.Path("iana")
+
+    def parse_file(self, template: str) -> IntendedUsageType:
+        path = self.IANA_DIR / template
+        content = path.read_text("utf-8")
+        parser = IntendedUsageParser({}, {})
+        return parser.parse(template, content)
+
+    def test_check_unused(self) -> None:
+        missing = {"text/rtf": "7be2577fc8b70c153e04845dc37f6a38"}
+        parser = IntendedUsageParser({}, missing)
+        with self.assertLogs(__script_name__, level=logging.WARNING) as context_manager:
+            unused_count = parser.check_unused()
+        self.assertRegex(context_manager.output[0], "text/rtf")
+        self.assertEqual(len(context_manager.output), 1)
+        self.assertEqual(unused_count, 1)
+
+    def test_common(self) -> None:
+        self.assertEqual(self.parse_file("audio/L8"), "Common")
+
+    def test_common_lowercase(self) -> None:
+        self.assertEqual(self.parse_file("image/vnd.fpx"), "Common")
+
+    def test_common_not_uppercase(self) -> None:
+        self.assertEqual(self.parse_file("audio/L16"), "Common")
+
+    def test_intended_usage_without_colon(self) -> None:
+        self.assertEqual(self.parse_file("application/ssml+xml"), "Common")
+
+    def test_limited_use(self) -> None:
+        self.assertEqual(self.parse_file("text/dns"), "Limited use")
+
+    def test_limited_use_lowercase(self) -> None:
+        self.assertEqual(self.parse_file("application/beep+xml"), "Limited use")
+
+    def test_limited_use_not_uppercase(self) -> None:
+        self.assertEqual(self.parse_file("text/uri-list"), "Limited use")
+
+    def test_only_newline_separated(self) -> None:
+        self.assertEqual(self.parse_file("application/mathml+xml"), "Common")
+
+    def test_no_intended_usage_found(self) -> None:
+        with self.assertRaises(NoIntendedUsageFound):
+            self.parse_file("text/rtf")
+
+    def test_no_registration_template_available(self) -> None:
+        self.assertEqual(self.parse_file("text/plain"), "")
+
+    def test_obsolete(self) -> None:
+        self.assertEqual(self.parse_file("image/hsj2"), "Obsolete")
+
+    def test_obsolete_not_uppercase(self) -> None:
+        self.assertEqual(self.parse_file("application/vnd.ah-barcode"), "Obsolete")
 
 
 class TestMain(unittest.TestCase):
