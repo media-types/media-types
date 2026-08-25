@@ -133,24 +133,28 @@ def _handle_http_error(
     else:
         wait_time = 0.0
 
+    attempt_str = ""
+    if attempts > 1:
+        attempt_str = f" (attempt {attempt + 1}/{attempts})"
+
     if wait_time and attempt + 1 < attempts:
         logger.warning(
-            "HTTP %s (%s) for '%s'. Retrying in %.1f seconds (attempt %d/%d)...",
+            "HTTP %s (%s) for '%s'. Retrying in %.1f seconds%s...",
             error.code,
             error.reason,
             url,
             wait_time,
-            attempt + 1,
-            attempts,
+            attempt_str,
         )
         time.sleep(wait_time)
         return True
 
     logger.error(
-        "HTTP %s (%s) for '%s'%s",
+        "HTTP %s (%s) for '%s'%s%s",
         error.code,
         error.reason,
         url,
+        attempt_str,
         ". Waiting %.1f seconds..." if wait_time else "",
     )
     if wait_time:
