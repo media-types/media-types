@@ -133,7 +133,7 @@ def _handle_http_error(
     else:
         wait_time = 0.0
 
-    if wait_time and attempt < attempts:
+    if wait_time and attempt + 1 < attempts:
         logger.warning(
             "HTTP %s (%s) for '%s'. Retrying in %.1f seconds (attempt %d/%d)...",
             error.code,
