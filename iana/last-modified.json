@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Tue, 18 Aug 2026 01:16:22 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Mon, 24 Aug 2026 21:36:22 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Sun, 18 Jul 2021 23:39:34 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Sun, 18 Jul 2021 23:39:33 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Sat, 24 Jan 2026 03:11:29 GMT",
@@ -547,7 +547,7 @@
   "https://www.iana.org/assignments/media-types/application/ttml+xml": "Tue, 21 Sep 2021 22:16:15 GMT",
   "https://www.iana.org/assignments/media-types/application/tve-trigger": "Sun, 18 Jul 2021 23:39:35 GMT",
   "https://www.iana.org/assignments/media-types/application/tzif": "Tue, 05 Nov 2024 22:35:42 GMT",
-  "https://www.iana.org/assignments/media-types/application/tzif-leap": "Tue, 05 Nov 2024 22:35:42 GMT",
+  "https://www.iana.org/assignments/media-types/application/tzif-leap": "Mon, 24 Aug 2026 21:36:22 GMT",
   "https://www.iana.org/assignments/media-types/application/uccs+cbor": "Wed, 28 May 2025 21:50:30 GMT",
   "https://www.iana.org/assignments/media-types/application/ujcs+json": "Wed, 28 May 2025 21:50:30 GMT",
   "https://www.iana.org/assignments/media-types/application/ulpfec": "Sun, 18 Jul 2021 23:39:32 GMT",
