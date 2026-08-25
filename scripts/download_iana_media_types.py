@@ -39,7 +39,7 @@ from media_types import (
     iter_csv_rows,
 )
 
-ATTEMPTS = 3
+ATTEMPTS = 4
 BASE_DELAY = 10.0
 MIN_DELAY = 1.0
 BASE_URL = "https://www.iana.org/assignments"
