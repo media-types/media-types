@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Mon, 24 Aug 2026 21:36:22 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Wed, 26 Aug 2026 17:56:24 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Sun, 18 Jul 2021 23:39:34 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Sun, 18 Jul 2021 23:39:33 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Sat, 24 Jan 2026 03:11:29 GMT",
@@ -902,7 +902,7 @@
   "https://www.iana.org/assignments/media-types/application/vnd.ecowin.series": "Sun, 18 Jul 2021 23:39:32 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.ecowin.seriesrequest": "Sun, 18 Jul 2021 23:39:35 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.ecowin.seriesupdate": "Sun, 18 Jul 2021 23:39:33 GMT",
-  "https://www.iana.org/assignments/media-types/application/vnd.edulith.edux+json": "Wed, 08 Apr 2026 23:46:21 GMT",
+  "https://www.iana.org/assignments/media-types/application/vnd.edulith.edux+json": "Wed, 26 Aug 2026 17:56:24 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.efi.img": "Fri, 20 May 2022 22:21:11 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.efi.iso": "Fri, 20 May 2022 22:21:11 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.eln+zip": "Thu, 09 Feb 2023 03:46:04 GMT",
