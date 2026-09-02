@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Wed, 26 Aug 2026 17:56:24 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Wed, 02 Sep 2026 03:56:23 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Sun, 18 Jul 2021 23:39:34 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Sun, 18 Jul 2021 23:39:33 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Sat, 24 Jan 2026 03:11:29 GMT",
@@ -962,6 +962,7 @@
   "https://www.iana.org/assignments/media-types/application/vnd.ffsns": "Sun, 18 Jul 2021 23:39:31 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.fgb": "Wed, 11 Jun 2025 20:30:27 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.ficlab.flb+zip": "Wed, 06 Dec 2023 02:45:26 GMT",
+  "https://www.iana.org/assignments/media-types/application/vnd.fiduswriter+zip": "Wed, 02 Sep 2026 03:56:23 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.filmit.zfc": "Wed, 06 Dec 2023 02:45:26 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.fints": "Wed, 06 Dec 2023 02:45:26 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.firemonkeys.cloudcell": "Sun, 18 Jul 2021 23:39:31 GMT",
