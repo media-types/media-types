@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Mon, 14 Sep 2026 19:06:22 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Thu, 17 Sep 2026 02:06:31 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Sun, 18 Jul 2021 23:39:34 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Sun, 18 Jul 2021 23:39:33 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Sat, 24 Jan 2026 03:11:29 GMT",
@@ -946,6 +946,7 @@
   "https://www.iana.org/assignments/media-types/application/vnd.evolv.ecig.profile": "Wed, 06 Dec 2023 02:45:26 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.evolv.ecig.settings": "Wed, 06 Dec 2023 02:45:26 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.evolv.ecig.theme": "Wed, 06 Dec 2023 02:45:26 GMT",
+  "https://www.iana.org/assignments/media-types/application/vnd.excelano.slipcase+zip": "Thu, 17 Sep 2026 02:06:31 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.exstream-empower+zip": "Wed, 06 Dec 2023 02:45:26 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.exstream-package": "Wed, 06 Dec 2023 02:45:26 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.ezpix-album": "Sun, 18 Jul 2021 23:39:33 GMT",
