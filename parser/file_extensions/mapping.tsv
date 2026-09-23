@@ -11,6 +11,8 @@
 	None.  A file format with the extension .mp4 has been defined for MPEG-4 content but is not directly correlated with this MIME type for which the sole purpose is RTP transport.
 	None. This MIME-type primary purpoes is to identify PDUs that are in transport.
 	not expected to be stored in files
+	project.binary (whole filename match)
+	project.godot (whole filename match)
 	RFC 8427 uses the media type to refer to protocol messages and thus does not require a file extension.
 	RFC 9569 uses the media type to refer to protocol messages; thus, it does not require a file extension.
 	SOAP messages are not required or expected to be stored as files.
