@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Tue, 29 Sep 2026 00:48:46 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Tue, 06 Oct 2026 19:06:27 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Tue, 29 Sep 2026 00:48:44 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Tue, 29 Sep 2026 00:48:44 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Tue, 29 Sep 2026 00:48:42 GMT",
@@ -683,6 +683,7 @@
   "https://www.iana.org/assignments/media-types/application/vnd.adobe.partial-upload": "Tue, 29 Sep 2026 00:48:42 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.adobe.xdp+xml": "Tue, 29 Sep 2026 00:48:44 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.aep+zip": "Tue, 29 Sep 2026 00:48:44 GMT",
+  "https://www.iana.org/assignments/media-types/application/vnd.aethel.package": "Tue, 06 Oct 2026 19:06:27 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.aether.imp": "Tue, 29 Sep 2026 00:48:44 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.afpc.afplinedata": "Tue, 29 Sep 2026 00:48:43 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.afpc.afplinedata-pagedef": "Tue, 29 Sep 2026 00:48:43 GMT",
