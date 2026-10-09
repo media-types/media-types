@@ -283,7 +283,7 @@ class EnhancedMediaType(MediaType):
     def get_csv_dict_keys() -> list[str]:
         """Gets the list of CSV header keys used for CSV serialization."""
         dict_keys = MediaType.get_csv_dict_keys()
-        dict_keys.insert(2, "Primary File Extensions")
+        dict_keys.insert(dict_keys.index("File Extensions"), "Primary File Extensions")
         return dict_keys
 
     def as_csv_dict(self) -> dict[str, str]:
