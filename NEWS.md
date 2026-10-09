@@ -1,6 +1,27 @@
 This file summarizes the major and interesting changes for each release. For a
 detailed list of changes, please see the git history.
 
+2026.10.09
+----------
+
+* add several new media types to the vendor tree:
+  * `application/vnd.fiduswriter.book+zip`
+  * `application/vnd.fiduswriter.template+zip`
+  * `application/vnd.excelano.slipcase+zip`
+  * `model/vnd.sdf3d.s3d`
+  * `application/vnd.godot.project.binary`
+  * `application/vnd.godot.project.text`
+  * `application/vnd.godot.resource.binary`
+  * `application/vnd.godot.resource.text`
+  * `application/vnd.drawoble.drawing+zip`
+  * `application/vnd.fabylon.book`
+  * `application/vnd.nnu.profile+json`
+  * `application/vnd.aethel.package`
+  * `application/vnd.nanorix.auditproof+json`
+  * `application/vnd.dai`
+  * `application/vnd.emilia.authorization-evidence-challenge+json`
+  * `application/vnd.majikah.mjksmap`
+
 2026.09.09
 ----------
 

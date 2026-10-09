@@ -23,7 +23,7 @@ endif
 
 NAME = media-types
 # Use YYYY.0M.0D defined in https://calver.org/
-VERSION = 2026.09.09
+VERSION = 2026.10.09
 PREFIX = /usr
 DATADIR = $(PREFIX)/share/media-types
 PYTHON_FILES = $(wildcard scripts/*.py)
