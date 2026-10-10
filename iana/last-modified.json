@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Thu, 08 Oct 2026 01:11:27 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Fri, 09 Oct 2026 23:16:28 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Tue, 29 Sep 2026 00:48:44 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Tue, 29 Sep 2026 00:48:44 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Tue, 29 Sep 2026 00:48:42 GMT",
@@ -424,8 +424,8 @@
   "https://www.iana.org/assignments/media-types/application/riscos": "Tue, 29 Sep 2026 00:48:44 GMT",
   "https://www.iana.org/assignments/media-types/application/rlmi+xml": "Tue, 29 Sep 2026 00:48:45 GMT",
   "https://www.iana.org/assignments/media-types/application/rls-services+xml": "Tue, 29 Sep 2026 00:48:44 GMT",
-  "https://www.iana.org/assignments/media-types/application/roughtime-malfeasance+json": "Tue, 29 Sep 2026 00:48:44 GMT",
-  "https://www.iana.org/assignments/media-types/application/roughtime-server+json": "Tue, 29 Sep 2026 00:48:45 GMT",
+  "https://www.iana.org/assignments/media-types/application/roughtime-malfeasance+json": "Fri, 09 Oct 2026 23:16:34 GMT",
+  "https://www.iana.org/assignments/media-types/application/roughtime-server+json": "Fri, 09 Oct 2026 23:16:34 GMT",
   "https://www.iana.org/assignments/media-types/application/route-apd+xml": "Tue, 29 Sep 2026 00:48:45 GMT",
   "https://www.iana.org/assignments/media-types/application/route-s-tsid+xml": "Tue, 29 Sep 2026 00:48:45 GMT",
   "https://www.iana.org/assignments/media-types/application/route-usd+xml": "Tue, 29 Sep 2026 00:48:44 GMT",
