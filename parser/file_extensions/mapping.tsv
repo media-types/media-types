@@ -40,6 +40,7 @@ fits fit fts	fits  This file extension SHOULD NOT be interpreted as a prescripti
 flx	Generally "flx", but documents describing certain symbol table may allocate their own set of extensions.
 fpx	often used with .fpx files.
 g3fc	.g3fc, .g3fc<n>
+geml gemlhistory	"geml", "gemlhistory"  A ".gemlhistory" file is a complete, valid GEML document of the same media type: a version sidecar that declares its vocabulary in its own metadata block like any other document. The separate extension marks the document's role, not its format, so that a directory walk collecting documents can take ".geml" and leave the sidecar, whose stored blobs hold superseded text. Neither extension is a vocabulary declaration.
 h5 hdf5	.h5 (common), .hdf5 (also common)
 hbci hbc kom upa pkd bpd	.hbci and .hbc; .kom, .upa, .pkd an .bpd for special purpose
 hdf h4 hdf4	.hdf (common), .h4, .hdf4 (also seen)
