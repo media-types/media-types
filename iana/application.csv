@@ -1069,6 +1069,7 @@ vnd.ibm.rights-management,application/vnd.ibm.rights-management,[Bruce_Tantlinge
 vnd.ibm.secure-container,application/vnd.ibm.secure-container,[Bruce_Tantlinger]
 vnd.ibus+json,application/vnd.ibus+json,[Boris_Opalic]
 vnd.iccprofile,application/vnd.iccprofile,[Phil_Green]
+vnd.idop+zip,application/vnd.idop+zip,[Kacper_Gościniak]
 vnd.ieee.1905,application/vnd.ieee.1905,[Purva_R_Rajkotia]
 vnd.igloader,application/vnd.igloader,[Tim_Fisher]
 vnd.imagemeter.folder+zip,application/vnd.imagemeter.folder+zip,[Dirk_Farin]

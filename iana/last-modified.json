@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Thu, 29 Oct 2026 06:06:42 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Fri, 30 Oct 2026 00:51:31 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Tue, 13 Oct 2026 20:06:57 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Wed, 21 Oct 2026 03:11:26 GMT",
@@ -1083,6 +1083,7 @@
   "https://www.iana.org/assignments/media-types/application/vnd.ibm.secure-container": "Tue, 13 Oct 2026 20:06:59 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.ibus+json": "Wed, 28 Oct 2026 23:06:33 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.iccprofile": "Tue, 13 Oct 2026 20:06:57 GMT",
+  "https://www.iana.org/assignments/media-types/application/vnd.idop+zip": "Fri, 30 Oct 2026 00:51:31 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.ieee.1905": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.igloader": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.imagemeter.folder+zip": "Tue, 13 Oct 2026 20:06:57 GMT",
