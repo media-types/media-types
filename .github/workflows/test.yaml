@@ -19,6 +19,15 @@ jobs:
       - name: Run black check
         run: make black
 
+  build:
+    runs-on: ubuntu-slim
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build
+        run: make
+
   isort:
     runs-on: ubuntu-slim
     strategy:
