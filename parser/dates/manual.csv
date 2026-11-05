@@ -1,0 +1,211 @@
+BLAKE2b Checksum,Media Type,Registered,Last Updated,Note
+aedfd715e6f091403799aabff925ff0b,application/ace+cbor,,2022-04-19,last updated from last-modified.json
+1d350064f1ead9270ddd9eb2049a300b,application/ace+json,,2023-07-19,last updated from last-modified.json
+f28ab6433b4a4faf998954502956767b,application/ace-groupcomm+cbor,,2024-09-16,last updated from last-modified.json
+6c2d86560e0cf6437d158d5b3f8484f1,application/ace-trl+cbor,,2025-06-17,last updated from last-modified.json
+f8c619d6e6d2301854d548724e86ecc6,application/activemessage,,2021-08-28,last updated from last-modified.json
+4e830149e7da7c7e44d7608e5ebf610a,application/aif+cbor,,2022-09-02,last updated from last-modified.json
+3e50e8bff007c389e7cfb6a9bfb6a403,application/aif+json,,2022-09-02,last updated from last-modified.json
+5142c19c4cfe2296af3913e97dd09e34,application/alto-cdni+json,,2022-07-11,last updated from last-modified.json
+9bb314729a540684bce3a27d78c68064,application/alto-cdnifilter+json,,2022-07-11,last updated from last-modified.json
+a13da3f47403789b27cf085ec961aaca,application/alto-propmap+json,,2022-07-18,last updated from last-modified.json
+fa0a0eb3e48e27826051f58bd9aed682,application/alto-propmapparams+json,,2022-07-18,last updated from last-modified.json
+83496d038f305fc0fca40ad2cbadb423,application/alto-tips+json,,2024-09-12,last updated from last-modified.json
+7f540948209eea1940aa1da390a33b9a,application/alto-tipsparams+json,,2024-09-12,last updated from last-modified.json
+542d3e81676b67a27bb9b8ca47d47003,application/andrew-inset,,2021-08-28,last updated from last-modified.json
+f33efd5adcbbae9d7c1b983813ec0979,application/applefile,1993-03-14,,Sun Mar 14 22:07 1993
+cd406088e10ecd94b2a93fa35e049223,application/at+jwt,,2021-10-22,last updated from last-modified.json
+16c739de28fae2ff1efad54642e62742,application/atom+xml,2005-12-05,2007-10-08,RFC 4287 published December 2005 and RFC 5023 published October 2007 and subtype last updated October 2007
+746f6c7ec5fd6fd8f26c46c9c62d5705,application/cid-edhoc+cbor-seq,,2024-03-22,last updated from last-modified.json
+678dbf10a17897d4b93528ac49b095b4,application/client-authentication+jwt,,2026-05-06,last updated from last-modified.json
+18d47b469c54e8e163e9ef342d38e904,application/cmw+cbor,,2026-07-20,last updated from last-modified.json
+4021ee7a8d0ede8196fce8657c4ced1e,application/cmw+cose,,2026-07-20,last updated from last-modified.json
+76a1ce32ad6b1d71ea61fb836526b75a,application/cmw+json,,2026-07-20,last updated from last-modified.json
+bfb11e15d29912e903b4b6b1efb3c538,application/cmw+jws,,2026-07-20,last updated from last-modified.json
+c81339c90b2b9623946fac00a0a87b69,application/coap-eap,,2025-09-16,last updated from last-modified.json
+c11c7aa4ace09f528b270d40167891e1,application/concise-problem-details+cbor,,2022-10-24,last updated from last-modified.json
+34fdfd18c326d4a46d6c52519c1ffb9f,application/cose,,2022-09-01,last updated from last-modified.json
+1d30f50b30712217f49ae75daed5bb1e,application/cose-c509+cbor,2026-08-11,2026-08-11,last updated from last-modified.json and registered from git commit
+4c56744da15e864014937e6d1c7fef07,application/cose-c509-cert+cbor,2026-08-11,2026-08-11,last updated from last-modified.json and registered from git commit
+a1a6c229cfeb9f8d9c73c94faf603dff,application/cose-c509-crtemplate+cbor,2026-08-11,2026-08-11,last updated from last-modified.json and registered from git commit
+be9017b41d6cea38e97c1c324df8aecf,application/cose-c509-pem+cbor,2026-08-11,2026-08-11,last updated from last-modified.json and registered from git commit
+69be1ce126459a21e9cd84e0ec08162b,application/cose-c509-pkcs10+cbor,2026-08-11,2026-08-11,last updated from last-modified.json and registered from git commit
+03948a14d23a5f0ea7e3c86183e84fde,application/cose-c509-privkey+cbor,2026-08-11,2026-08-11,last updated from last-modified.json and registered from git commit
+f07aec921d69119b06812dc2f22aa131,application/cose-certhash+cbor,2026-08-11,2026-08-11,last updated from last-modified.json and registered from git commit
+331e2b541bdc639b99510fe9f3b1c592,application/cose-key,,2022-09-01,last updated from last-modified.json
+464ea50a331c36513036135f03b2e553,application/cose-key-set,,2022-09-01,last updated from last-modified.json
+f7698113efcde2f7a8e54daf2c16e54e,application/cose-x509,,2023-02-17,last updated from last-modified.json
+d202d7fa986a4635adbe40706703e1ed,application/dots+cbor,,2021-09-03,last updated from last-modified.json
+6404503ca0428f62b5ff095813369012,application/dpop+jwt,,2023-09-11,last updated from last-modified.json
+346faeab786045796e7383029d91c787,application/eat+cwt,,2025-05-28,last updated from last-modified.json
+4631c404bc1f165aee4ba39a4b1a3744,application/eat+jwt,,2025-05-28,last updated from last-modified.json
+16fd05621e7eeb4df82a629d426080ce,application/eat-bun+cbor,,2025-05-28,last updated from last-modified.json
+1f410b5a5161f019ee078f4969498c0f,application/eat-bun+json,,2025-05-28,last updated from last-modified.json
+ce9cb292fa30ec0635463da941a58130,application/eat-ucs+cbor,,2025-05-28,last updated from last-modified.json
+bff6987333e0f8cac7596db8e8f4ae0d,application/eat-ucs+json,,2025-05-28,last updated from last-modified.json
+d3f89bd4ff60fa55616ff4ea0a08c141,application/edhoc+cbor-seq,,2024-03-22,last updated from last-modified.json
+cc7540acdb1fbf552f1f40b699c216d0,application/EmergencyCallData.VEDS+xml,,2022-05-25,last updated from last-modified.json
+d0cd97235cf7f12e76e6a77217bcfd0c,application/expect-ct-report+json,,2022-06-09,last updated from last-modified.json
+c34d60887e693f082a623ea73a89a149,application/geofeed+csv,,2025-10-14,last updated from last-modified.json
+9fbbd15da6971f0e9ab2783130fe160f,application/gnap-binding-jws,,2024-10-09,last updated from last-modified.json
+d5165c9fe79170daebdbcf3ff0eff8a4,application/gnap-binding-jwsd,,2024-10-09,last updated from last-modified.json
+33daac759df7d9117d11d4f8f9a59944,application/gnap-binding-rotation-jws,,2024-10-09,last updated from last-modified.json
+9530f1be51ce5db2a26a5f5860d993b5,application/gnap-binding-rotation-jwsd,,2024-10-09,last updated from last-modified.json
+045632c3092e7104fa199d4732f66d27,application/jscontact+json,,2024-05-09,last updated from last-modified.json
+3142774f8f5abd1957f4ad0c8b575219,application/jsonpath,,2024-02-23,last updated from last-modified.json
+b39e293c07179aa0c3103de566a2f327,application/kb+jwt,,2025-11-24,last updated from last-modified.json
+ac319bf1fb4c43f14809b64ae8caadb3,application/lgr+xml,,2023-07-21,last updated from last-modified.json
+858ccc212e6737999b58014cf12ae58e,application/linkset+json,,2022-07-21,last updated from last-modified.json
+4da58322be9cf0bf265f65a6694e6611,application/linkset,,2022-07-21,last updated from last-modified.json
+f33efd5adcbbae9d7c1b983813ec0979,application/mac-binhex40,1993-03-14,,Sun Mar 14 22:07 1993
+6a5ae6e1b0fe33c11a2b09b16b91e784,application/measured-component+cbor,,2026-08-04,last updated from last-modified.json
+78c3ba5274e3a056cf03f889ccdfc400,application/measured-component+json,,2026-08-04,last updated from last-modified.json
+5e143dc536cc4d57f1213c53c15ea62d,application/missing-blocks+cbor-seq,,2022-03-17,last updated from last-modified.json
+3a78147b8d4360b386f5fedca1e09012,application/mp4,2006-03-16,2011-08-26,RFC 4337 published March 2006 and RFC 6381 published August 2011 and subtype last updated August 2011
+ff8691abae4ad6f0df125783e7b7b134,application/nasdata,2006-10-25,2006-10-25,RFC 4707 was published in October 2006
+6ffc3fd5fd261887c8955b3bcc2f473f,application/oauth-authz-req+jwt,,2021-09-08,last updated from last-modified.json
+9ce57d968bec9684c832971fc33ff05e,application/oblivious-dns-message,,2022-06-10,last updated from last-modified.json
+bed40960f785d87886fd3cc3870be9e6,application/octet-stream,1996-11,1996-11,RFC 2045 and 2046 published November 1996 and subtype last updated April November 1996
+89bd15b9c92101198e4e7cfb49599ddb,application/ohttp-keys,,2024-01-16,last updated from last-modified.json
+897ed7a7eb512a2f739b8e8d6cf2dfb4,application/passport,,2023-07-21,last updated from last-modified.json
+a803fcf828b14772c36278b5be7d771c,application/postscript,1996-11,1996-11,RFC 2045 and 2046 published November 1996 and subtype last updated April November 1996
+180c10cdbde2a36d6e612a9cbb85854f,application/private-token-issuer-directory,,2024-06-18,last updated from last-modified.json
+97840b3e8d49115ca86f93f1d5f87576,application/private-token-request,,2024-06-18,last updated from last-modified.json
+6ccadb97d9ddb50ed724ec2266ae1c6c,application/private-token-response,,2024-06-18,last updated from last-modified.json
+76637788146b84a2b88a4dcc4951880f,application/problem+json,,2023-08-01,last updated from last-modified.json
+6a272dfb3ce43c9a68146d475b5dbe9d,application/problem+xml,,2023-08-01,last updated from last-modified.json
+854bf76e5e54eff934ec5a6409158753,application/protobuf+json,,2026-08-04,last updated from last-modified.json
+575a2e9965585465fb304b05ffc9d693,application/protobuf,,2026-08-04,last updated from last-modified.json
+4752ab1578110858cac2426773454229,application/prs.cyn,2020-09-29,2021-09-04,last updated from last-modified.json
+683fd0afe9f8cde6f4fc9e28cb24d960,application/prs.mayfile,,2024-08-14,last updated from last-modified.json
+b5912d48a6ef1df292f297fcaba4b431,application/prs.plucker,2002-02-24,2021-09-04,last updated from last-modified.json
+27fe5f8c297c9049826c21a3db3accb7,application/reginfo+xml,2004-03-31,2004-03-31,RFC 3680 was published in March 2004
+5985cd381e52bd74ba47f4e18297451e,application/remote-printing,1993-07-31,2022-12-15,last updated from last-modified.json
+99b7d590db93eccff3a2b6b40126fa0e,application/roughtime-malfeasance+json,,2026-10-09,last updated from last-modified.json
+cbc98946f38dd21c733822482b678c5b,application/roughtime-server+json,,2026-10-09,last updated from last-modified.json
+252874b1951f1d004bb9471046d170f7,application/rpki-ccr+gzip,,2026-07-11,last updated from last-modified.json
+16032e55f4814af7ee89ed5494c8e7ff,application/rpki-ccr,,2026-07-11,last updated from last-modified.json
+a056d3bfce2de5081587a2adbf74f79b,application/rpki-checklist,,2022-11-18,last updated from last-modified.json
+28f642477555bfa511cbfbd2d0942e3e,application/rpki-manifest,,2022-06-21,last updated from last-modified.json
+18cb00c309300656278e14e7e1018caf,application/rpki-roa,,2024-05-29,last updated from last-modified.json
+c2362e5e081cba196bcd9648386951ef,application/rpki-signed-tal,,2024-12-19,last updated from last-modified.json
+646f67a5eda4d0f4982ff55907331359,application/rs-metadata+xml,,2025-07-01,last updated from last-modified.json
+6c74535d3bb60de99258b994e4d76fff,application/scitt-receipt+cose,,2026-07-03,last updated from last-modified.json
+f0d12d2be0c3dc2f472f4d1377ff0e56,application/scitt-statement+cose,,2026-07-03,last updated from last-modified.json
+847fd3291827b23fa3b293c9022bfc2f,application/sd-jwt+json,,2025-11-24,last updated from last-modified.json
+3e4409f4ba3c667386eec97ec7de8766,application/sd-jwt,,2025-11-24,last updated from last-modified.json
+e6e0c60264c0104fefd495cccfe58a21,application/sdf+json,,2026-01-21,last updated from last-modified.json
+1f6d6ea47fd78f280cbb7fca53ff19c6,application/sslkeylogfile,,2026-07-20,last updated from last-modified.json
+a4c2118a9c4c1a5a00f1824a8bd5af2a,application/statuslist+cwt,,2026-06-29,last updated from last-modified.json
+5a834848d7134f6cf69530eee9ef2a6d,application/statuslist+jwt,,2026-06-29,last updated from last-modified.json
+052b6f3d40c549eeb674628659f676a7,application/suit-envelope+cose,,2025-05-29,last updated from last-modified.json
+e7652ebebf01a89b6adf65bcbc92ec05,application/suit-report+cose,,2026-02-17,last updated from last-modified.json
+10a7479990ade977a3fe8dde639cc258,application/swid+cbor,,2023-07-21,last updated from last-modified.json
+6b4556f9a4ea693266dcadba727bfd2e,application/teep+cbor,,2026-03-19,last updated from last-modified.json
+710bb803ab58fd9a59e6439303d7ffb1,application/timestamp-query,2001-08,2001-08,RFC 3161 published August 2001 and subtype last updated April August 2001
+710bb803ab58fd9a59e6439303d7ffb1,application/timestamp-reply,2001-08,2001-08,RFC 3161 published August 2001 and subtype last updated April August 2001
+e13cc721bcd6ed5833bc13701847efbe,application/token-introspection+jwt,,2025-02-04,last updated from last-modified.json
+7bbe655755e0fd8673dac4ca0ccb40e0,application/trickle-ice-sdpfrag,,2023-07-21,last updated from last-modified.json
+e21b127ed17f44a27e69490a23ca56e7,application/tzif,,2024-11-05,last updated from last-modified.json
+ed5fc90c12fb7fbc0a911061a314d448,application/tzif-leap,,2026-08-24,last updated from last-modified.json
+14cbf43bf9b681d08077aea41a7f9242,application/uccs+cbor,,2025-05-28,last updated from last-modified.json
+5d41186a1d6717be881357f6e02b6d09,application/ujcs+json,,2025-05-28,last updated from last-modified.json
+434bc706f651688706ba0615f3717bde,application/v3c,,2026-09-01,last updated from last-modified.json
+c0315bebd6b78d9025782a93d5c38f4d,application/vnd.acucorp,2002-02-24,2021-09-21,last updated from last-modified.json
+fef45815bb80b98b82ef89ea1b35d74c,application/vnd.aether.imp,,2021-10-01,last updated from last-modified.json
+2b78e505dbb815630cc401b9c36830ad,application/vnd.amiga.ami,2002-01-17,2021-10-01,last updated from last-modified.json
+7788b750e80802595d2a8c97391e54da,application/vnd.apple.installer+xml,2005-11-30,2005-11,spelling mistake in created
+e0609f15e40f18b3a439eaa9cf2a3b40,application/vnd.apple.mpegurl,,2026-05-15,last updated from last-modified.json
+885f05a90d011701f8bcaa358a9856d9,application/vnd.apple.steering-list,,2026-05-20,last updated from last-modified.json
+b43c8c75f296f0c19f5fac84cf216559,application/vnd.belightsoft.lhzl+zip,,2022-06-28,last updated from last-modified.json
+39adbb628166bfbe330c574aa8722095,application/vnd.blueice.multipass,2002-04-30,2021-10-09,last updated from last-modified.json
+afc67b66edeccaa7d8c85b9ab578dde5,application/vnd.bmi,,2021-10-09,last updated from last-modified.json
+d46918a6a7cd10a1f96e3823d3f0ec4c,application/vnd.canon-cpdl,,2021-10-09,last updated from last-modified.json
+fee355d4f496ae34b102b1ed6602b430,application/vnd.canon-lips,,2021-10-09,last updated from last-modified.json
+7a05a9f2c71c9de3b495ed9a28c9973a,application/vnd.cinderella,2002-04-30,2021-10-09,last updated from last-modified.json
+8ed60c8c592d2ea2878ab9325d79850d,application/vnd.contact.cmsg,,2021-10-23,last updated from last-modified.json
+41c35ae5e1f9bcb7d224669cb2a7f869,application/vnd.crypto-shade-file,2019-08-13,2021-10-23,last updated from last-modified.json
+6896fa98ddad4df92ea3fb0bfbf7ccea,application/vnd.ctc-posml,,2021-10-23,last updated from last-modified.json
+c889c2450590af361a60771d6e6089fd,application/vnd.data-vision.rdz,2002-06-24,2021-11-30,last updated from last-modified.json
+02209147410f48608b78d92c80ab5fe2,application/vnd.dreamfactory,2002-01-17,2022-01-08,last updated from last-modified.json
+ac01158d8d55c1b8bc7c3e34eb6dad4a,application/vnd.drive+json,2015-09-11,2022-01-08,last updated from last-modified.json
+7933c8c8c492c961cc6683767397d033,application/vnd.epson.esf,,2022-06-03,last updated from last-modified.json
+b17f03af24ebde201c1530f8e15802db,application/vnd.ericsson.quickcall,,2022-06-17,last updated from last-modified.json
+6eb06b51623c7d1581293a29c611a32b,application/vnd.eu.kasparian.car+json,,2023-12-06,last updated from last-modified.json
+ea6083ce560d3c4e5707d33babd99fd0,application/vnd.eudora.data,,2023-12-06,last updated from last-modified.json
+f9ce01db9197d928dff837be95e31c2e,application/vnd.freelog.comic,,2023-06-26,last updated from last-modified.json
+1fd83475da4c39cb2016e2b9e96301a1,application/vnd.ibm.afplinedata,2001-03-16,2018-04-10,registration date in US MM-DD-YY format
+6b7ee6e763141ab1b9942c4447a3513f,application/vnd.ibm.MiniPay,1997-02-27,,two emails with dates
+267e4f9533626796bda1425a7ba6910b,application/vnd.informedcontrol.rms+xml,2006-10-24,2006-10-24,dates in DD-MM-YYYY format
+422d9d6ee67b334ab66e174640cfd10f,application/vnd.informix-visionary,,2002-02-05,Note posted: 05 February 2002
+c70b79e27ba8469d348d65b932686fd2,application/vnd.irepository.package+xml,2001-06-12,2001-06-12,registered lacks brackets
+69072c6b809c975ce7694f40068c217f,application/vnd.kahootz,2005-11-30,2005-11,registration date not in brackets
+dd2a24a26401fc28909b89e85924b062,application/vnd.Mobius.MBK,2001-03-16,2001-03-16,dates in US MM-DD-YY format
+70fbc108619229f1347149ab6932c089,application/vnd.Mobius.MQY,2001-03-16,2001-03-16,dates in US MM-DD-YY format
+723d043199153b6ae27769baf16e3b5d,application/vnd.mseq,2001-03-05,,created date in US MM/DD/YY format
+838cadc513e0b59a2aa6da852ba5a4a5,application/vnd.oma.bcast.associated-procedure-parameter+xml,,2015-03-05,last updated 2007-06-29 and last updated 2015-03-05
+a4af2bea7c923a12a7ddb9e14aa17b16,application/vnd.smart.notebook,2009-12-17,2009-12-17,spelling mistake in created
+e57816d0fd3fbf6b00d46339a21903b4,application/vnd.syncml.dm+wbxml,2006-06-23,2006-06-23,dates not in brackets
+646be3da931790ee99967f3f625b7ded,application/vnd.vidsoft.vidconference,2001-03-16,2001-03-16,dates in US MM-DD-YY format
+dee97578ef45f6e20d1e6a9af1e97f67,application/vnd.vividence.scriptfile,2001-03-16,2001-03-16,dates in US MM-DD-YY format
+f836361a7f9b6d73b90c5f03ceb46c9d,application/vnd.wordperfect,2004-03-05,2004-03-05,missing bracket before last updated
+24678a538a15ac3fe3c71b35d4eed0e8,application/voucher-jws+json,,2025-01-16,last updated from last-modified.json
+4d06e54a602dd67924e9c285ca6ff29e,application/watcherinfo+xml,2004-08-31,2004-08-31,media type was registered in RFC 3858 not in RFC 6208
+bc0283cae8925cc269823e7a8b2c52b3,application/yaml,,2024-02-16,last updated from last-modified.json
+dab497d0ca155d5a9b0dbf22679ec907,application/yang-data+cbor,,2022-07-21,last updated from last-modified.json
+b211690d0c55a42893de2bec628d7f83,application/yang-sid+json,,2024-08-02,last updated from last-modified.json
+b3c94ddd5a210a3e80564ae80b145a7b,audio/flac,,2024-12-20,last updated from last-modified.json
+c8e1e76a016b73196b94a2270127c24e,audio/G719,2009-01-23,,media type was registered in RFC 5404 not in RFC 5405
+4e78a1472ea6be012c3683c9557cc7b3,audio/matroska,,2024-10-15,last updated from last-modified.json
+2753bc60bb74bbe7eda102b8a1becd6a,audio/mp4,2006-03-16,2011-08-26,RFC 4337 published March 2006 and RFC 6381 published August 2011 and subtype last updated August 2011
+30d3ee7ded71a8f597c86a3e9e5eea4a,audio/prs.sid,,2003-09-25,Last updated date in US MM-D-YYYY
+46583d13806d6dc68ce321e2310b9d08,audio/QCELP,,2021-08-24,last updated from last-modified.json
+b73c1ceeaaa9525c468d569fcf623e92,audio/scip,,2024-07-25,last updated from last-modified.json
+b339adfd2a40d52b03dfbaab595b44a8,audio/vnd.dolby.pl2,2009-03-13,2009-03-13,spelling mistake in created
+013a808c329e909e56f0718b176e59c2,audio/vnd.nuera.ecelp9600,2001-01-12,,created date in US MM/DD/YY format
+b3453a706a87348d3326b31e21667301,audio/vnd.qcelp,,2020-10-12,Last updated 2003-10-31 but Intended Usage: OBSOLETE added 2020-10-12
+65a86c44bfdaa95f9adf8a269c9d49aa,haptics/hjif,,2025-03-18,last updated from last-modified.json
+47083033fb43eb92474bf3770854aec9,haptics/hmpg,,2026-06-01,last updated from last-modified.json
+d23bf0925b1f439e3f3e32c9c72a1fab,haptics/ivs,,2025-03-18,last updated from last-modified.json
+417377252e8c22ddd65422d9d4f15323,image/jpeg,,2024-08-07,last updated from last-modified.json
+2bef2c645cc19afb9f56f691bc334d23,image/jpx,,2024-05-14,last updated from last-modified.json
+b365ddd9ae2206d6e58eb8bc94a332b3,image/vnd.dwg,1996-03-20,,three emails with dates
+2cce903733573c528973493bb5bbe20f,image/vnd.dxf,1996-03-20,,three emails with dates
+4e0846ae9917309f034305f932dbdd3e,image/vnd.svf,1996-03-20,,three emails with dates
+bcb4395c01d6710a611584c533544bcb,image/webp,,2024-11-21,last updated from last-modified.json
+62ef885b2a368de67877726e1e4ed7c3,message/bhttp,,2022-09-01,last updated from last-modified.json
+4d79e021f3906e77d7c47598688549a3,message/global,2008-09-05,2012-02-17,template updated by RFC6532 and previous version included in RFC5335
+bcb2735a90f9dd25a15eab9e68c781c8,message/global-delivery-status,2008-09-05,2012-02-17,template updated by RFC6533; previous version included in RFC5337
+7dcd2bd0d01a9dcd33ea14bb09c78f30,message/global-disposition-notification,2008-09-05,2012-02-17,template updated by RFC6533; previous version included in RFC5337
+e827004408f0794fa13ed22334be1544,message/global-headers,2008-09-05,2012-02-17,template updated by RFC6533; previous version included in RFC5337
+8f098d04ff902be91f85c23b558cef36,message/mls,,2026-07-14,last updated from last-modified.json
+09bd421c34b947a73edae9d752006365,message/news,1993,2009-11-28,registered 1993 and obsoleted by RFC5537
+bfdf758d66c2fdce0b97cd50e004eba4,message/ohttp-chunked-req,,2026-03-05,last updated from last-modified.json
+30a255d9f15d1c76f2c695d1d0548248,message/ohttp-chunked-res,,2026-03-05,last updated from last-modified.json
+5de757d822f321aca09633084515c583,message/ohttp-req,,2024-01-16,last updated from last-modified.json
+b8116de67f8603792772433183ace969,message/ohttp-res,,2024-01-16,last updated from last-modified.json
+dc76f4a3ed142cb0d23b533511cc02d8,message/s-http,1999-08,2021-12-23,per RFC2660 and last updated from last-modified.json
+f3983af275f7e295e5c80cea6e23bf13,model/iges,1997-01-10,,dates for model/iges and application/iges
+a4df16f7baa7f0188e8359fdba50e988,model/u3d,,2022-02-26,last updated from last-modified.json
+ac9d8fa62a2235c8386377d04ebdda2a,multipart/appledouble,1993-03-14,,Sun Mar 14 22:07 1993
+03db9ac581a2d5b853cf6755cc51469f,multipart/form-data,1998-08,2015-07-14,RFC2388 version replaced by RFC7578
+2d6a172aa7e068e84374e0ab3e0539c4,multipart/header-set,1993-10-05,,5 October 1993
+10fd32107f0843776699265f5a20f94b,text/css,,2026-07-10,last updated from last-modified.json
+1e1afaece699c0b2d563008da456e9c2,text/ecmascript,,2022-05-10,last updated from last-modified.json
+b561ac3957429c2e63eb119b17289e00,text/javascript,,2023-03-30,last updated from last-modified.json
+1ded667586c75b195b5ba1ac92ae5dfb,text/t140,2000-05,2005-06-06,per RFC4103 which updates RFC2793 registration
+70bcc67869d346fc9ebd452e040a81f3,text/vnd.curl,,2002-12-18,Comments: 2002-12-18
+8be33c3a58568bbba733213ebb5f2f7e,text/vnd.wap.wml,1999-03-02,2015-05-12,last revised 2015-05-12
+13f953ea02d4d65d97dd58927f22596a,video/evc,,2024-06-12,last updated from last-modified.json
+97d47639f01d20b233cc9bbc442c6605,video/FFV1,,2021-08-24,last updated from last-modified.json
+55f77e4b6ff748e75bb6c00baa50873e,video/H265,,2023-07-21,last updated from last-modified.json
+f45955cff9dbf4952fe1fd81407379d8,video/H266,,2022-12-23,last updated from last-modified.json
+68e1bfae6fc3323e9a47c0695f0e91b6,video/jpeg2000-scl,,2025-09-03,last updated from last-modified.json
+076f3b61a8884550667b90133deede64,video/jxsv,,2026-09-24,last updated from last-modified.json
+afae758cdddc4becdf244f68d586e7be,video/matroska,,2024-10-15,last updated from last-modified.json
+b2304139f21966775454a826d7c6a7a9,video/matroska-3d,,2024-10-15,last updated from last-modified.json
+87ba8bc256fe6eb7a0dbedeb073272a1,video/mp4,2006-03-16,2011-08-26,RFC 4337 published March 2006 and RFC 6381 published August 2011 and subtype last updated August 2011
+2140860d65de57af3ab20a41a390afa8,video/scip,,2024-07-25,last updated from last-modified.json
+071f7444c9157efadc152b9358fc48ea,video/vnd.nokia.interleaved-multimedia,2001-03-16,2001-03-16,dates in US MM-DD-YY format
+d8cb4c6a4ccc7f42c7382cae50244357,video/vnd.vivo,1996-01-29,,missing day of week in date: 29 Jan 96 14:52:11 EDT
+d6e77dec696755e1886998b9b0a5b287,video/VP9,,2025-03-29,last updated from last-modified.json

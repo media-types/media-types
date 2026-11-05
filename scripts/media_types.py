@@ -70,6 +70,8 @@ class MediaType:
     This class represents the media type data provided by IANA.
     """
 
+    registered: str
+    last_updated: str
     name: str
     template: str
     file_extensions: list[str]
@@ -83,6 +85,8 @@ class MediaType:
     def from_csv_dict(cls, items: dict[str, str]) -> Self:
         """Creates an instance from a CSV row dictionary."""
         return cls(
+            items["Registered"],
+            items["Last Updated"],
             items["Name"],
             items["Template"],
             parse_space_separated_list(items["File Extensions"]),
@@ -93,16 +97,26 @@ class MediaType:
     @classmethod
     def from_upstream_iana_csv_dict(cls, items: dict[str, str]) -> Self:
         """Creates an instance from a upstream IANA CSV row dictionary."""
-        return cls(items["Name"], items["Template"], [], "", items["Reference"])
+        return cls("", "", items["Name"], items["Template"], [], "", items["Reference"])
 
     @staticmethod
     def get_csv_dict_keys() -> list[str]:
         """Gets the list of CSV header keys used for CSV serialization."""
-        return ["Name", "Template", "File Extensions", "Intended Usage", "Reference"]
+        return [
+            "Registered",
+            "Last Updated",
+            "Name",
+            "Template",
+            "File Extensions",
+            "Intended Usage",
+            "Reference",
+        ]
 
     def as_csv_dict(self) -> dict[str, str]:
         """Converts the instance into a CSV row dictionary."""
         return {
+            "Registered": self.registered,
+            "Last Updated": self.last_updated,
             "Name": self.name,
             "Template": self.template,
             "File Extensions": " ".join(self.file_extensions),
@@ -112,6 +126,7 @@ class MediaType:
 
     def add_additional_information(
         self,
+        date_parser: Callable[[str, str], tuple[str, str]],
         file_extensions_parser: Callable[[str, str], list[str]],
         intended_usage_parser: Callable[[str, str], IntendedUsageType],
         directory: pathlib.Path,
@@ -131,6 +146,12 @@ class MediaType:
             return 1
 
         failures = 0
+        try:
+            self.registered, self.last_updated = date_parser(self.template, content)
+        except ParserFailure as error:
+            logger = logging.getLogger(__name__)
+            logger.error("%s", error)
+            failures += 1
         try:
             self.file_extensions = file_extensions_parser(self.template, content)
         except ParserFailure as error:
@@ -175,6 +196,7 @@ class MediaTypeList(list[T]):
 
     def add_additional_information(
         self,
+        date_parser: Callable[[str, str], tuple[str, str]],
         file_extensions_parser: Callable[[str, str], list[str]],
         intended_usage_parser: Callable[[str, str], IntendedUsageType],
         directory: pathlib.Path,
@@ -186,7 +208,7 @@ class MediaTypeList(list[T]):
         failures = 0
         for media_type in self:
             failures += media_type.add_additional_information(
-                file_extensions_parser, intended_usage_parser, directory
+                date_parser, file_extensions_parser, intended_usage_parser, directory
             )
         return failures
 
@@ -262,6 +284,8 @@ class EnhancedMediaType(MediaType):
     def from_csv_dict(cls, items: dict[str, str]) -> Self:
         """Creates an instance from a CSV row dictionary."""
         return cls(
+            items["Registered"],
+            items["Last Updated"],
             items["Name"],
             items["Template"],
             parse_space_separated_list(items["File Extensions"]),

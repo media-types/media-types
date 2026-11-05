@@ -27,6 +27,8 @@
   <table>
     <thead>
       <tr>
+        <th>Registered</th>
+        <th>Last Updated</th>
         <th>Name</th>
         <th>Template</th>
         <th>Primary File Extensions</th>
@@ -37,7 +39,7 @@
     </thead>
     <tbody>
 {%- for row in media_types %}
-<tr><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.primary_file_extensions | join(" ") }}</td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.intended_usage }}</td><td>{{ row.reference }}</td></tr>
+<tr><td>{{ row.registered }}</td><td>{{ row.last_updated }}</td><td>{{ row.name }}</td><td><a href="{{ row.template }}.txt">{{ row.template }}</a></td><td>{{ row.primary_file_extensions | join(" ") }}</td><td>{{ row.file_extensions | join(" ") }}</td><td>{{ row.intended_usage }}</td><td>{{ row.reference }}</td></tr>
 {%- endfor %}
     </tbody>
   </table>
@@ -45,6 +47,8 @@
     <b>Statistics</b>:
     <ul>
       <li>Total media types: {{ media_types | length }}</li>
+      <li>Media types with registration date: {{ iana | selectattr('registered') | list | length }}</li>
+      <li>Media types with last updated date: {{ iana | selectattr('last_updated') | list | length }}</li>
       <li>Media types with file extension(s): {{ media_types | selectattr('file_extensions') | list | length }}</li>
       <li>Media types with primary file extension(s): {{ media_types | selectattr('primary_file_extensions') | list | length }}</li>
       <li>Media types per intended usage:</li>

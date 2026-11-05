@@ -51,6 +51,10 @@ unittest:
 	python3 -m unittest discover -p '*.py' -s scripts -v
 
 check-sorted:
+	tail -n +2 parser/dates/manual.csv | LANG=C sort -cf -k 2 -t ,
+	tail -n +2 parser/dates/missing_last_updated.csv | LANG=C sort -cf -k 2 -t ,
+	tail -n +2 parser/dates/missing_registered.csv | LANG=C sort -cf -k 2 -t ,
+	tail -n +2 parser/dates/rfcs.csv | LANG=C sort -cn
 	tail -n +2 parser/file_extensions/manual.csv | LANG=C sort -cf -k 2 -t ,
 	grep -v '^#' parser/file_extensions/mapping.tsv | LANG=C sort -cf
 	tail -n +2 parser/file_extensions/missing.csv | LANG=C sort -cf -k 2 -t ,
