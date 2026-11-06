@@ -149,6 +149,7 @@ e57816d0fd3fbf6b00d46339a21903b4,application/vnd.syncml.dm+wbxml,2006-06-23,2006
 646be3da931790ee99967f3f625b7ded,application/vnd.vidsoft.vidconference,2001-03-16,2001-03-16,dates in US MM-DD-YY format
 dee97578ef45f6e20d1e6a9af1e97f67,application/vnd.vividence.scriptfile,2001-03-16,2001-03-16,dates in US MM-DD-YY format
 f836361a7f9b6d73b90c5f03ceb46c9d,application/vnd.wordperfect,2004-03-05,2004-03-05,missing bracket before last updated
+ef0ed03e1c632c5b4c651881a0ebe2f7,application/voucher-cms+json,,2026-11-05,last updated from last-modified.json
 24678a538a15ac3fe3c71b35d4eed0e8,application/voucher-jws+json,,2025-01-16,last updated from last-modified.json
 4d06e54a602dd67924e9c285ca6ff29e,application/watcherinfo+xml,2004-08-31,2004-08-31,media type was registered in RFC 3858 not in RFC 6208
 bc0283cae8925cc269823e7a8b2c52b3,application/yaml,,2024-02-16,last updated from last-modified.json

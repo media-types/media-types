@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Fri, 30 Oct 2026 00:51:31 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Thu, 05 Nov 2026 21:31:29 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Tue, 13 Oct 2026 20:06:57 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Wed, 21 Oct 2026 03:11:26 GMT",
@@ -1767,7 +1767,7 @@
   "https://www.iana.org/assignments/media-types/application/vnd.zul": "Tue, 13 Oct 2026 20:06:56 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.zzazz.deck+xml": "Tue, 13 Oct 2026 20:06:59 GMT",
   "https://www.iana.org/assignments/media-types/application/voicexml+xml": "Tue, 13 Oct 2026 20:06:58 GMT",
-  "https://www.iana.org/assignments/media-types/application/voucher-cms+json": "Tue, 13 Oct 2026 20:06:58 GMT",
+  "https://www.iana.org/assignments/media-types/application/voucher-cms+json": "Thu, 05 Nov 2026 21:31:32 GMT",
   "https://www.iana.org/assignments/media-types/application/voucher-jws+json": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/vp": "Tue, 13 Oct 2026 20:06:56 GMT",
   "https://www.iana.org/assignments/media-types/application/vp+cose": "Tue, 13 Oct 2026 20:06:58 GMT",
