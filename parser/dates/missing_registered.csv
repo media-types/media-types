@@ -20,7 +20,7 @@ cd406088e10ecd94b2a93fa35e049223,application/at+jwt
 243760e5fc02a7c2ba97318267d3fb56,application/cbor
 39fbc7c25c1c888e88a10ade1fd968fb,application/cbor-seq
 746f6c7ec5fd6fd8f26c46c9c62d5705,application/cid-edhoc+cbor-seq
-678dbf10a17897d4b93528ac49b095b4,application/client-authentication+jwt
+bb8d90f33c7780066618428a58474aa8,application/client-authentication+jwt
 af4c2c614200340feb18ed6a935c2af6,application/clue+xml
 bf279da0f7cd67963c7332d87a31dcac,application/clue_info+xml
 18d47b469c54e8e163e9ef342d38e904,application/cmw+cbor

@@ -17,7 +17,7 @@ f33efd5adcbbae9d7c1b983813ec0979,application/applefile,1993-03-14,,Sun Mar 14 22
 cd406088e10ecd94b2a93fa35e049223,application/at+jwt,,2021-10-22,last updated from last-modified.json
 16c739de28fae2ff1efad54642e62742,application/atom+xml,2005-12-05,2007-10-08,RFC 4287 published December 2005 and RFC 5023 published October 2007 and subtype last updated October 2007
 746f6c7ec5fd6fd8f26c46c9c62d5705,application/cid-edhoc+cbor-seq,,2024-03-22,last updated from last-modified.json
-678dbf10a17897d4b93528ac49b095b4,application/client-authentication+jwt,,2026-05-06,last updated from last-modified.json
+bb8d90f33c7780066618428a58474aa8,application/client-authentication+jwt,,2026-11-11,last updated from last-modified.json
 18d47b469c54e8e163e9ef342d38e904,application/cmw+cbor,,2026-07-20,last updated from last-modified.json
 4021ee7a8d0ede8196fce8657c4ced1e,application/cmw+cose,,2026-07-20,last updated from last-modified.json
 76a1ce32ad6b1d71ea61fb836526b75a,application/cmw+json,,2026-07-20,last updated from last-modified.json
