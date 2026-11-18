@@ -1,5 +1,5 @@
 {
-  "https://www.iana.org/assignments/media-types/application.csv": "Wed, 11 Nov 2026 07:56:30 GMT",
+  "https://www.iana.org/assignments/media-types/application.csv": "Tue, 17 Nov 2026 22:36:24 GMT",
   "https://www.iana.org/assignments/media-types/application/1d-interleaved-parityfec": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpdash-qoe-report+xml": "Tue, 13 Oct 2026 20:06:57 GMT",
   "https://www.iana.org/assignments/media-types/application/3gpp-ims+xml": "Wed, 21 Oct 2026 03:11:26 GMT",
@@ -401,6 +401,7 @@
   "https://www.iana.org/assignments/media-types/application/prs.implied-object+json-seq": "Tue, 13 Oct 2026 20:06:55 GMT",
   "https://www.iana.org/assignments/media-types/application/prs.implied-object+yaml": "Tue, 13 Oct 2026 20:06:57 GMT",
   "https://www.iana.org/assignments/media-types/application/prs.implied-structure": "Tue, 13 Oct 2026 20:06:58 GMT",
+  "https://www.iana.org/assignments/media-types/application/prs.ktb+zip": "Tue, 17 Nov 2026 22:36:25 GMT",
   "https://www.iana.org/assignments/media-types/application/prs.mayfile": "Tue, 13 Oct 2026 20:06:55 GMT",
   "https://www.iana.org/assignments/media-types/application/prs.nprend": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/prs.plucker": "Tue, 13 Oct 2026 20:06:58 GMT",
