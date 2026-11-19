@@ -797,6 +797,8 @@
   "https://www.iana.org/assignments/media-types/application/vnd.cncf.helm.chart.content.v1.tar+gzip": "Tue, 13 Oct 2026 20:06:56 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.cncf.helm.chart.provenance.v1.prov": "Tue, 13 Oct 2026 20:06:56 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.cncf.helm.config.v1+json": "Tue, 13 Oct 2026 20:06:57 GMT",
+  "https://www.iana.org/assignments/media-types/application/vnd.codynamicslab.latch": "Wed, 18 Nov 2026 20:51:23 GMT",
+  "https://www.iana.org/assignments/media-types/application/vnd.codynamicslab.latchdoc": "Wed, 18 Nov 2026 20:51:23 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.coffeescript": "Tue, 13 Oct 2026 20:06:58 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.collabio.xodocuments.document": "Tue, 13 Oct 2026 20:06:56 GMT",
   "https://www.iana.org/assignments/media-types/application/vnd.collabio.xodocuments.document-template": "Tue, 13 Oct 2026 20:06:59 GMT",

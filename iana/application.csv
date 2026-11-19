@@ -783,6 +783,8 @@ vnd.cmmf-encoder-configuration+json,application/vnd.cmmf-encoder-configuration+j
 vnd.cncf.helm.chart.content.v1.tar+gzip,application/vnd.cncf.helm.chart.content.v1.tar+gzip,[Andrew_Block]
 vnd.cncf.helm.chart.provenance.v1.prov,application/vnd.cncf.helm.chart.provenance.v1.prov,[Andrew_Block]
 vnd.cncf.helm.config.v1+json,application/vnd.cncf.helm.config.v1+json,[Andrew_Block]
+vnd.codynamicslab.latch,application/vnd.codynamicslab.latch,[Mike_Holford]
+vnd.codynamicslab.latchdoc,application/vnd.codynamicslab.latchdoc,[Mike_Holford]
 vnd.coffeescript,application/vnd.coffeescript,[Devyn_Collier_Johnson]
 vnd.collabio.xodocuments.document,application/vnd.collabio.xodocuments.document,[Alexey_Meandrov]
 vnd.collabio.xodocuments.document-template,application/vnd.collabio.xodocuments.document-template,[Alexey_Meandrov]
