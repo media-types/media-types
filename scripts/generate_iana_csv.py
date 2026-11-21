@@ -553,7 +553,9 @@ class DateParser:
         self.used_rfcs.add(rfc)
         return self.rfcs[rfc]
 
-    def parse(self, template: str, content: str) -> tuple[str, str]:
+    def parse(
+        self, template: str, content: str, rfc_references: list[int]
+    ) -> tuple[str, str]:
         """Extract intended usage from template text content."""
         if content.strip() == "No registration template available.":
             return ("", "")
@@ -578,6 +580,11 @@ class DateParser:
             last_updated = self._parse_last_updated(template, content)
         if registered and last_updated:
             return (registered, last_updated)
+
+        if not registered and rfc_references:
+            registered = self.get_rfc_date(rfc_references[0])
+        if not last_updated and rfc_references:
+            last_updated = self.get_rfc_date(rfc_references[-1])
 
         self._check_missing_dates(template, content, registered, last_updated)
         return (registered, last_updated)
@@ -1101,7 +1108,7 @@ class TestFileExtensionsParser(unittest.TestCase):
         media_types = MediaTypeList(iter_media_types(DEFAULT_DIRECTORY))
         self.assertEqual(
             media_types.add_additional_information(
-                lambda _a, _b: ("", ""),
+                lambda _a, _b, _c: ("", ""),
                 parser.parse,
                 lambda _a, _b: "",
                 DEFAULT_DIRECTORY,
@@ -1178,6 +1185,7 @@ class TestDateParser(unittest.TestCase):
         template: str,
         missing_checksum: str = "",
         rfcs: dict[int, str] | None = None,
+        rfc_references: list[int] | None = None,
     ) -> tuple[str, str]:
         path = DEFAULT_DIRECTORY / template
         content = path.read_text("utf-8")
@@ -1185,7 +1193,7 @@ class TestDateParser(unittest.TestCase):
         if missing_checksum:
             missing[template] = missing_checksum
         parser = DateParser({}, {}, missing, missing, rfcs or {})
-        return parser.parse(template, content)
+        return parser.parse(template, content, rfc_references or [])
 
     def test_combined_created_comma_last_updated(self) -> None:
         self.assertEqual(
@@ -1548,6 +1556,16 @@ class TestDateParser(unittest.TestCase):
 
     def test_separate_submitted_to_iana(self) -> None:
         self.assertEqual(self.parse_file("image/vnd.fpx"), ("1996-09-09", "2009-04-07"))
+
+    def test_two_rfcs(self) -> None:
+        self.assertEqual(
+            self.parse_file(
+                "audio/G7291",
+                rfcs={4749: "2006-10-25", 5459: "2009-01-23"},
+                rfc_references=[4749, 5459],
+            ),
+            ("2006-10-25", "2009-01-23"),
+        )
 
 
 class TestMain(unittest.TestCase):

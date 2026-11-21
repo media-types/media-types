@@ -19,6 +19,8 @@ import dataclasses
 import logging
 import os
 import pathlib
+import re
+import unittest
 from collections.abc import Callable, Container, Iterable, Iterator, Mapping
 from typing import Literal, Self, TypeVar, cast
 
@@ -112,6 +114,11 @@ class MediaType:
             "Reference",
         ]
 
+    def get_rfc_references(self) -> list[int]:
+        """Extracts RFC numbers from the reference string."""
+        matches = re.findall(r"\[RFC ([0-9]+)", self.reference)
+        return [int(m) for m in matches]
+
     def as_csv_dict(self) -> dict[str, str]:
         """Converts the instance into a CSV row dictionary."""
         return {
@@ -126,7 +133,7 @@ class MediaType:
 
     def add_additional_information(
         self,
-        date_parser: Callable[[str, str], tuple[str, str]],
+        date_parser: Callable[[str, str, list[int]], tuple[str, str]],
         file_extensions_parser: Callable[[str, str], list[str]],
         intended_usage_parser: Callable[[str, str], IntendedUsageType],
         directory: pathlib.Path,
@@ -147,7 +154,9 @@ class MediaType:
 
         failures = 0
         try:
-            self.registered, self.last_updated = date_parser(self.template, content)
+            self.registered, self.last_updated = date_parser(
+                self.template, content, self.get_rfc_references()
+            )
         except ParserFailure as error:
             logger = logging.getLogger(__name__)
             logger.error("%s", error)
@@ -196,7 +205,7 @@ class MediaTypeList(list[T]):
 
     def add_additional_information(
         self,
-        date_parser: Callable[[str, str], tuple[str, str]],
+        date_parser: Callable[[str, str, list[int]], tuple[str, str]],
         file_extensions_parser: Callable[[str, str], list[str]],
         intended_usage_parser: Callable[[str, str], IntendedUsageType],
         directory: pathlib.Path,
@@ -330,3 +339,34 @@ def get_top_level_media_type_names(directory: pathlib.Path) -> Iterator[str]:
         if name in SKIP_TOP_LEVEL_TYPES:
             continue
         yield name
+
+
+class TestMediaType(unittest.TestCase):
+    # pylint: disable=missing-function-docstring
+    """Test MediaType class."""
+
+    def test_get_rfc_references(self) -> None:
+        vp9 = MediaType.from_upstream("VP9", "video/VP9", "[RFC 9628]")
+        self.assertEqual(vp9.get_rfc_references(), [9628])
+
+    def test_get_rfc_references_none(self) -> None:
+        midi_clip = MediaType.from_upstream(
+            "midi-clip", "audio/midi-clip", "[MIDI_Association]; [Benjamin_Israel]"
+        )
+        self.assertEqual(midi_clip.get_rfc_references(), [])
+
+    def test_get_rfc_references_two_rfcs(self) -> None:
+        csv_type = MediaType.from_upstream("csv", "text/csv", "[RFC 4180]; [RFC 7111]")
+        self.assertEqual(csv_type.get_rfc_references(), [4180, 7111])
+
+    def test_get_rfc_references_with_comma(self) -> None:
+        cmw = MediaType.from_upstream(
+            "cmw+jws", "application/cmw+jws", "[RFC 9999, Section 4.2]"
+        )
+        self.assertEqual(cmw.get_rfc_references(), [9999])
+
+    def test_get_rfc_references_with_errata(self) -> None:
+        g719 = MediaType.from_upstream(
+            "G719", "audio/G719", "[RFC 5404]; [RFC Errata 3245]"
+        )
+        self.assertEqual(g719.get_rfc_references(), [5404])
