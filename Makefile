@@ -51,7 +51,8 @@ unittest:
 	python3 -m unittest discover -p '*.py' -s scripts -v
 
 check-sorted:
-	tail -n +2 parser/dates/manual.csv | LANG=C sort -cf -k 2 -t ,
+	tail -n +2 parser/dates/manual_last_updated.csv | LANG=C sort -cf -k 2 -t ,
+	tail -n +2 parser/dates/manual_registered.csv | LANG=C sort -cf -k 2 -t ,
 	tail -n +2 parser/dates/missing_last_updated.csv | LANG=C sort -cf -k 2 -t ,
 	tail -n +2 parser/dates/missing_registered.csv | LANG=C sort -cf -k 2 -t ,
 	tail -n +2 parser/dates/rfcs.csv | LANG=C sort -cn

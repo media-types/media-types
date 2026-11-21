@@ -44,7 +44,8 @@ from media_types import (
 )
 
 DEFAULT_DIRECTORY = pathlib.Path("iana")
-DEFAULT_DATES_MANUAL = pathlib.Path("parser/dates/manual.csv")
+DEFAULT_DATES_MANUAL_LAST_UPDATED = pathlib.Path("parser/dates/manual_last_updated.csv")
+DEFAULT_DATES_MANUAL_REGISTERED = pathlib.Path("parser/dates/manual_registered.csv")
 DEFAULT_DATES_MISSING_LAST_UPDATED = pathlib.Path(
     "parser/dates/missing_last_updated.csv"
 )
@@ -211,18 +212,12 @@ class ManualDates:
 
     checksum: str
     media_type: str
-    registered: str
-    last_updated: str
+    date: str
 
     @classmethod
-    def from_csv_dict(cls, items: dict[str, str]) -> Self:
+    def from_csv_dict(cls, items: dict[str, str], date_key: str) -> Self:
         """Creates an instance from a CSV row dictionary."""
-        return cls(
-            items["BLAKE2b Checksum"],
-            items["Media Type"],
-            items["Registered"],
-            items["Last Updated"],
-        )
+        return cls(items["BLAKE2b Checksum"], items["Media Type"], items[date_key])
 
 
 @dataclasses.dataclass
@@ -275,11 +270,11 @@ def load_file_extensions_manual(path: pathlib.Path) -> dict[str, ManualFileExten
     return mapping
 
 
-def load_dates_manual_csv(path: pathlib.Path) -> dict[str, ManualDates]:
+def load_dates_manual_csv(path: pathlib.Path, date_key: str) -> dict[str, ManualDates]:
     """Load dates manual CSV file."""
     mapping = {}
     for row in iter_csv_rows(path):
-        value = ManualDates.from_csv_dict(row)
+        value = ManualDates.from_csv_dict(row, date_key)
         mapping[value.media_type] = value
     return mapping
 
@@ -361,12 +356,16 @@ def _parse_email_date(date_str: str) -> str:
 class DateParser:
     """Parser for registration and last updated dates."""
 
-    manual: dict[str, ManualDates]
+    manual_last_updated: dict[str, ManualDates]
+    manual_registered: dict[str, ManualDates]
     missing_last_updated: dict[str, str]
     missing_registered: dict[str, str]
     rfcs: dict[int, str]
 
-    used_manual: set[str] = dataclasses.field(
+    used_manual_last_updated: set[str] = dataclasses.field(
+        default_factory=set, init=False, repr=False
+    )
+    used_manual_registered: set[str] = dataclasses.field(
         default_factory=set, init=False, repr=False
     )
     used_missing_last_updated: set[str] = dataclasses.field(
@@ -378,19 +377,31 @@ class DateParser:
     used_rfcs: set[int] = dataclasses.field(default_factory=set, init=False, repr=False)
 
     @classmethod
+    # pylint: disable-next=unknown-option-value  # support for pylint 3.0 in Ubuntu 24.04
+    # pylint: disable-next=too-many-arguments,too-many-positional-arguments
     def from_files(
         cls,
-        manual_file: pathlib.Path,
+        manual_last_updated_file: pathlib.Path,
+        manual_registered_file: pathlib.Path,
         missing_last_updated_file: pathlib.Path,
         missing_registered_file: pathlib.Path,
         rfcs_file: pathlib.Path,
     ) -> Self:
         """Construct an instance by loading rules from file paths."""
-        manual = load_dates_manual_csv(manual_file)
+        manual_last_updated = load_dates_manual_csv(
+            manual_last_updated_file, "Last Updated"
+        )
+        manual_registered = load_dates_manual_csv(manual_registered_file, "Registered")
         missing_last_updated = load_missing_csv(missing_last_updated_file)
         missing_registered = load_missing_csv(missing_registered_file)
         rfcs = load_dates_rfcs_csv(rfcs_file)
-        return cls(manual, missing_last_updated, missing_registered, rfcs)
+        return cls(
+            manual_last_updated,
+            manual_registered,
+            missing_last_updated,
+            missing_registered,
+            rfcs,
+        )
 
     def _check_missing_dates(
         self, template: str, content: str, registered: str, last_updated: str
@@ -518,6 +529,23 @@ class DateParser:
 
         return ""
 
+    def _get_manual_dates(self, template: str, content: str) -> tuple[str, str]:
+        registered = ""
+        last_updated = ""
+        if template in self.manual_registered:
+            verify_checksum(
+                template, content, self.manual_registered[template].checksum
+            )
+            self.used_manual_registered.add(template)
+            registered = self.manual_registered[template].date
+        if template in self.manual_last_updated:
+            verify_checksum(
+                template, content, self.manual_last_updated[template].checksum
+            )
+            self.used_manual_last_updated.add(template)
+            last_updated = self.manual_last_updated[template].date
+        return (registered, last_updated)
+
     def get_rfc_date(self, rfc: int) -> str:
         """Get the RFC publish date and mark it as used."""
         if rfc not in self.rfcs:
@@ -530,21 +558,24 @@ class DateParser:
         if content.strip() == "No registration template available.":
             return ("", "")
 
-        if template in self.manual:
-            verify_checksum(template, content, self.manual[template].checksum)
-            self.used_manual.add(template)
-            dates = self.manual[template]
-            self._check_missing_dates(
-                template, content, dates.registered, dates.last_updated
-            )
-            return (dates.registered, dates.last_updated)
-
-        registered, last_updated = self._parse_combined(template, content)
+        registered, last_updated = self._get_manual_dates(template, content)
         if registered and last_updated:
             return (registered, last_updated)
 
-        registered = self._parse_registered(template, content)
-        last_updated = self._parse_last_updated(template, content)
+        combined_registered, combined_last_updated = self._parse_combined(
+            template, content
+        )
+        if not registered:
+            registered = combined_registered
+        if not last_updated:
+            last_updated = combined_last_updated
+        if registered and last_updated:
+            return (registered, last_updated)
+
+        if not registered:
+            registered = self._parse_registered(template, content)
+        if not last_updated:
+            last_updated = self._parse_last_updated(template, content)
         if registered and last_updated:
             return (registered, last_updated)
 
@@ -556,7 +587,12 @@ class DateParser:
         logger = logging.getLogger(__script_name__)
         unused_count = 0
         for name, data, used in (
-            ("manual", self.manual, self.used_manual),
+            (
+                "manual last updated",
+                self.manual_last_updated,
+                self.used_manual_last_updated,
+            ),
+            ("manual registered", self.manual_registered, self.used_manual_registered),
             (
                 "missing last updated",
                 self.missing_last_updated,
@@ -763,11 +799,18 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
         help="Output CSV file (default: %(default)s)",
     )
     parser.add_argument(
-        "--dates-manual",
-        default=DEFAULT_DATES_MANUAL,
+        "--dates-manual-last-updated",
+        default=DEFAULT_DATES_MANUAL_LAST_UPDATED,
         type=pathlib.Path,
         help="Path to the CSV file containing mapping of media types"
-        " to registered and last updated dates. (default: %(default)s)",
+        " to last updated dates. (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--dates-manual-registered",
+        default=DEFAULT_DATES_MANUAL_REGISTERED,
+        type=pathlib.Path,
+        help="Path to the CSV file containing mapping of media types"
+        " to registered dates. (default: %(default)s)",
     )
     parser.add_argument(
         "--dates-missing-last-updated",
@@ -835,7 +878,8 @@ def main(argv: Sequence[str]) -> int:
     logging.basicConfig(level=logging.WARNING, format=LOG_FORMAT)
 
     date_parser = DateParser.from_files(
-        args.dates_manual,
+        args.dates_manual_last_updated,
+        args.dates_manual_registered,
         args.dates_missing_last_updated,
         args.dates_missing_registered,
         args.dates_rfcs,
@@ -1138,7 +1182,7 @@ class TestDateParser(unittest.TestCase):
         missing = {}
         if missing_checksum:
             missing[template] = missing_checksum
-        parser = DateParser({}, missing, missing, rfcs or {})
+        parser = DateParser({}, {}, missing, missing, rfcs or {})
         return parser.parse(template, content)
 
     def test_combined_created_comma_last_updated(self) -> None:
