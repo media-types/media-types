@@ -47,6 +47,11 @@ install: media-types.csv mime.types
 	install -m 644 mime.types $(DESTDIR)/etc/mime.types
 	install -m 644 media-types.csv $(DESTDIR)$(DATADIR)/media-types.csv
 
+coverage:
+	python3 -m coverage run -m unittest discover -p '*.py' -s scripts -v
+	python3 -m coverage report
+	python3 -m coverage html
+
 unittest:
 	python3 -m unittest discover -p '*.py' -s scripts -v
 
