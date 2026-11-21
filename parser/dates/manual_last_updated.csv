@@ -43,7 +43,7 @@ d202d7fa986a4635adbe40706703e1ed,application/dots+cbor,2021-09-03,date from last
 ce9cb292fa30ec0635463da941a58130,application/eat-ucs+cbor,2025-05-28,date from last-modified.json
 bff6987333e0f8cac7596db8e8f4ae0d,application/eat-ucs+json,2025-05-28,date from last-modified.json
 d3f89bd4ff60fa55616ff4ea0a08c141,application/edhoc+cbor-seq,2024-03-22,date from last-modified.json
-cc7540acdb1fbf552f1f40b699c216d0,application/EmergencyCallData.VEDS+xml,2022-05-25,date from last-modified.json
+cc7540acdb1fbf552f1f40b699c216d0,application/EmergencyCallData.VEDS+xml,2022-05-23,date from RFC Errata 6500
 d0cd97235cf7f12e76e6a77217bcfd0c,application/expect-ct-report+json,2022-06-09,date from last-modified.json
 c34d60887e693f082a623ea73a89a149,application/geofeed+csv,2025-10-14,date from last-modified.json
 9fbbd15da6971f0e9ab2783130fe160f,application/gnap-binding-jws,2024-10-09,date from last-modified.json
@@ -105,7 +105,7 @@ e7652ebebf01a89b6adf65bcbc92ec05,application/suit-report+cose,2026-02-17,date fr
 e13cc721bcd6ed5833bc13701847efbe,application/token-introspection+jwt,2025-02-04,date from last-modified.json
 7bbe655755e0fd8673dac4ca0ccb40e0,application/trickle-ice-sdpfrag,2023-07-21,date from last-modified.json
 e21b127ed17f44a27e69490a23ca56e7,application/tzif,2024-11-05,date from last-modified.json
-ed5fc90c12fb7fbc0a911061a314d448,application/tzif-leap,2026-08-24,date from last-modified.json
+ed5fc90c12fb7fbc0a911061a314d448,application/tzif-leap,2026-07-20,date from RFC Errata 9028
 14cbf43bf9b681d08077aea41a7f9242,application/uccs+cbor,2025-05-28,date from last-modified.json
 5d41186a1d6717be881357f6e02b6d09,application/ujcs+json,2025-05-28,date from last-modified.json
 434bc706f651688706ba0615f3717bde,application/v3c,2026-09-01,date from last-modified.json
@@ -147,6 +147,7 @@ bc0283cae8925cc269823e7a8b2c52b3,application/yaml,2024-02-16,date from last-modi
 dab497d0ca155d5a9b0dbf22679ec907,application/yang-data+cbor,2022-07-21,date from last-modified.json
 b211690d0c55a42893de2bec628d7f83,application/yang-sid+json,2024-08-02,date from last-modified.json
 b3c94ddd5a210a3e80564ae80b145a7b,audio/flac,2024-12-20,date from last-modified.json
+c8e1e76a016b73196b94a2270127c24e,audio/G719,2012-06-07,date from RFC Errata 3245
 4e78a1472ea6be012c3683c9557cc7b3,audio/matroska,2024-10-15,date from last-modified.json
 2753bc60bb74bbe7eda102b8a1becd6a,audio/mp4,2011-08-26,RFC 4337 published March 2006 and RFC 6381 published August 2011 and subtype last updated August 2011
 30d3ee7ded71a8f597c86a3e9e5eea4a,audio/prs.sid,2003-09-25,Last updated date in US MM-D-YYYY
