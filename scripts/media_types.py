@@ -95,9 +95,9 @@ class MediaType:
         )
 
     @classmethod
-    def from_upstream_iana_csv_dict(cls, items: dict[str, str]) -> Self:
-        """Creates an instance from a upstream IANA CSV row dictionary."""
-        return cls("", "", items["Name"], items["Template"], [], "", items["Reference"])
+    def from_upstream(cls, name: str, template: str, reference: str) -> Self:
+        """Creates an instance from a upstream IANA CSV row."""
+        return cls("", "", name, template, [], "", reference)
 
     @staticmethod
     def get_csv_dict_keys() -> list[str]:
