@@ -60,7 +60,7 @@ check-sorted:
 	tail -n +2 parser/dates/manual_registered.csv | LANG=C sort -cfu -k 2 -t ,
 	tail -n +2 parser/dates/missing_last_updated.csv | LANG=C sort -cfu -k 2 -t ,
 	tail -n +2 parser/dates/missing_registered.csv | LANG=C sort -cfu -k 2 -t ,
-	tail -n +2 parser/dates/rfcs.csv | LANG=C sort -cnu
+	tail -n +2 parser/dates/rfcs.csv | LANG=C sort -cVu
 	tail -n +2 parser/file_extensions/manual.csv | LANG=C sort -cfu -k 2 -t ,
 	grep -v '^#' parser/file_extensions/mapping.tsv | LANG=C sort -cfu
 	tail -n +2 parser/file_extensions/missing.csv | LANG=C sort -cfu -k 2 -t ,

@@ -279,11 +279,11 @@ def load_dates_manual_csv(path: pathlib.Path, date_key: str) -> dict[str, Manual
     return mapping
 
 
-def load_dates_rfcs_csv(path: pathlib.Path) -> dict[int, str]:
+def load_dates_rfcs_csv(path: pathlib.Path) -> dict[str, str]:
     """Load dates rfcs CSV file."""
     mapping = {}
     for row in iter_csv_rows(path):
-        mapping[int(row["RFC"])] = row["Date published"]
+        mapping[row["RFC"]] = row["Date published"]
     return mapping
 
 
@@ -360,7 +360,7 @@ class DateParser:
     manual_registered: dict[str, ManualDates]
     missing_last_updated: dict[str, str]
     missing_registered: dict[str, str]
-    rfcs: dict[int, str]
+    rfcs: dict[str, str]
 
     used_manual_last_updated: set[str] = dataclasses.field(
         default_factory=set, init=False, repr=False
@@ -374,7 +374,7 @@ class DateParser:
     used_missing_registered: set[str] = dataclasses.field(
         default_factory=set, init=False, repr=False
     )
-    used_rfcs: set[int] = dataclasses.field(default_factory=set, init=False, repr=False)
+    used_rfcs: set[str] = dataclasses.field(default_factory=set, init=False, repr=False)
 
     @classmethod
     # pylint: disable-next=unknown-option-value  # support for pylint 3.0 in Ubuntu 24.04
@@ -426,7 +426,7 @@ class DateParser:
                 f"Found no {' and '.join(missing)} date for '{template}'."
             )
 
-    def _check_rfc_date(self, rfc: int, date: str) -> str:
+    def _check_rfc_date(self, rfc: str, date: str) -> str:
         if len(date) >= 10:
             return date
         rfc_date = self.get_rfc_date(rfc)
@@ -444,15 +444,15 @@ class DateParser:
         if found:
             assert len(found) == 1, f"multiple dates for {template}: {found}"
             rfc_registred, last_updated = found[0]
-            registered = self.get_rfc_date(int(rfc_registred))
+            registered = self.get_rfc_date(rfc_registred)
             return (registered, last_updated)
 
         found = REGISTERED_RFC_UPDATED_RFC_RE.findall(content)
         if found:
             assert len(found) == 1, f"multiple dates for {template}: {found}"
             rfc_registred, rfc_updated = found[0]
-            registered = self.get_rfc_date(int(rfc_registred))
-            last_updated = self.get_rfc_date(int(rfc_updated))
+            registered = self.get_rfc_date(rfc_registred)
+            last_updated = self.get_rfc_date(rfc_updated)
             return (registered, last_updated)
 
         found = RFC_REGISTERED_UPDATED_RE.findall(content)
@@ -461,9 +461,9 @@ class DateParser:
             rfc_registered, registered_str, last_updated_str, rfc_updated = found[0]
             registered = _parse_date(registered_str)
             last_updated = _parse_date(last_updated_str)
-            registered = self._check_rfc_date(int(rfc_registered), registered)
+            registered = self._check_rfc_date(rfc_registered, registered)
             if rfc_updated:
-                last_updated = self._check_rfc_date(int(rfc_updated), last_updated)
+                last_updated = self._check_rfc_date(rfc_updated, last_updated)
             elif registered_str == last_updated_str:
                 last_updated = registered
             return (registered, last_updated)
@@ -492,14 +492,14 @@ class DateParser:
                 len(set(found)) == 1
             ), f"multiple registration dates for {template}: {found}"
             rfc_registered, registered = found[0]
-            return self._check_rfc_date(int(rfc_registered), _parse_date(registered))
+            return self._check_rfc_date(rfc_registered, _parse_date(registered))
 
         found = REGISTERED_RFC_RE.findall(content)
         if found:
             assert (
                 len(set(found)) == 1
             ), f"multiple registration dates for {template}: {found}"
-            return self.get_rfc_date(int(found[0]))
+            return self.get_rfc_date(found[0])
 
         for pattern in (EMAIL_DATE_RE, EMAIL_FROM_DATE_RE):
             found = pattern.findall(content)
@@ -546,7 +546,7 @@ class DateParser:
             last_updated = self.manual_last_updated[template].date
         return (registered, last_updated)
 
-    def get_rfc_date(self, rfc: int) -> str:
+    def get_rfc_date(self, rfc: str) -> str:
         """Get the RFC publish date and mark it as used."""
         if rfc not in self.rfcs:
             raise MissingRFCDate(f"Missing publish date for RFC {rfc}.")
@@ -554,7 +554,7 @@ class DateParser:
         return self.rfcs[rfc]
 
     def parse(
-        self, template: str, content: str, rfc_references: list[int]
+        self, template: str, content: str, rfc_references: list[str]
     ) -> tuple[str, str]:
         """Extract intended usage from template text content."""
         registered, last_updated = self._get_manual_dates(template, content)
@@ -1181,8 +1181,8 @@ class TestDateParser(unittest.TestCase):
         self,
         template: str,
         missing_checksum: str = "",
-        rfcs: dict[int, str] | None = None,
-        rfc_references: list[int] | None = None,
+        rfcs: dict[str, str] | None = None,
+        rfc_references: list[str] | None = None,
     ) -> tuple[str, str]:
         path = DEFAULT_DIRECTORY / template
         content = path.read_text("utf-8")
@@ -1200,7 +1200,7 @@ class TestDateParser(unittest.TestCase):
     def test_combined_defined_in_rfc_comma_deprecated_by_rfc(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "text/directory", rfcs={2425: "1998-09", 6350: "2011-08-31"}
+                "text/directory", rfcs={"2425": "1998-09", "6350": "2011-08-31"}
             ),
             ("1998-09", "2011-08-31"),
         )
@@ -1212,28 +1212,28 @@ class TestDateParser(unittest.TestCase):
 
     def test_combined_originally_registered_by_rfc_comma_last_updated(self) -> None:
         self.assertEqual(
-            self.parse_file("multipart/byteranges", rfcs={2616: "1999-06"}),
+            self.parse_file("multipart/byteranges", rfcs={"2616": "1999-06"}),
             ("1999-06", "2021-10-01"),
         )
 
     def test_combined_published_in_rfc_comma_last_updated_via_rfc(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "application/xml", rfcs={3023: "2001-01", 7303: "2014-07-07"}
+                "application/xml", rfcs={"3023": "2001-01", "7303": "2014-07-07"}
             ),
             ("2001-01", "2014-04-17"),
         )
 
     def test_combined_registered_by_rfc_comma_last_updated(self) -> None:
         self.assertEqual(
-            self.parse_file("text/csv", rfcs={4180: "2005-10-04"}),
+            self.parse_file("text/csv", rfcs={"4180": "2005-10-04"}),
             ("2005-10-04", "2014-01-17"),
         )
 
     def test_combined_registered_by_rfc_comma_optional_parameters_updated(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "audio/VMR-WB", rfcs={4348: "2006-01-11", 4424: "2006-02-28"}
+                "audio/VMR-WB", rfcs={"4348": "2006-01-11", "4424": "2006-02-28"}
             ),
             ("2006-01-11", "2006-02-28"),
         )
@@ -1241,27 +1241,31 @@ class TestDateParser(unittest.TestCase):
     def test_combined_registered_by_rfc_comma_optional_parameters_added(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "video/jpeg2000", rfcs={5371: "2008-10-21", 5372: "2008-10-21"}
+                "video/jpeg2000", rfcs={"5371": "2008-10-21", "5372": "2008-10-21"}
             ),
             ("2008-10-21", "2008-10-21"),
         )
 
     def test_combined_registered_by_rfc_in_brackets_comma_last_updated(self) -> None:
         self.assertEqual(
-            self.parse_file("application/merge-patch+json", rfcs={7396: "2014-10-31"}),
+            self.parse_file(
+                "application/merge-patch+json", rfcs={"7396": "2014-10-31"}
+            ),
             ("2014-10-31", "2014-11-03"),
         )
 
     def test_combined_registered_by_rfc_comma_updated_by_rfc(self) -> None:
         self.assertEqual(
-            self.parse_file("image/tiff", rfcs={2302: "1998-03", 3302: "2002-09-27"}),
+            self.parse_file(
+                "image/tiff", rfcs={"2302": "1998-03", "3302": "2002-09-27"}
+            ),
             ("1998-03", "2002-09-27"),
         )
 
     def test_combined_registered_by_rfc_comma_updated_by_rfc_plus_date(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "audio/MP4A-LATM", rfcs={3016: "2000-11", 6416: "2011-10-18"}
+                "audio/MP4A-LATM", rfcs={"3016": "2000-11", "6416": "2011-10-18"}
             ),
             ("2000-11", "2011-10-18"),
         )
@@ -1294,7 +1298,7 @@ class TestDateParser(unittest.TestCase):
     def test_combined_registered_in_rfc_comma_updated_by_rfc(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "image/tiff-fx", rfcs={3250: "2002-09-25", 3950: "2005-02-09"}
+                "image/tiff-fx", rfcs={"3250": "2002-09-25", "3950": "2005-02-09"}
             ),
             ("2002-09-25", "2005-02-09"),
         )
@@ -1302,7 +1306,7 @@ class TestDateParser(unittest.TestCase):
     def test_combined_registered_in_rfc_comma_updated_in_rfc(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "audio/mpa-robust", rfcs={3119: "2001-06", 5219: "2008-02-14"}
+                "audio/mpa-robust", rfcs={"3119": "2001-06", "5219": "2008-02-14"}
             ),
             ("2001-06", "2008-02-14"),
         )
@@ -1335,38 +1339,38 @@ class TestDateParser(unittest.TestCase):
 
     def test_combined_rfc_published_subtype_last_updated(self) -> None:
         self.assertEqual(
-            self.parse_file("audio/ogg", rfcs={5334: "2008-09-03"}),
+            self.parse_file("audio/ogg", rfcs={"5334": "2008-09-03"}),
             ("2008-09-03", "2016-03-07"),
         )
 
     def test_combined_rfc_published_subtype_last_updated_per_rfc(self) -> None:
         self.assertEqual(
-            self.parse_file("audio/L8", rfcs={3555: "2003-07-29", 4856: "2007-03"}),
+            self.parse_file("audio/L8", rfcs={"3555": "2003-07-29", "4856": "2007-03"}),
             ("2003-07-29", "2007-03"),
         )
 
     def test_combined_rfc_published_subtype_last_updated_old(self) -> None:
         self.assertEqual(
-            self.parse_file("video/rtx", rfcs={4588: "2006-07-25"}),
+            self.parse_file("video/rtx", rfcs={"4588": "2006-07-25"}),
             ("2006-07-25", "2006-07-25"),
         )
 
     def test_combined_rfc_published_subtype_last_updated_old_with_text(self) -> None:
         self.assertEqual(
-            self.parse_file("audio/3gpp", rfcs={3839: "2004-07-13"}),
+            self.parse_file("audio/3gpp", rfcs={"3839": "2004-07-13"}),
             ("2004-07-13", "2004-07-13"),
         )
 
     def test_combined_rfc_published_subtype_last_updated_old_with_day(self) -> None:
         self.assertEqual(
-            self.parse_file("application/javascript", rfcs={4329: "2006-04-26"}),
+            self.parse_file("application/javascript", rfcs={"4329": "2006-04-26"}),
             ("2006-04-26", "2022-05-16"),
         )
 
     def test_combined_rfc_published_updated(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "audio/EVRC", rfcs={3558: "2003-07-29", 4788: "2007-01-10"}
+                "audio/EVRC", rfcs={"3558": "2003-07-29", "4788": "2007-01-10"}
             ),
             ("2003-07-29", "2007-01-10"),
         )
@@ -1476,7 +1480,7 @@ class TestDateParser(unittest.TestCase):
     def test_separate_per_rfc(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "text/troff", "2b9592096d599f28d710b45abbe75914", {4263: "2006-01-18"}
+                "text/troff", "2b9592096d599f28d710b45abbe75914", {"4263": "2006-01-18"}
             ),
             ("2006-01-18", ""),
         )
@@ -1484,7 +1488,9 @@ class TestDateParser(unittest.TestCase):
     def test_separate_per_rfc_number(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "video/BMPEG", "86efcfb62f310455249dde88e8d2c6d8", {3555: "2003-07-29"}
+                "video/BMPEG",
+                "86efcfb62f310455249dde88e8d2c6d8",
+                {"3555": "2003-07-29"},
             ),
             ("2003-07-29", ""),
         )
@@ -1492,7 +1498,7 @@ class TestDateParser(unittest.TestCase):
     def test_separate_per_rfc_with_space(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "video/H263", "5efde3497af77f73528bf23a6588514a", {3555: "2003-07-29"}
+                "video/H263", "5efde3497af77f73528bf23a6588514a", {"3555": "2003-07-29"}
             ),
             ("2003-07-29", ""),
         )
@@ -1502,7 +1508,7 @@ class TestDateParser(unittest.TestCase):
             self.parse_file(
                 "multipart/report",
                 "6b3953e176549a1d4d01a7da70aa81c9",
-                {6522: "2012-01-17"},
+                {"6522": "2012-01-17"},
             ),
             ("2012-01-17", ""),
         )
@@ -1516,7 +1522,7 @@ class TestDateParser(unittest.TestCase):
     def test_separate_registered_in_rfc(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "audio/RED", "7111e393716de0818757a9cd1d1737a1", {3555: "2003-07-29"}
+                "audio/RED", "7111e393716de0818757a9cd1d1737a1", {"3555": "2003-07-29"}
             ),
             ("2003-07-29", ""),
         )
@@ -1524,7 +1530,7 @@ class TestDateParser(unittest.TestCase):
     def test_separate_registered_via_rfc(self) -> None:
         self.assertEqual(
             self.parse_file(
-                "audio/opus", "27f87d963a3ba3880460bff97f2ea6ec", {7587: "2015-06-30"}
+                "audio/opus", "27f87d963a3ba3880460bff97f2ea6ec", {"7587": "2015-06-30"}
             ),
             ("2015-06-30", ""),
         )
@@ -1540,7 +1546,7 @@ class TestDateParser(unittest.TestCase):
             self.parse_file(
                 "audio/MPA",
                 "99eb3f463ca236d6d98a543739ea82bc",
-                rfcs={3555: "2003-07-29"},
+                rfcs={"3555": "2003-07-29"},
             ),
             ("2003-07-29", ""),
         )
@@ -1558,8 +1564,8 @@ class TestDateParser(unittest.TestCase):
         self.assertEqual(
             self.parse_file(
                 "audio/G7291",
-                rfcs={4749: "2006-10-25", 5459: "2009-01-23"},
-                rfc_references=[4749, 5459],
+                rfcs={"4749": "2006-10-25", "5459": "2009-01-23"},
+                rfc_references=["4749", "5459"],
             ),
             ("2006-10-25", "2009-01-23"),
         )
