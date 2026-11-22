@@ -35,6 +35,7 @@ RFC,Date published,Reference
 3080,2001-03,https://datatracker.ietf.org/doc/rfc3080/history/
 3119,2001-06,https://datatracker.ietf.org/doc/rfc3119/history/
 3156,2001-08,https://datatracker.ietf.org/doc/rfc3156/history/
+3161,2001-08,https://datatracker.ietf.org/doc/rfc3161/history/
 3189,2002-01,https://datatracker.ietf.org/doc/rfc3189/history/
 3190,2002-01,https://datatracker.ietf.org/doc/rfc3190/history/
 3204,2001-12,https://datatracker.ietf.org/doc/rfc3204/history/
@@ -77,6 +78,7 @@ RFC,Date published,Reference
 4047,2005-04-20,https://datatracker.ietf.org/doc/rfc4047/history/
 4060,2005-05-06,https://datatracker.ietf.org/doc/rfc4060/history/
 4102,2005-06-06,https://datatracker.ietf.org/doc/rfc4102/history/
+4103,2005-06-06,https://datatracker.ietf.org/doc/rfc4103/history/
 4155,2005-09-13,https://datatracker.ietf.org/doc/rfc4155/history/
 4175,2005-09-27,https://datatracker.ietf.org/doc/rfc4175/history/
 4180,2005-10-04,https://datatracker.ietf.org/doc/rfc4180/history/
@@ -85,6 +87,7 @@ RFC,Date published,Reference
 4235,2005-11-30,https://datatracker.ietf.org/doc/rfc4235/history/
 4263,2006-01-18,https://datatracker.ietf.org/doc/rfc4263/history/
 4267,2005-11-30,https://datatracker.ietf.org/doc/rfc4267/history/
+4287,2005-12-05,https://datatracker.ietf.org/doc/rfc4287/history/
 4298,2005-12-21,https://datatracker.ietf.org/doc/rfc4298/history/
 4329,2006-04-26,https://datatracker.ietf.org/doc/rfc4329/history/
 4337,2006-03-16,https://datatracker.ietf.org/doc/rfc4337/history/
@@ -195,6 +198,8 @@ RFC,Date published,Reference
 6503,2012-03-25,https://datatracker.ietf.org/doc/rfc6503/history/
 6505,2012-03-25,https://datatracker.ietf.org/doc/rfc6505/history/
 6522,2012-01-17,https://datatracker.ietf.org/doc/rfc6522/history/
+6532,2012-02-17,https://datatracker.ietf.org/doc/rfc6532/history/
+6533,2012-02-17,https://datatracker.ietf.org/doc/rfc6533/history/
 6597,2012-04-13,https://datatracker.ietf.org/doc/rfc6597/history/
 6682,2012-08-15,https://datatracker.ietf.org/doc/rfc6682/history/
 6690,2012-08-07,https://datatracker.ietf.org/doc/rfc6690/history/
@@ -209,6 +214,7 @@ RFC,Date published,Reference
 7515,2015-05-19,https://datatracker.ietf.org/doc/rfc7515/history/
 7517,2015-05-19,https://datatracker.ietf.org/doc/rfc7517/history/
 7519,2015-05-19,https://datatracker.ietf.org/doc/rfc7519/history/
+7578,2015-07-14,https://datatracker.ietf.org/doc/rfc7578/history/
 7587,2015-06-30,https://datatracker.ietf.org/doc/rfc7587/history/
 7655,2015-11-02,https://datatracker.ietf.org/doc/rfc7655/history/
 7736,2015-12-23,https://datatracker.ietf.org/doc/rfc7736/history/
@@ -317,6 +323,7 @@ RFC,Date published,Reference
 9770,2025-06-13,https://datatracker.ietf.org/doc/rfc9770/history/
 9781,2025-05-27,https://datatracker.ietf.org/doc/rfc9781/history/
 9782,2025-05-27,https://datatracker.ietf.org/doc/rfc9782/history/
+9806,2025-06-27,https://datatracker.ietf.org/doc/rfc9806/history/
 9820,2025-09-12,https://datatracker.ietf.org/doc/rfc9820/history/
 9828,2025-08-29,https://datatracker.ietf.org/doc/rfc9828/history/
 9850,2026-07-15,https://datatracker.ietf.org/doc/rfc9850/history/
@@ -324,6 +331,7 @@ RFC,Date published,Reference
 9880,2026-01-30,https://datatracker.ietf.org/doc/rfc9880/history/
 9901,2025-11-19,https://datatracker.ietf.org/doc/rfc9901/history/
 9943,2026-06-30,https://datatracker.ietf.org/doc/rfc9943/history/
+9993,2026-05-30,https://datatracker.ietf.org/doc/rfc9993/history/
 9996,2026-07-30,https://datatracker.ietf.org/doc/rfc9996/history/
 9999,2026-07-14,https://datatracker.ietf.org/doc/rfc9999/history/
 10013,2026-07-30,https://datatracker.ietf.org/doc/rfc10013/history/

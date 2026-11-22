@@ -1,6 +1,5 @@
 BLAKE2b Checksum,Media Type,Registered,Note
 f33efd5adcbbae9d7c1b983813ec0979,application/applefile,1993-03-14,Sun Mar 14 22:07 1993
-16c739de28fae2ff1efad54642e62742,application/atom+xml,2005-12-05,RFC 4287 published December 2005 and RFC 5023 published October 2007 and subtype last updated October 2007
 1d30f50b30712217f49ae75daed5bb1e,application/cose-c509+cbor,2026-08-11,date from git commit
 4c56744da15e864014937e6d1c7fef07,application/cose-c509-cert+cbor,2026-08-11,date from git commit
 a1a6c229cfeb9f8d9c73c94faf603dff,application/cose-c509-crtemplate+cbor,2026-08-11,date from git commit
@@ -9,14 +8,9 @@ be9017b41d6cea38e97c1c324df8aecf,application/cose-c509-pem+cbor,2026-08-11,date 
 03948a14d23a5f0ea7e3c86183e84fde,application/cose-c509-privkey+cbor,2026-08-11,date from git commit
 f07aec921d69119b06812dc2f22aa131,application/cose-certhash+cbor,2026-08-11,date from git commit
 f33efd5adcbbae9d7c1b983813ec0979,application/mac-binhex40,1993-03-14,Sun Mar 14 22:07 1993
-3a78147b8d4360b386f5fedca1e09012,application/mp4,2006-03-16,RFC 4337 published March 2006 and RFC 6381 published August 2011 and subtype last updated August 2011
 ff8691abae4ad6f0df125783e7b7b134,application/nasdata,2006-10-25,RFC 4707 was published in October 2006
-bed40960f785d87886fd3cc3870be9e6,application/octet-stream,1996-11,RFC 2045 and 2046 published November 1996 and subtype last updated April November 1996
-a803fcf828b14772c36278b5be7d771c,application/postscript,1996-11,RFC 2045 and 2046 published November 1996 and subtype last updated April November 1996
 b5912d48a6ef1df292f297fcaba4b431,application/prs.plucker,2002-02-24,date in YYYY-DD-MM format
 27fe5f8c297c9049826c21a3db3accb7,application/reginfo+xml,2004-03-31,RFC 3680 was published in March 2004
-710bb803ab58fd9a59e6439303d7ffb1,application/timestamp-query,2001-08,RFC 3161 published August 2001 and subtype last updated April August 2001
-710bb803ab58fd9a59e6439303d7ffb1,application/timestamp-reply,2001-08,RFC 3161 published August 2001 and subtype last updated April August 2001
 c0315bebd6b78d9025782a93d5c38f4d,application/vnd.acucorp,2002-02-24,date in YYYY-DD-MM format
 7788b750e80802595d2a8c97391e54da,application/vnd.apple.installer+xml,2005-11-30,spelling mistake in created
 1fd83475da4c39cb2016e2b9e96301a1,application/vnd.ibm.afplinedata,2001-03-16,registration date in US MM-DD-YY format
@@ -33,7 +27,6 @@ e57816d0fd3fbf6b00d46339a21903b4,application/vnd.syncml.dm+wbxml,2006-06-23,date
 dee97578ef45f6e20d1e6a9af1e97f67,application/vnd.vividence.scriptfile,2001-03-16,date in US MM-DD-YY format
 4d06e54a602dd67924e9c285ca6ff29e,application/watcherinfo+xml,2004-08-31,media type was registered in RFC 3858 not in RFC 6208
 c8e1e76a016b73196b94a2270127c24e,audio/G719,2009-01-23,media type was registered in RFC 5404 not in RFC 5405
-2753bc60bb74bbe7eda102b8a1becd6a,audio/mp4,2006-03-16,RFC 4337 published March 2006 and RFC 6381 published August 2011 and subtype last updated August 2011
 b339adfd2a40d52b03dfbaab595b44a8,audio/vnd.dolby.pl2,2009-03-13,spelling mistake in created
 013a808c329e909e56f0718b176e59c2,audio/vnd.nuera.ecelp9600,2001-01-12,created date in US MM/DD/YY format
 b365ddd9ae2206d6e58eb8bc94a332b3,image/vnd.dwg,1996-03-20,three emails with dates
@@ -49,6 +42,5 @@ ac9d8fa62a2235c8386377d04ebdda2a,multipart/appledouble,1993-03-14,Sun Mar 14 22:
 03db9ac581a2d5b853cf6755cc51469f,multipart/form-data,1998-08,RFC2388 version replaced by RFC7578
 2d6a172aa7e068e84374e0ab3e0539c4,multipart/header-set,1993-10-05,5 October 1993
 1ded667586c75b195b5ba1ac92ae5dfb,text/t140,2000-05,per RFC4103 which updates RFC2793 registration
-87ba8bc256fe6eb7a0dbedeb073272a1,video/mp4,2006-03-16,RFC 4337 published March 2006 and RFC 6381 published August 2011 and subtype last updated August 2011
 071f7444c9157efadc152b9358fc48ea,video/vnd.nokia.interleaved-multimedia,2001-03-16,date in US MM-DD-YY format
 d8cb4c6a4ccc7f42c7382cae50244357,video/vnd.vivo,1996-01-29,missing day of week in date: 29 Jan 96 14:52:11 EDT
