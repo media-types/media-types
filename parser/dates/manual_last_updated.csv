@@ -1,6 +1,7 @@
 BLAKE2b Checksum,Media Type,Last Updated,Note
 f8c619d6e6d2301854d548724e86ecc6,application/activemessage,2021-08-28,date from last-modified.json
 542d3e81676b67a27bb9b8ca47d47003,application/andrew-inset,2021-08-28,date from last-modified.json
+52c61256d7451ea7540e438327df145c,application/coap-group+json,2014-10-30,move date to RFC 7390 publish date
 1d30f50b30712217f49ae75daed5bb1e,application/cose-c509+cbor,2026-08-11,date from last-modified.json
 4c56744da15e864014937e6d1c7fef07,application/cose-c509-cert+cbor,2026-08-11,date from last-modified.json
 a1a6c229cfeb9f8d9c73c94faf603dff,application/cose-c509-crtemplate+cbor,2026-08-11,date from last-modified.json
