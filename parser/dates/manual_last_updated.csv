@@ -60,7 +60,7 @@ c8e1e76a016b73196b94a2270127c24e,audio/G719,2012-06-07,date from RFC Errata 3245
 c2a628337159b30c13125ecbcc8e560b,audio/vnd.dlna.adts,2005-12-09,day taken from registration date
 b3453a706a87348d3326b31e21667301,audio/vnd.qcelp,2020-10-12,Last updated 2003-10-31 but Intended Usage: OBSOLETE added 2020-10-12
 dd2517e56fbf6ea122043d62c0a3af96,image/vnd.adobe.photoshop,2005-12-09,day taken from registration date
-dc76f4a3ed142cb0d23b533511cc02d8,message/s-http,2021-12-23,date from last-modified.json
+dc76f4a3ed142cb0d23b533511cc02d8,message/s-http,2021-12-06,date when RFC 2660 was changed to historic
 a4df16f7baa7f0188e8359fdba50e988,model/u3d,2022-02-26,date from last-modified.json
 10fd32107f0843776699265f5a20f94b,text/css,2026-07-10,date from last-modified.json
 70bcc67869d346fc9ebd452e040a81f3,text/vnd.curl,2002-12-18,Comments: 2002-12-18
