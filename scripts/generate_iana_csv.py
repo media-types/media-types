@@ -557,9 +557,6 @@ class DateParser:
         self, template: str, content: str, rfc_references: list[int]
     ) -> tuple[str, str]:
         """Extract intended usage from template text content."""
-        if content.strip() == "No registration template available.":
-            return ("", "")
-
         registered, last_updated = self._get_manual_dates(template, content)
         if registered and last_updated:
             return (registered, last_updated)
