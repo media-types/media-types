@@ -10,6 +10,7 @@ be9017b41d6cea38e97c1c324df8aecf,application/cose-c509-pem+cbor,2026-08-11,date 
 03948a14d23a5f0ea7e3c86183e84fde,application/cose-c509-privkey+cbor,2026-08-11,date from last-modified.json
 f07aec921d69119b06812dc2f22aa131,application/cose-certhash+cbor,2026-08-11,date from last-modified.json
 cc7540acdb1fbf552f1f40b699c216d0,application/EmergencyCallData.VEDS+xml,2022-05-23,date from RFC Errata 6500
+41590c2e2bff9cd8291d5a2f48fa30cd,application/fastsoap,2005-10-31,day taken from registration date
 ff8691abae4ad6f0df125783e7b7b134,application/nasdata,2006-10-25,RFC 4707 was published in October 2006
 4752ab1578110858cac2426773454229,application/prs.cyn,2021-09-04,date from last-modified.json
 683fd0afe9f8cde6f4fc9e28cb24d960,application/prs.mayfile,2024-08-14,date from last-modified.json
@@ -18,6 +19,7 @@ b5912d48a6ef1df292f297fcaba4b431,application/prs.plucker,2021-09-04,date from la
 5985cd381e52bd74ba47f4e18297451e,application/remote-printing,2022-12-15,date from last-modified.json
 252874b1951f1d004bb9471046d170f7,application/rpki-ccr+gzip,2026-07-11,date from last-modified.json
 16032e55f4814af7ee89ed5494c8e7ff,application/rpki-ccr,2026-07-11,date from last-modified.json
+7b609a06ce0ae5aa1ef2b17539a477ee,application/soap+fastinfoset,2005-10-31,day taken from registration date
 a4c2118a9c4c1a5a00f1824a8bd5af2a,application/statuslist+cwt,2026-06-29,date from last-modified.json
 5a834848d7134f6cf69530eee9ef2a6d,application/statuslist+jwt,2026-06-29,date from last-modified.json
 052b6f3d40c549eeb674628659f676a7,application/suit-envelope+cose,2025-05-29,date from last-modified.json
@@ -27,8 +29,10 @@ ed5fc90c12fb7fbc0a911061a314d448,application/tzif-leap,2026-07-20,date from RFC 
 c0315bebd6b78d9025782a93d5c38f4d,application/vnd.acucorp,2021-09-21,date from last-modified.json
 fef45815bb80b98b82ef89ea1b35d74c,application/vnd.aether.imp,2021-10-01,date from last-modified.json
 2b78e505dbb815630cc401b9c36830ad,application/vnd.amiga.ami,2021-10-01,date from last-modified.json
+7788b750e80802595d2a8c97391e54da,application/vnd.apple.installer+xml,2005-11-30,day taken from registration date
 e0609f15e40f18b3a439eaa9cf2a3b40,application/vnd.apple.mpegurl,2026-05-15,date from last-modified.json
 885f05a90d011701f8bcaa358a9856d9,application/vnd.apple.steering-list,2026-05-20,date from last-modified.json
+68b9cfbc99b474926f15e86eded43b63,application/vnd.autopackage,2005-11-30,day taken from registration date
 b43c8c75f296f0c19f5fac84cf216559,application/vnd.belightsoft.lhzl+zip,2022-06-28,date from last-modified.json
 39adbb628166bfbe330c574aa8722095,application/vnd.blueice.multipass,2021-10-09,date from last-modified.json
 afc67b66edeccaa7d8c85b9ab578dde5,application/vnd.bmi,2021-10-09,date from last-modified.json
@@ -45,24 +49,37 @@ ac01158d8d55c1b8bc7c3e34eb6dad4a,application/vnd.drive+json,2022-01-08,date from
 b17f03af24ebde201c1530f8e15802db,application/vnd.ericsson.quickcall,2022-06-17,date from last-modified.json
 6eb06b51623c7d1581293a29c611a32b,application/vnd.eu.kasparian.car+json,2023-12-06,date from last-modified.json
 ea6083ce560d3c4e5707d33babd99fd0,application/vnd.eudora.data,2023-12-06,date from last-modified.json
+1b13e5a71e862a33f30100c0ff587194,application/vnd.fluxtime.clip,2005-12-09,day taken from registration date
 f9ce01db9197d928dff837be95e31c2e,application/vnd.freelog.comic,2023-06-26,date from last-modified.json
 267e4f9533626796bda1425a7ba6910b,application/vnd.informedcontrol.rms+xml,2006-10-24,date in DD-MM-YYYY format
 422d9d6ee67b334ab66e174640cfd10f,application/vnd.informix-visionary,2002-02-05,Note posted: 05 February 2002
+69072c6b809c975ce7694f40068c217f,application/vnd.kahootz,2005-11-30,day taken from registration date
 dd2a24a26401fc28909b89e85924b062,application/vnd.Mobius.MBK,2001-03-16,date in US MM-DD-YY format
 70fbc108619229f1347149ab6932c089,application/vnd.Mobius.MQY,2001-03-16,date in US MM-DD-YY format
+2cb6cb1a4e31211cf6a4f567dcca8b28,application/vnd.ms-cab-compressed,2005-12-09,day taken from registration date
+385a75e678ff129bd5c357a4d40bc53b,application/vnd.ms-fontobject,2005-12-09,day taken from registration date
+faad515c61a9cd95f42d79fce106a47f,application/vnd.ms-ims,2005-12-09,day taken from registration date
 838cadc513e0b59a2aa6da852ba5a4a5,application/vnd.oma.bcast.associated-procedure-parameter+xml,2015-03-05,last updated 2007-06-29 and last updated 2015-03-05
+f076d4a523073b866899e84d5f34385e,application/vnd.osgi.dp,2005-11-30,day taken from registration date
+9ce11f88f87df3f6f892f70cdf356f81,application/vnd.piaccess.application-licence,2005-12-09,day taken from registration date
+863120e7678ddfacd0d205af297c89bd,application/vnd.preminet,2005-11-30,day taken from registration date
+bf35dbd27cc6018d30218e6676747c4e,application/vnd.ruckus.download,2005-11-30,day taken from registration date
 e57816d0fd3fbf6b00d46339a21903b4,application/vnd.syncml.dm+wbxml,2006-06-23,date not in brackets
 646be3da931790ee99967f3f625b7ded,application/vnd.vidsoft.vidconference,2001-03-16,date in US MM-DD-YY format
 dee97578ef45f6e20d1e6a9af1e97f67,application/vnd.vividence.scriptfile,2001-03-16,date in US MM-DD-YY format
 f836361a7f9b6d73b90c5f03ceb46c9d,application/vnd.wordperfect,2004-03-05,missing bracket before last updated
+1fafc3479c6a7db73296a6c91ab27612,application/vnd.zzazz.deck+xml,2005-12-09,day taken from registration date
 ef0ed03e1c632c5b4c651881a0ebe2f7,application/voucher-cms+json,2026-11-05,date from last-modified.json
 24678a538a15ac3fe3c71b35d4eed0e8,application/voucher-jws+json,2025-01-16,date from last-modified.json
 4d06e54a602dd67924e9c285ca6ff29e,application/watcherinfo+xml,2004-08-31,media type was registered in RFC 3858 not in RFC 6208
 c8e1e76a016b73196b94a2270127c24e,audio/G719,2012-06-07,date from RFC Errata 3245
 30d3ee7ded71a8f597c86a3e9e5eea4a,audio/prs.sid,2003-09-25,Last updated date in US MM-D-YYYY
 b73c1ceeaaa9525c468d569fcf623e92,audio/scip,2024-07-25,date from last-modified.json
+5568ff0b7d26dd5033ed52d790e10f4b,audio/vnd.cmles.radio-events,2005-11-30,day taken from registration date
+c2a628337159b30c13125ecbcc8e560b,audio/vnd.dlna.adts,2005-12-09,day taken from registration date
 b3453a706a87348d3326b31e21667301,audio/vnd.qcelp,2020-10-12,Last updated 2003-10-31 but Intended Usage: OBSOLETE added 2020-10-12
 65a86c44bfdaa95f9adf8a269c9d49aa,haptics/hjif,2025-03-18,date from last-modified.json
+dd2517e56fbf6ea122043d62c0a3af96,image/vnd.adobe.photoshop,2005-12-09,day taken from registration date
 bfdf758d66c2fdce0b97cd50e004eba4,message/ohttp-chunked-req,2026-03-05,date from last-modified.json
 30a255d9f15d1c76f2c695d1d0548248,message/ohttp-chunked-res,2026-03-05,date from last-modified.json
 dc76f4a3ed142cb0d23b533511cc02d8,message/s-http,2021-12-23,date from last-modified.json
@@ -71,4 +88,5 @@ a4df16f7baa7f0188e8359fdba50e988,model/u3d,2022-02-26,date from last-modified.js
 70bcc67869d346fc9ebd452e040a81f3,text/vnd.curl,2002-12-18,Comments: 2002-12-18
 8be33c3a58568bbba733213ebb5f2f7e,text/vnd.wap.wml,2015-05-12,last revised 2015-05-12
 076f3b61a8884550667b90133deede64,video/jxsv,2026-09-24,date from last-modified.json
+0ecbdd0de89e7eb3cf88e8d0f8e30b55,video/vnd.dlna.mpeg-tts,2005-12-08,day taken from registration date
 071f7444c9157efadc152b9358fc48ea,video/vnd.nokia.interleaved-multimedia,2001-03-16,date in US MM-DD-YY format
