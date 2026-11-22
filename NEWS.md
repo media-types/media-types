@@ -1,6 +1,38 @@
 This file summarizes the major and interesting changes for each release. For a
 detailed list of changes, please see the git history.
 
+2026.11.23
+----------
+
+* Parse registration and last updated dates.
+  Add a `Registered` and `Last Updated` column to the CSV files.
+* add several new media types to the personal and vendor trees:
+  * `application/prs.ktb+zip`
+  * `application/prs.zbook`
+  * `application/vnd.BCG.TrustDeclaration`
+  * `application/vnd.codynamicslab.latch`
+  * `application/vnd.codynamicslab.latchdoc`
+  * `application/vnd.colabox.fppd+json`
+  * `application/vnd.emirian.blueprint`
+  * `application/vnd.geovirtuallis.geov+zip`
+  * `application/vnd.ibus+json`
+  * `application/vnd.idop+zip`
+  * `application/vnd.jupiter.jdx+json`
+  * `application/vnd.krypteon.krpt`
+  * `application/vnd.mcap`
+  * `application/vnd.ngdtuanh.abook+zip`
+  * `application/vnd.ngdtuanh.abookproj+zip`
+  * `application/vnd.pebblestream.psosf+zip`
+  * `application/vnd.penguin-pn.theuip`
+  * `application/vnd.quantumsequrity.qnsqy`
+  * `audio/prs.elupon-eua`
+  * `image/vnd.imgformats.ssimf`
+  * `model/vnd.pygrassreal.py3s`
+  * `model/vnd.pygrassreal.py4s`
+  * `text/prs.mtsv`
+  * `text/prs.rowih`
+  * `text/vnd.geml`
+
 2026.10.09
 ----------
 
