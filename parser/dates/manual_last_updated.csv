@@ -56,11 +56,9 @@ f836361a7f9b6d73b90c5f03ceb46c9d,application/vnd.wordperfect,2004-03-05,missing 
 4d06e54a602dd67924e9c285ca6ff29e,application/watcherinfo+xml,2004-08-31,media type was registered in RFC 3858 not in RFC 6208
 c8e1e76a016b73196b94a2270127c24e,audio/G719,2012-06-07,date from RFC Errata 3245
 30d3ee7ded71a8f597c86a3e9e5eea4a,audio/prs.sid,2003-09-25,Last updated date in US MM-D-YYYY
-b73c1ceeaaa9525c468d569fcf623e92,audio/scip,2024-07-25,date from last-modified.json
 5568ff0b7d26dd5033ed52d790e10f4b,audio/vnd.cmles.radio-events,2005-11-30,day taken from registration date
 c2a628337159b30c13125ecbcc8e560b,audio/vnd.dlna.adts,2005-12-09,day taken from registration date
 b3453a706a87348d3326b31e21667301,audio/vnd.qcelp,2020-10-12,Last updated 2003-10-31 but Intended Usage: OBSOLETE added 2020-10-12
-65a86c44bfdaa95f9adf8a269c9d49aa,haptics/hjif,2025-03-18,date from last-modified.json
 dd2517e56fbf6ea122043d62c0a3af96,image/vnd.adobe.photoshop,2005-12-09,day taken from registration date
 dc76f4a3ed142cb0d23b533511cc02d8,message/s-http,2021-12-23,date from last-modified.json
 a4df16f7baa7f0188e8359fdba50e988,model/u3d,2022-02-26,date from last-modified.json
