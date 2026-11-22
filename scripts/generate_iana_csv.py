@@ -655,7 +655,7 @@ class FileExtensionsParser:
     # pylint: disable-next=too-many-return-statements
     def parse(self, template: str, content: str) -> list[str]:
         """Extract file extensions from template text content."""
-        if content.strip() == "No registration template available.":
+        if content.strip() in ("", "No registration template available."):
             return []
 
         if template in self.manual:
@@ -737,7 +737,7 @@ class IntendedUsageParser:
 
     def parse(self, template: str, content: str) -> IntendedUsageType:
         """Extract intended usage from template text content."""
-        if content.strip() == "No registration template available.":
+        if content.strip() in ("", "No registration template available."):
             return ""
 
         if template in self.manual:

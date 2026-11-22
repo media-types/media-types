@@ -146,11 +146,11 @@ class MediaType:
         try:
             content = path.read_text("utf-8")
         except FileNotFoundError as error:
-            if self.template in ALLOWED_MISSING_TEMPLATES:
-                return 0
-            logger = logging.getLogger(__name__)
-            logger.error("%s not found", error.filename)
-            return 1
+            if self.template not in ALLOWED_MISSING_TEMPLATES:
+                logger = logging.getLogger(__name__)
+                logger.error("%s not found", error.filename)
+                return 1
+            content = ""
 
         failures = 0
         try:
