@@ -116,7 +116,7 @@ class MediaType:
 
     def get_rfc_references(self) -> list[str]:
         """Extracts RFC numbers from the reference string."""
-        return re.findall(r"\[RFC ([0-9]+)", self.reference)
+        return re.findall(r"\[RFC[ -]([0-9]+|[a-z0-9-]+[0-9])", self.reference)
 
     def as_csv_dict(self) -> dict[str, str]:
         """Converts the instance into a CSV row dictionary."""
@@ -347,6 +347,12 @@ class TestMediaType(unittest.TestCase):
     def test_get_rfc_references(self) -> None:
         vp9 = MediaType.from_upstream("VP9", "video/VP9", "[RFC 9628]")
         self.assertEqual(vp9.get_rfc_references(), ["9628"])
+
+    def test_get_rfc_references_draft(self) -> None:
+        teep = MediaType.from_upstream(
+            "teep+cbor", "application/teep+cbor", "[RFC-ietf-teep-protocol-26]"
+        )
+        self.assertEqual(teep.get_rfc_references(), ["ietf-teep-protocol-26"])
 
     def test_get_rfc_references_none(self) -> None:
         midi_clip = MediaType.from_upstream(
