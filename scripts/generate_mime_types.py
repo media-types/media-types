@@ -28,7 +28,11 @@ import pathlib
 import sys
 from collections.abc import Iterable
 
-from media_types import EnhancedMediaType, EnhancedMediaTypeList, iter_csv_rows
+from media_types import (
+    EnhancedMediaType,
+    EnhancedMediaTypeList,
+    read_exclude_list_from_csvs,
+)
 
 DEFAULT_EXCLUDE = pathlib.Path("mime_types/exclude.csv")
 MIME_TYPE_WIDTH = 48
@@ -48,22 +52,6 @@ def check_unused_excludes(excludes: Iterable[str], removed: set[str]) -> int:
         failures += 1
 
     return failures
-
-
-def read_exclude_list_from_csvs(paths: Iterable[pathlib.Path]) -> tuple[list[str], int]:
-    """Read CSV files to compile a unique set of media types to exclude."""
-    exclude = []
-    failures = 0
-    for path in paths:
-        for row in iter_csv_rows(path):
-            media_type = row["Media Type"]
-            if media_type in exclude:
-                logger = logging.getLogger(__script_name__)
-                logger.warning("Duplicate media type in removal list: %s", media_type)
-                failures += 1
-                continue
-            exclude.append(media_type)
-    return exclude, failures
 
 
 def write_mime_types(

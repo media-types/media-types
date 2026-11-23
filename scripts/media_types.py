@@ -59,6 +59,22 @@ def parse_space_separated_list(string: str) -> list[str]:
     return string.split(" ")
 
 
+def read_exclude_list_from_csvs(paths: Iterable[pathlib.Path]) -> tuple[list[str], int]:
+    """Read CSV files to compile a unique set of media types to exclude."""
+    exclude = []
+    failures = 0
+    for path in paths:
+        for row in iter_csv_rows(path):
+            media_type = row["Media Type"]
+            if media_type in exclude:
+                logger = logging.getLogger(__name__)
+                logger.warning("Duplicate media type in removal list: %s", media_type)
+                failures += 1
+                continue
+            exclude.append(media_type)
+    return exclude, failures
+
+
 def typecast_intended_usage(intended_usage: str) -> IntendedUsageType:
     """Narrow type from str to IntendedUsageType."""
     assert intended_usage in ("Common", "Limited use", "Obsolete", "")
