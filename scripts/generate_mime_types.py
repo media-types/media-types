@@ -23,7 +23,6 @@ file extensions.
 import argparse
 import logging
 import math
-import os
 import pathlib
 import sys
 from collections.abc import Iterable
@@ -31,6 +30,7 @@ from collections.abc import Iterable
 from media_types import (
     EnhancedMediaType,
     EnhancedMediaTypeList,
+    check_unused_excludes,
     read_exclude_list_from_csvs,
 )
 
@@ -38,20 +38,6 @@ DEFAULT_EXCLUDE = pathlib.Path("mime_types/exclude.csv")
 MIME_TYPE_WIDTH = 48
 TAB_WIDTH = 8
 LOG_FORMAT = "%(name)s %(levelname)s: %(message)s"
-__script_name__ = os.path.basename(sys.argv[0]) if __name__ == "__main__" else __name__
-
-
-def check_unused_excludes(excludes: Iterable[str], removed: set[str]) -> int:
-    """Check that all excludes where used."""
-    failures = 0
-
-    unused = [media_type for media_type in excludes if media_type not in removed]
-    if unused:
-        logger = logging.getLogger(__script_name__)
-        logger.warning("%i unused excludes: %s", len(unused), unused)
-        failures += 1
-
-    return failures
 
 
 def write_mime_types(

@@ -35,6 +35,19 @@ class ParserFailure(RuntimeError):
     """Base exception raised for errors during parsing."""
 
 
+def check_unused_excludes(excludes: Iterable[str], removed: set[str]) -> int:
+    """Check that all excludes where used."""
+    failures = 0
+
+    unused = [media_type for media_type in excludes if media_type not in removed]
+    if unused:
+        logger = logging.getLogger(__name__)
+        logger.warning("%i unused excludes: %s", len(unused), unused)
+        failures += 1
+
+    return failures
+
+
 def iter_csv_rows(path: pathlib.Path) -> Iterator[dict[str, str]]:
     """Yields rows from a CSV file."""
     with open(path, encoding="utf-8") as csv_file:
