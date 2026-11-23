@@ -17,5 +17,9 @@ max-line-length = 88
 # Tells whether to display a full report or only the messages.
 reports = false
 
+[tool.pylint.similarities]
+# Minimum lines number of a similarity.
+min-similarity-lines=11
+
 [tool.ruff]
 src = ["."]

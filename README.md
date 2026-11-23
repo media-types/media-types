@@ -47,6 +47,12 @@ Media types can be excluded from the output file
 to support removing deprecated or obsoleted media types.
 A (different) header and a footer can be added to `mime.types`.
 
+## 4. Generate nginx.types
+
+Similar to the previous step, generate a `nginx.types` from the enhanced IANA CSV file.
+Media types can be excluded from the output file
+to support removing deprecated or obsoleted media types.
+
 Building
 ========
 
@@ -125,6 +131,16 @@ To add a different header to `mime.types`
 set the environment/make variable `HEADER` to a file containing it.
 To add a footer to `mime.types`
 set the environment/make variable `FOOTER` to a file containing it.
+
+To exclude additional media types from `nginx.types`,
+create a CSV file with at least the column `Media Type`.
+Set the environment/make variable `EXTRA_NGINX_EXCLUDE` to its path.
+Example content:
+
+```csv
+Media Type,Reason
+audio/prs.sid,does not play nice with toys
+```
 
 Related projects
 ================

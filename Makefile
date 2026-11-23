@@ -21,6 +21,10 @@ ifdef FOOTER
 GENERATE_MIME_TYPES_ARGS += --footer=$(FOOTER)
 endif
 
+ifdef EXTRA_NGINX_EXCLUDE
+GENERATE_NGINX_TYPES_ARGS += --exclude=nginx_types/exclude.csv --exclude=$(EXTRA_NGINX_EXCLUDE)
+endif
+
 NAME = media-types
 # Use YYYY.0M.0D defined in https://calver.org/
 VERSION = 2026.11.23
@@ -28,7 +32,7 @@ PREFIX = /usr
 DATADIR = $(PREFIX)/share/media-types
 PYTHON_FILES = $(wildcard scripts/*.py)
 
-all: iana/top-level-media-type-names.csv media-types.csv mime.types
+all: iana/top-level-media-type-names.csv media-types.csv mime.types nginx.types
 
 iana/top-level-media-type-names.csv:
 	scripts/download_iana_media_types.py
@@ -42,10 +46,14 @@ media-types.csv: iana.csv $(wildcard enhancement/*)
 mime.types: media-types.csv $(wildcard mime_types/*)
 	scripts/generate_mime_types.py $(GENERATE_MIME_TYPES_ARGS)
 
+nginx.types: media-types.csv $(wildcard mime_types/*)
+	scripts/generate_nginx_types.py $(GENERATE_NGINX_TYPES_ARGS)
+
 install: media-types.csv mime.types
 	install -m 755 -d $(DESTDIR)/etc $(DESTDIR)$(DATADIR)
 	install -m 644 mime.types $(DESTDIR)/etc/mime.types
 	install -m 644 media-types.csv $(DESTDIR)$(DATADIR)/media-types.csv
+	install -m 644 nginx.types $(DESTDIR)$(DATADIR)/nginx.types
 
 coverage:
 	python3 -m coverage run -m unittest discover -p '*.py' -s scripts -v
@@ -74,7 +82,7 @@ check-sorted:
 check: check-sorted unittest
 
 clean:
-	rm -f iana.csv media-types.csv mime.types
+	rm -f iana.csv media-types.csv mime.types nginx.types
 	rm -rf .mypy_cache __pycache__ _site
 
 lint: black isort mypy pylint
@@ -91,7 +99,7 @@ mypy:
 pylint:
 	pylint --rcfile=scripts/pyproject.toml $(PYTHON_FILES)
 
-_site/index.html: $(wildcard website/*.jinja2) iana.csv media-types.csv mime.types
+_site/index.html: $(wildcard website/*.jinja2) iana.csv media-types.csv mime.types nginx.types
 	scripts/generate_website.py
 
 _site/%: %
@@ -102,7 +110,7 @@ _site/%/: iana/%/
 	mkdir -p $@
 	for f in $<*; do cp "$$f" "_site/$${f#iana/}.txt"; done
 
-site: _site/index.html _site/iana.csv _site/media-types.csv _site/mime.types $(patsubst iana/%,_site/%,$(wildcard iana/*/))
+site: _site/index.html _site/iana.csv _site/media-types.csv _site/mime.types _site/nginx.types $(patsubst iana/%,_site/%,$(wildcard iana/*/))
 
 %.asc: %
 	gpg --armor --batch --detach-sign --yes --output $@ $^

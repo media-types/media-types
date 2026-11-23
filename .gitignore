@@ -4,5 +4,6 @@
 /iana.csv
 /media-types.csv
 /mime.types
+/nginx.types
 __pycache__/
 _site/

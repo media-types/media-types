@@ -53,6 +53,9 @@ def main() -> None:
         "--mime-types", default=pathlib.Path("mime.types"), type=pathlib.Path
     )
     parser.add_argument(
+        "--nginx-types", default=pathlib.Path("nginx.types"), type=pathlib.Path
+    )
+    parser.add_argument(
         "-i", "--iana-csv", default=pathlib.Path("iana.csv"), type=pathlib.Path
     )
     parser.add_argument(
@@ -62,8 +65,14 @@ def main() -> None:
 
     media_types = EnhancedMediaTypeList.from_files([args.media_types_csv])
     mime_types = args.mime_types.read_text("utf-8")
+    nginx_types = args.nginx_types.read_text("utf-8")
     iana: MediaTypeList[MediaType] = MediaTypeList.from_files([args.iana_csv])
-    context = {"media_types": media_types, "mime_types": mime_types, "iana": iana}
+    context = {
+        "media_types": media_types,
+        "mime_types": mime_types,
+        "nginx_types": nginx_types,
+        "iana": iana,
+    }
     _render_html_pages(context, args.output)
 
 
