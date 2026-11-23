@@ -89,7 +89,7 @@ mypy:
 	mypy --strict $(PYTHON_FILES)
 
 pylint:
-	pylint $(PYTHON_FILES)
+	pylint --rcfile=scripts/pyproject.toml $(PYTHON_FILES)
 
 _site/index.html: $(wildcard website/*.jinja2) iana.csv media-types.csv mime.types
 	scripts/generate_website.py
