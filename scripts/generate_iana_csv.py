@@ -126,9 +126,10 @@ OLD_DATE_INVERSE_RE = re.compile(
     "^([0-9]{4}) (" + "|".join(MONTH_MAP) + r") ([0-3]?[0-9])$"
 )
 REGISTERED_LAST_UPDATED_RE = re.compile(
-    r"\((?:[Rr]egistered|[Ff]ile created|created)(?: in)? ([0-9]{4}(?:-[0-9]{2}(?:-[0-9]{2})?)?)"
-    r"(?: (?:per|through|via) RFC ?[0-9]+)?[,;]"
-    r"(?: last| updated [0-9]{4}-[0-9]{2}-[0-9]{2},)? updated ([0-9]{4}-[0-9]{2}-[0-9]{2})"
+    r"\((?:[Rr]egistered|[Ff]ile created|created)(?: in)?"
+    r" ([0-9]{4}(?:-[0-9]{2}(?:-[0-9]{2})?)?)(?: (?:per|through|via) RFC ?[0-9]+)?[,;]"
+    r"(?: last| updated [0-9]{4}-[0-9]{2}-[0-9]{2},)?"
+    r" updated ([0-9]{4}-[0-9]{2}-[0-9]{2})"
     r"(?:; (?:see RFC[0-9]+|obsoleted by[A-Za-z0-9/+ \n]+))?\)"
 )
 REGISTERED_RFC_LAST_UPDATED_RE = re.compile(
